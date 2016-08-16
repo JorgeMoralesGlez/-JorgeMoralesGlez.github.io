@@ -3,7 +3,7 @@ var contextoRojo = miCanvasRojo.getContext("2d");
 contextoRojo.fillStyle = "red";
 contextoRojo.fillRect (30, 30, 50, 50);
 var miCanvasVerde = document.getElementById("miCanvasVerde");
-var contextoVerde = miCanvasAzul.getContext("2d");
+var contextoVerde = miCanvasVerde.getContext("2d");
 contextoVerde.fillStyle = "green";
 contextoVerde.fillRect (30, 30, 50, 50);
 var miCanvasAzul = document.getElementById("miCanvasAzul");
