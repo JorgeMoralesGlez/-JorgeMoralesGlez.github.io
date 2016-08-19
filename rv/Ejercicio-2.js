@@ -7,7 +7,7 @@ document.body.appendChild(renderizador.domElement);
 var formaesf = new THREE.SphereGeometry(3, 20, 20);
 var formacil = new THREE.CylinderGeometry(1, 1, 10, 20, 2, false);
 var materialcil = new THREE.MeshBasicMaterial({color: 0x996600});
-var materialesf = new THREE.MeshBasiclMaterial({color: 0x009900});
+var materialesf = new THREE.MeshBasicMaterial({color: 0x009900});
 var esfera = new THREE.Mesh(formaesf, materialesf);
 var cilindro = new THREE.Mesh( formacil, materialcil);
 esfera.position.y = 3;
