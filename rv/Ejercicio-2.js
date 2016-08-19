@@ -1,0 +1,16 @@
+var escena = new THREE.Scene();
+var camara = new THREE.PerspectiveCamera();
+camara.position.z = 20;
+var renderizador = new THREE.WebGLRenderer();
+renderizador.setSize(window.innerHeight*.95, window.innerHeight*.95);
+document.body.appendChild(renderizador.domElement);
+var formaesf = new THREE.SphereGeometry(3, 20, 20);
+var formacil = new THREE.CylinderGeometry(1, 1, 10, 20, 2, false);
+var materialcil = new THREE.MeshBasicMaterial({color: 0x996600});
+var materialesf = new THREE.MeshBasiclMaterial({color: 0x009900});
+var esfera = new THREE.Mesh(formaesf, materialesf);
+var cilindro = new THREE.Mesh( formacil, materialcil);
+esfera.position.y = 3;
+cilindro.position.y = -1;
+escena.add(esfera, cilindro);
+renderizador.render( escena, camara);
