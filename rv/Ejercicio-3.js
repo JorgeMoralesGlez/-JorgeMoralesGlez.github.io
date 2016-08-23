@@ -13,8 +13,8 @@ forma.faces.push( new THREE.Face3( 1, 2, 3 ) );
 forma.faces.push( new THREE.Face3( 3, 0, 1 ) );
 forma.faces.push( new THREE.Face3( 4, 5, 1 ) );
 forma.faces.push( new THREE.Face3( 1, 0 ,4 ) );
-forma.faces.push( new THREE.Face3( 7, 6, 2 ) );
-forma.faces.push( new THREE.Face3( 2, 3, 7 ) );
+forma.faces.push( new THREE.Face3( 3, 2, 6 ) );
+forma.faces.push( new THREE.Face3( 6, 7, 3 ) );
 
 forma.computeBoundingSphere();
 forma.computeFaceNormals();
