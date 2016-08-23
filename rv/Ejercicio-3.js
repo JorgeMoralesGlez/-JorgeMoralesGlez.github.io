@@ -1,9 +1,9 @@
 var forma = new THREE.Geometry();
 
-forma.vertices.push( new THREE.Vector3( 1, 0, 1) );
-forma.vertices.push( new THREE.Vector3( 1, 0, -1) );
-forma.vertices.push( new THREE.Vector3( -1, 0, -1) );
-forma.vertices.push( new THREE.Vector3( -1, 0, 1) );
+forma.vertices.push( new THREE.Vector3( 1, -1, 1) );
+forma.vertices.push( new THREE.Vector3( 1, -1, -1) );
+forma.vertices.push( new THREE.Vector3( -1, -1, -1) );
+forma.vertices.push( new THREE.Vector3( -1, -1, 1) );
 forma.vertices.push( new THREE.Vector3( 1, 1, 1) );
 forma.vertices.push( new THREE.Vector3( 1, 1, -1) );
 forma.vertices.push( new THREE.Vector3( -1, 1, -1) );
