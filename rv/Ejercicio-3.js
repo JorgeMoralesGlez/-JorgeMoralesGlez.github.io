@@ -19,8 +19,7 @@ forma.computeFaceNormals();
 
 var material = new THREE.MeshNormalMaterial();
 var malla = new THREE.Mesh( forma, material );
-malla.rotateX(-Math.PI/4);
-malla.rotateY(Math.PI/4);
+malla.rotateX(Math.PI/4);
 
 var escena = new THREE.Scene();
 escena.add( malla );
