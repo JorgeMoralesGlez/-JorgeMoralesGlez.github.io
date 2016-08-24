@@ -9,7 +9,7 @@ forma.vertices.push( new THREE.Vector3( 1, 1, -1) );
 forma.vertices.push( new THREE.Vector3( -1, 1, -1) );
 forma.vertices.push( new THREE.Vector3( -1, 1, 1) );
 
-
+forma.faces.push( new THREE.Face3( 1, 2, 3 ) );
 
 forma.computeBoundingSphere();
 forma.computeFaceNormals();
