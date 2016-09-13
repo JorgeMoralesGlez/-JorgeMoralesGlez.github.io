@@ -24,7 +24,7 @@ renderizador.setSize( 600, 600 );
 
 renderizador.shadowMapEnabled = true;
 malla.castShadow = true;
-base.recieveShadow = true;
+base.receiveShadow = true;
 iluminacion.castShadow = true;
 
 renderizador.render( escena, camara );
