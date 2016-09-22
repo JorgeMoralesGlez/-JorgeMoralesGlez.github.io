@@ -14,6 +14,6 @@ function init(p){
   }
   
   var escena, camara, renderizador;
-  init(l);
+  init(1);
   main(2);
   
