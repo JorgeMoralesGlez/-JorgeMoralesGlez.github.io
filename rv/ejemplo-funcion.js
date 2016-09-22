@@ -9,7 +9,7 @@ function init(p){
   camara.position.z = 5*p;
   }
   
-  var main = funtion(p){
+  var main = function(p){
     renderizador.render(escena, camara);
   }
   
