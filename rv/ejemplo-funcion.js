@@ -1,4 +1,4 @@
-funtion init(p){
+function init(p){
   var malla(new THREE.BoxGeometry( p, p, p ), new THREE.MeshNormalMaterial());
   escena = new THREE.Scene();
   escena.add(malla);
