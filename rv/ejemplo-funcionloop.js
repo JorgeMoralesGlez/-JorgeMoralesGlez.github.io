@@ -15,6 +15,6 @@ function init(p){
     malla.rotateY(0.01);
   }
   
-  var escena, camara, renderizador;
+  var escena, camara, renderizador, malla;
   init(1);
   loop();
