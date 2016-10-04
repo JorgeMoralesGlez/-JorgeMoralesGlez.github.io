@@ -36,8 +36,8 @@ CONSTRUCTOR.setup = function() {
 }
 
 CONSTRUCTOR.loop = function() {
-  requestAnimationFrame( CONTRUCTOR.loop );
-  CONSTRUCTOR.renderizador.render( CONTRUCTOR.escena, CONTRUCTOR.camara);
+  requestAnimationFrame( CONSTRUCTOR.loop );
+  CONSTRUCTOR.renderizador.render( CONSTRUCTOR.escena, CONSTRUCTOR.camara);
 }
 
 CONSTRUCTOR.setup();
