@@ -31,8 +31,8 @@ CONSTRUCTOR.setup = function() {
   CONSTRUCTOR.renderizador.setSize(600, 600);
   
   CONSTRUCTOR.escena = new THREE.Scene();
-  CONSTRUCTOR.escena.add(arbol1, malla);
-  CONSTRUCTOR.escena.add(arbol2, malla);
+  CONSTRUCTOR.escena.add(arbol1.malla);
+  CONSTRUCTOR.escena.add(arbol2.malla);
 }
 
 CONSTRUCTOR.loop = function() {
