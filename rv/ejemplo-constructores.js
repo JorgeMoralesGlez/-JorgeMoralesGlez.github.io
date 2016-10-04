@@ -1,4 +1,4 @@
-function Arbor() {
+function Arbol() {
   var troncoForma = new THREE.CylinderGeometry(.25, .5, 1);
   var esferaForma = new THREE.SphereGeometry(.65);
   esferaForma.translate(0, 1, 0);
@@ -35,7 +35,7 @@ CONSTRUCTOR.setup = function() {
   CONTRUCTOR.escena.add(arbol2, malla);
 }
 
-CONTRUCTOR.loop = function() {
+CONSTRUCTOR.loop = function() {
   requestAnimationFrame( CONTRUCTOR.loop );
   CONSTRUCTOR.renderizador.render( CONTRUCTOR.escena, CONTRUCTOR.camara);
 }
