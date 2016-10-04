@@ -30,9 +30,9 @@ CONSTRUCTOR.setup = function() {
   CONSTRUCTOR.renderizador = new THREE.WebGLRenderer( {canvas: lienzo, antialias: true} );
   CONSTRUCTOR.renderizador.setSize(600, 600);
   
-  CONTRUCTOR.escena = new THrEE.Scene();
-  CONTRUCTOR.escena.add(arbol1, malla);
-  CONTRUCTOR.escena.add(arbol2, malla);
+  CONSTRUCTOR.escena = new THREE.Scene();
+  CONSTRUCTOR.escena.add(arbol1, malla);
+  CONSTRUCTOR.escena.add(arbol2, malla);
 }
 
 CONSTRUCTOR.loop = function() {
