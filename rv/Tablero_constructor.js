@@ -128,29 +128,12 @@ function setup() {
   var Torre3 = new Torre(ceramicanegra);
   var Torre4 = new Torre(ceramicablanca);
   
-  Torre1.rotateX(Math.PI/2);
-  Torre1.translateY(3);
 
-  Torre2.rotateX(Math.PI/2);
-  Torre2.translateY(3);
-  Torre2.translateZ(-70);
-
-  Torre3.rotateX(Math.PI/2);
-  Torre3.translateY(3);
-  Torre3.translateZ(-70);
-  Torre3.translateX(70);
-  
-  Torre4.rotateX(Math.PI/2);
-  Torre4.translateY(3);
-  Torre4.translateX(70);
   
   var Tablero1 = new Tablero(marmolnegro, marmolblanco);
   
   var Base1 = new Base(marmolcafe);
-  Base1.position.x=35;
-  Base1.position.y=35;
-  Base1.position.z=-2;
-  
+ 
   var campoVision = 45;
   var relacionAspecto = window.innerWidth / window.innerHeight;
   var planoCercano = 1;
