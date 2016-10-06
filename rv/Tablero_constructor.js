@@ -73,6 +73,7 @@ function Torre(textura) {
   torreForma.merge(pico3Malla.geometry, pico3Malla.matrix);
   torreForma.merge(pico4Malla.geometry, pico4Malla.matrix);
   var torreMalla = new THREE.Mesh(torreForma, textura);
+  escena.add(torreMalla);
 }
 Torre.prototype = new THREE.Mesh();
 
@@ -165,10 +166,7 @@ function setup() {
   
   
   escena.add(Base1);
-  escena.add(Torre1);
-  escena.add(Torre2);
-  escena.add(Torre3);
-  escena.add(Torre4);
+  
   renderizador = new THREE.WebGLRenderer();
   renderizador.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderizador.domElement);
