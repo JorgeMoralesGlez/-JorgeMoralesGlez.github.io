@@ -101,7 +101,7 @@ function Tablero(textura1, textura2) {
   }
 }
 
-function setcubo() {
+function setupcubo() {
   escena.add(cubo[k]);
 }
 
@@ -127,8 +127,6 @@ function setup() {
   var Torre2 = new Torre(ceramicanegra);
   var Torre3 = new Torre(ceramicanegra);
   var Torre4 = new Torre(ceramicablanca);
-  
-
   
   var Tablero1 = new Tablero(marmolnegro, marmolblanco);
   
