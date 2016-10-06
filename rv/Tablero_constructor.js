@@ -123,6 +123,7 @@ function Textura() {
 }
 
 function setup() {
+  escena = new THREE.Scene();
   var Torre1 = new Torre(ceramicablanca);
   var Torre2 = new Torre(ceramicanegra);
   var Torre3 = new Torre(ceramicanegra);
@@ -144,7 +145,6 @@ function setup() {
   camara.rotateZ(Math.PI/2);
   
   
-  escena = new THREE.Scene();
   escena.add(Base1);
   escena.add(Torre1);
   escena.add(Torre2);
