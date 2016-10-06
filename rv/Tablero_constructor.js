@@ -74,6 +74,7 @@ function Torre(textura) {
   torreForma.merge(pico4Malla.geometry, pico4Malla.matrix);
   var torreMalla = new THREE.Mesh(torreForma, textura);
 }
+Torre.prototype = new THREE.Mesh();
 
 function Tablero(textura1, textura2) {
   var cubo= new Array();
