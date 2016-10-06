@@ -90,7 +90,7 @@ function Tablero(textura1, textura2) {
         }
        cubo[k].position.x=j*10;
        cubo[k].position.y=i*10;
-       setupcubo();
+       escena.add(cubo[k]);
      }
      if(a==2){
           a=1;
@@ -101,9 +101,6 @@ function Tablero(textura1, textura2) {
   }
 }
 
-function setupcubo() {
-  escena.add(cubo[k]);
-}
 
 function Base(textura3) {
   var base = new THREE.Mesh( new THREE.BoxGeometry(90, 90, 2), textura3 );
