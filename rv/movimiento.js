@@ -11,7 +11,7 @@ function Pieza() {
   this.piernaDer.position.y = -2.5;
   cuerpo.position.z = 2.5;
  }
-Pieza.prototype = new THREE.Object3D
+Pieza.prototype = new THREE.Object3D;
 
 function setup() {
   pieza = new Pieza();
