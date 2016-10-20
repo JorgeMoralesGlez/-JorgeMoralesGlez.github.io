@@ -25,8 +25,8 @@ function setup() {
 }
 
 function loop() {
-  pieza.piernaDer.rotateZ(-0.05);
-  pieza.piernaIzq.rotateZ(0.05);
+  pieza.piernaDer.rotateZ(-0.1);
+  pieza.piernaIzq.rotateZ(0.1);
   renderizador.render(escena, camara);
   requestAnimationFrame(loop);
 }
