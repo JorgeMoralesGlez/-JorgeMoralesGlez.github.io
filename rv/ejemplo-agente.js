@@ -59,7 +59,7 @@ Pelota.prototype.sense = function(enviroment) {
 
 Pelota.prototype.act = function(enviroment) {
   if (this.colision === 1)
-    this.step = this.step;
+    this.step = -this.step;
   this.position.x += this.step;
 };
 
