@@ -120,6 +120,7 @@ Enviroment.prototype.setMap = function(map) {
       else if(map[i][j] === "r")
         this.add(new Robot(0.5, j - _offset, -(i - _offset)));
     }
+  }
 }
 
 function setup() { 
