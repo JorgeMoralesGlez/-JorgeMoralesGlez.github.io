@@ -150,7 +150,7 @@ function setup() {
   mapa[23]  = "x                       x";
   mapa[24]  = "xxxxxxxxxxxxxxxxxxxxxxxxx";
   
-  enviroment = new Envieroment();
+  enviroment = new Enviroment();
   
   enviroment.setMap(mapa);
   
