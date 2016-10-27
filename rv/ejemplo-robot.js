@@ -113,7 +113,7 @@ Wall.prototype = new THREE.Mesh();
 Enviroment.prototype.setMap = function(map) {
   var _offset = Math.floor(map.length/2);
   
-  for (var i = 0; i < map.length; ii) {
+  for (var i = 0; i < map.length; i++) {
     for (var j = 0; j < map.length; j++) {
       if(map[i][i] === "x")
         this.add(new Wall(1, j - _offset, -(i - _offset)));
