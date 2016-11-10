@@ -1,6 +1,6 @@
 var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
 var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
-var troncoForma = new THREE.CylinderGeometry(3,4,5,20,5,false);
+var troncoForma = new THREE.CylinderGeometry(2,4,10,20,10,false);
 
 base2Forma.translate(0,1,0);
 troncoForma.translate(0,2,0);
