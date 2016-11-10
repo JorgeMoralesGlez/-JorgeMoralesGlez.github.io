@@ -7,8 +7,8 @@ var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
 
 var peonForma = new THREE.Geometry();
-torreForma.merge(base1Malla.geometry, base1Malla.matrix);
-torreForma.merge(base2Malla.geometry, base2Malla.matrix);
+peonForma.merge(base1Malla.geometry, base1Malla.matrix);
+peonForma.merge(base2Malla.geometry, base2Malla.matrix);
 var material= new THREE.MeshNormalMaterial();
 var peonMalla = new THREE.Mesh(peonForma, material);
 
