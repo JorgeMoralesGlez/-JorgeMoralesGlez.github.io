@@ -35,13 +35,12 @@ pico4.rotateX(Math.PI/2);
 pico4.rotateY(Math.PI*3/2);
 
 base2Forma.translate(0,1,0);
-base3Forma.translate(0,4,0);
+base3Forma.translate(0,6,0);
 troncoForma.translate(0,12,0);
 pico1.translate(0,20,0);
 pico2.translate(0,20,0);
 pico3.translate(0,20,0);
 pico4.translate(0,20,0);
-
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
