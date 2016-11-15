@@ -5,7 +5,7 @@ var troncoForma = new THREE.CylinderGeometry(2,2,4,20,4,false);
 var detalle1Forma = new THREE.CylinderGeometry(4,4,.5,20,.5,false);
 var detalle2Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
 var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
-var cubierta1Forma = new THREE.CylinderGeometry(2.5,2.5,3.9,20,3.9,false);
+var cubierta1Forma = new THREE.CylinderGeometry(2.5,2.5,1.9,20,1.9,false);
 
 var arco1 = new THREE.Shape();
 arco1.moveTo(0, 0);
