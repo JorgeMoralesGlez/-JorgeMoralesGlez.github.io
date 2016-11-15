@@ -44,7 +44,7 @@ troncoForma.translate(0,12,0);
 detalle2Forma.translate(0,14,0);
 detalle1Forma.translate(0,14.3,0);
 detalle3Forma.translate(0,14.8,0);
-cubierta1Forma.translate(0,15.1,0);
+cubierta1Forma.translate(0,17.1,0);
 pico1.translate(0,20,0);
 pico2.translate(0,20,0);
 pico3.translate(0,20,0);
