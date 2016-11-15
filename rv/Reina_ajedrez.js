@@ -6,7 +6,7 @@ var detalle1Forma = new THREE.CylinderGeometry(4,4,.5,20,.5,false);
 var detalle2Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
 var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
 var cubierta1Forma = new THREE.CylinderGeometry(2.5,2.5,1.9,20,1.9,false);
-var cubierta2Forma = new THREE.CylinderGeometry(4,2.5,4,20,4,false);
+var cubierta2Forma = new THREE.CylinderGeometry(4,2.5,3,20,3,false);
 
 var arco1 = new THREE.Shape();
 arco1.moveTo(0, 0);
@@ -47,10 +47,10 @@ detalle1Forma.translate(0,14.3,0);
 detalle3Forma.translate(0,14.8,0);
 cubierta1Forma.translate(0,15.1,0);
 cubierta2Forma.translate(0,17,0);
-pico1.translate(0,20,0);
-pico2.translate(0,20,0);
-pico3.translate(0,20,0);
-pico4.translate(0,20,0);
+pico1.translate(0,19,0);
+pico2.translate(0,19,0);
+pico3.translate(0,19,0);
+pico4.translate(0,19,0);
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
