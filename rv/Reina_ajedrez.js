@@ -72,8 +72,6 @@ torreForma.merge(pico4Malla.geometry, pico4Malla.matrix);
 var material= new THREE.MeshNormalMaterial();
 var torreMalla = new THREE.Mesh(torreForma, material);
 
-torreMalla.rotateX(Math.PI/4);
-
 var escena = new THREE.Scene();
 escena.add(torreMalla);
 var camara = new THREE.PerspectiveCamera();
