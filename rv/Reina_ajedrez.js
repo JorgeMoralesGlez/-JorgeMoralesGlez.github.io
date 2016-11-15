@@ -35,7 +35,7 @@ pico4.rotateX(Math.PI/2);
 pico4.rotateY(Math.PI*3/2);
 
 base2Forma.translate(0,1,0);
-base3Forma.translate(0,2,0);
+base3Forma.translate(0,4,0);
 troncoForma.translate(0,12,0);
 pico1.translate(0,20,0);
 pico2.translate(0,20,0);
