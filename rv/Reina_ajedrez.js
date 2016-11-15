@@ -1,7 +1,7 @@
 var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
 var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
-var base3Forma = new THREE.CylinderGeometry(3,4,4,20,4,false);
-var troncoForma = new THREE.CylinderGeometry(3,3,10,20,10,false);
+var base3Forma = new THREE.CylinderGeometry(2,4,10,20,10,false);
+var troncoForma = new THREE.CylinderGeometry(2,2,4,20,4,false);
 
 var arco1 = new THREE.Shape();
 arco1.moveTo(0, 0);
@@ -36,11 +36,11 @@ pico4.rotateY(Math.PI*3/2);
 
 base2Forma.translate(0,1,0);
 base3Forma.translate(0,2,0);
-troncoForma.translate(0,6,0);
-pico1.translate(0,14,0);
-pico2.translate(0,14,0);
-pico3.translate(0,14,0);
-pico4.translate(0,14,0);
+troncoForma.translate(0,12,0);
+pico1.translate(0,20,0);
+pico2.translate(0,20,0);
+pico3.translate(0,20,0);
+pico4.translate(0,20,0);
 
 
 var base1Malla = new THREE.Mesh(base1Forma);
