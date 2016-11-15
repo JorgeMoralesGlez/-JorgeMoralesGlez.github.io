@@ -87,6 +87,8 @@ reinaForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
 var material= new THREE.MeshNormalMaterial();
 var reinaMalla = new THREE.Mesh(reinaForma, material);
 
+reinaMalla.rotateX(Math.PI/4);
+
 var escena = new THREE.Scene();
 escena.add(reinaMalla);
 var camara = new THREE.PerspectiveCamera();
