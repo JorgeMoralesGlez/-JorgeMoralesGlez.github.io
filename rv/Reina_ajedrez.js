@@ -47,10 +47,10 @@ detalle1Forma.translate(0,14.3,0);
 detalle3Forma.translate(0,14.8,0);
 cubierta1Forma.translate(0,15.1,0);
 cubierta2Forma.translate(0,17,0);
-pico1.translate(0,19,0);
-pico2.translate(0,19,0);
-pico3.translate(0,19,0);
-pico4.translate(0,19,0);
+pico1.translate(0,19.5,0);
+pico2.translate(0,19.5,0);
+pico3.translate(0,19.5,0);
+pico4.translate(0,19.5,0);
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
