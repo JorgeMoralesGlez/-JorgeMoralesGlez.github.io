@@ -7,6 +7,7 @@ var detalle2Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
 var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
 var cubierta1Forma = new THREE.CylinderGeometry(2.5,2.5,1.9,20,1.9,false);
 var cubierta2Forma = new THREE.CylinderGeometry(4,2.5,3,20,3,false);
+var cabeza1Forma = new THREE.SphereGeometry(1);
 
 var arco1 = new THREE.Shape();
 arco1.moveTo(0, 0);
@@ -51,6 +52,7 @@ pico1.translate(0,19.5,0);
 pico2.translate(0,19.5,0);
 pico3.translate(0,19.5,0);
 pico4.translate(0,19.5,0);
+cabeza1Forma.translate(0,19.5,0);
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
@@ -65,6 +67,7 @@ var pico1Malla= new THREE.Mesh(pico1);
 var pico2Malla= new THREE.Mesh(pico2);
 var pico3Malla= new THREE.Mesh(pico3);
 var pico4Malla= new THREE.Mesh(pico4);
+var cabeza1Malla= new THREE.Mesh(cabeza1Forma);
 
 var reinaForma = new THREE.Geometry();
 reinaForma.merge(base1Malla.geometry, base1Malla.matrix);
@@ -80,6 +83,7 @@ reinaForma.merge(detalle2Malla.geometry, detalle2Malla.matrix);
 reinaForma.merge(detalle3Malla.geometry, detalle3Malla.matrix);
 reinaForma.merge(cubierta1Malla.geometry, cubierta1Malla.matrix);
 reinaForma.merge(cubierta2Malla.geometry, cubierta2Malla.matrix);
+reinaForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
 var material= new THREE.MeshNormalMaterial();
 var reinaMalla = new THREE.Mesh(reinaForma, material);
 
