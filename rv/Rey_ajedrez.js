@@ -42,7 +42,7 @@ reyForma.merge(cubierta1Malla.geometry, cubierta1Malla.matrix);
 reyForma.merge(cubierta2Malla.geometry, cubierta2Malla.matrix);
 reyForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
 var material= new THREE.MeshNormalMaterial();
-var reyMalla = new THREE.Mesh(reinaForma, material);
+var reyMalla = new THREE.Mesh(reyForma, material);
 
 reyMalla.rotateX(Math.PI/4);
 
