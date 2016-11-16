@@ -8,6 +8,10 @@ var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
 var cubierta1Forma = new THREE.CylinderGeometry(2.5,2.5,1.9,20,1.9,false);
 var cubierta2Forma = new THREE.CylinderGeometry(4,2.5,3,20,3,false);
 var cabeza1Forma = new THREE.BoxGeometry(1,1,1)
+var cabeza2Forma = new THREE.BoxGeometry(1,1,1)
+var cabeza3Forma = new THREE.BoxGeometry(1,1,1)
+var cabeza4Forma = new THREE.BoxGeometry(1,1,1)
+var cabeza5Forma = new THREE.BoxGeometry(1,1,1)
 
 base2Forma.translate(0,1,0);
 base3Forma.translate(0,6,0);
@@ -18,6 +22,10 @@ detalle3Forma.translate(0,14.8,0);
 cubierta1Forma.translate(0,15.1,0);
 cubierta2Forma.translate(0,17,0);
 cabeza1Forma.translate(0,19.5,0);
+cabeza2Forma.translate(0,20.5,0);
+cabeza3Forma.translate(0,21.5,0);
+cabeza4Forma.translate(-1,20.5,0);
+cabeza5Forma.translate(1,20.5,0);
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
@@ -29,6 +37,10 @@ var detalle3Malla= new THREE.Mesh(detalle3Forma);
 var cubierta1Malla= new THREE.Mesh(cubierta1Forma);
 var cubierta2Malla= new THREE.Mesh(cubierta2Forma);
 var cabeza1Malla= new THREE.Mesh(cabeza1Forma);
+var cabeza2Malla= new THREE.Mesh(cabeza2Forma);
+var cabeza3Malla= new THREE.Mesh(cabeza3Forma);
+var cabeza4Malla= new THREE.Mesh(cabeza4Forma);
+var cabeza5Malla= new THREE.Mesh(cabeza5Forma);
 
 var reyForma = new THREE.Geometry();
 reyForma.merge(base1Malla.geometry, base1Malla.matrix);
@@ -41,6 +53,10 @@ reyForma.merge(detalle3Malla.geometry, detalle3Malla.matrix);
 reyForma.merge(cubierta1Malla.geometry, cubierta1Malla.matrix);
 reyForma.merge(cubierta2Malla.geometry, cubierta2Malla.matrix);
 reyForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
+reyForma.merge(cabeza2Malla.geometry, cabeza2Malla.matrix);
+reyForma.merge(cabeza3Malla.geometry, cabeza3Malla.matrix);
+reyForma.merge(cabeza4Malla.geometry, cabeza4Malla.matrix);
+reyForma.merge(cabeza5Malla.geometry, cabeza5Malla.matrix);
 var material= new THREE.MeshNormalMaterial();
 var reyMalla = new THREE.Mesh(reyForma, material);
 
