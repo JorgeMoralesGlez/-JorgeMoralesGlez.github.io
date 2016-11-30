@@ -371,7 +371,7 @@ function setup(){
   var peonMalla5 = new THREE.Mesh(peonForma, ceramicablanca);
   var peonMalla6 = new THREE.Mesh(peonForma, ceramicablanca);
   var peonMalla7 = new THREE.Mesh(peonForma, ceramicablanca);
-  var peonMalla8 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla8 = new THREE.Mesh(peonForma, ceramicanegra);
   var peonMalla9 = new THREE.Mesh(peonForma, ceramicanegra);
   var peonMalla10 = new THREE.Mesh(peonForma, ceramicanegra);
   var peonMalla11 = new THREE.Mesh(peonForma, ceramicanegra);
