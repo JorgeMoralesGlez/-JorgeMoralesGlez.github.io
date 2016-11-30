@@ -173,8 +173,10 @@ function setup(){
   var reyMalla1 = new THREE.Mesh(reyForma, ceramicanegra);
 
   reyMalla.rotateX(Math.PI/2);
+  reyMalla.translateY(3);
   
   reyMalla1.rotateX(Math.PI/2);
+  reyMalla1.translateY(3);
   
   //Tablero
   var campoVision = 45;
