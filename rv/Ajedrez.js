@@ -284,7 +284,7 @@ function setup(){
   //Alfil
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
   var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
-  var troncoForma = new THREE.CylinderGeometry(2,3,20,20,20,false);
+  var troncoForma = new THREE.CylinderGeometry(2,3,15,15,15,false);
   var detalle1Forma = new THREE.CylinderGeometry(4,4,.5,20,.5,false);
   var detalle2Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
   var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
