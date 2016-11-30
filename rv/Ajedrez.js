@@ -282,23 +282,23 @@ function setup(){
   reinaMalla1.translateZ(-70);
   
   //Alfil
-  var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
+ var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
   var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
-  var troncoForma = new THREE.CylinderGeometry(2,3,10,10,10,false);
-  var detalle1Forma = new THREE.CylinderGeometry(4,4,.5,20,.5,false);
-  var detalle2Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
-  var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
-  var cabeza1Forma = new THREE.SphereGeometry(3);
-  var cabeza2Forma = new THREE.SphereGeometry(1);
+  var troncoForma = new THREE.CylinderGeometry(1.5,3,12,12,12,false);
+  var detalle1Forma = new THREE.CylinderGeometry(3.5,3.5,.5,20,.5,false);
+  var detalle2Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
+  var detalle3Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
+  var cabeza1Forma = new THREE.SphereGeometry(2);
+  var cabeza2Forma = new THREE.SphereGeometry(.5);
 
-  base1Forma.translate(0,-9,0);
-  base2Forma.translate(0,-8,0);
-  troncoForma.translate(0,1,0);
-  cabeza1Forma.translate(0,13,0);
-  cabeza2Forma.translate(0,16,0);
-  detalle1Forma.translate(0,9,0);
-  detalle2Forma.translate(0,8.7,0);
-  detalle3Forma.translate(0,9.5,0);
+  base1Forma.translate(0,1,0);
+  base2Forma.translate(0,2,0);
+  troncoForma.translate(0,8,0);
+  cabeza1Forma.translate(0,15,0);
+  cabeza2Forma.translate(0,17,0);
+  detalle1Forma.translate(0,11,0);
+  detalle2Forma.translate(0,10.7,0);
+  detalle3Forma.translate(0,11.5,0);
 
   var base1Malla = new THREE.Mesh(base1Forma);
   var base2Malla= new THREE.Mesh(base2Forma);
@@ -325,20 +325,20 @@ function setup(){
   var alfilMalla3 = new THREE.Mesh(alfilForma, ceramicanegra);
   
   alfilMalla.rotateX(Math.PI/2);
-  alfilMalla.translateY(12);
+  alfilMalla.translateY(3);
   alfilMalla.translateX(20);
   
   alfilMalla1.rotateX(Math.PI/2);
-  alfilMalla1.translateY(12);
+  alfilMalla1.translateY(3);
   alfilMalla1.translateX(20);
   alfilMalla1.translateZ(-70);
   
   alfilMalla2.rotateX(Math.PI/2);
-  alfilMalla2.translateY(12);
+  alfilMalla2.translateY(3);
   alfilMalla2.translateX(50);
   
   alfilMalla3.rotateX(Math.PI/2);
-  alfilMalla3.translateY(12);
+  alfilMalla3.translateY(3);
   alfilMalla3.translateX(50);
   alfilMalla3.translateZ(-70);
   
