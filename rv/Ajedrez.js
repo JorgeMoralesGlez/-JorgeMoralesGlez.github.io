@@ -419,6 +419,45 @@ function setup(){
   peonMalla7.translateZ(-10);
   peonMalla7.translateX(70);
   
+  peonMalla8.rotateX(Math.PI/2);
+  peonMalla8.translateY(3);
+  peonMalla8.translateZ(-60);
+  
+  peonMalla9.rotateX(Math.PI/2);
+  peonMalla9.translateY(3);
+  peonMalla9.translateZ(-60);
+  peonMalla9.translateX(10);
+  
+  peonMalla10.rotateX(Math.PI/2);
+  peonMalla10.translateY(3);
+  peonMalla10.translateZ(-60);
+  peonMalla10.translateX(20);
+  
+  peonMalla11.rotateX(Math.PI/2);
+  peonMalla11.translateY(3);
+  peonMalla11.translateZ(-60);
+  peonMalla11.translateX(30);
+  
+  peonMalla12.rotateX(Math.PI/2);
+  peonMalla12.translateY(3);
+  peonMalla12.translateZ(-60);
+  peonMalla12.translateX(40);
+  
+  peonMalla13.rotateX(Math.PI/2);
+  peonMalla13.translateY(3);
+  peonMalla13.translateZ(-60);
+  peonMalla13.translateX(50);
+  
+  peonMalla14.rotateX(Math.PI/2);
+  peonMalla14.translateY(3);
+  peonMalla14.translateZ(-60);
+  peonMalla14.translateX(60);
+  
+  peonMalla15.rotateX(Math.PI/2);
+  peonMalla15.translateY(3);
+  peonMalla15.translateZ(-60);
+  peonMalla15.translateX(70);
+  
   //Tablero
   var campoVision = 45;
   var relacionAspecto = window.innerWidth / window.innerHeight;
