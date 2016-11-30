@@ -5,7 +5,7 @@ var cabezaForma = new THREE.SphereGeometry(2);
 
 base2Forma.translate(0,1,0);
 troncoForma.translate(0,5,0);
-cabezaForma.translate(0,10,0);
+cabezaForma.translate(0,9.5,0);
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
