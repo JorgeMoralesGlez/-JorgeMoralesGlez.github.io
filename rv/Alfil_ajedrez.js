@@ -10,11 +10,11 @@ var cabeza2Forma = new THREE.SphereGeometry(1);
 base1Forma.translate(0,1,0);
 base2Forma.translate(0,2,0);
 troncoForma.translate(0,3,0);
-cabeza1Forma.translate(0,13,0);
-cabeza2Forma.translate(0,16,0);
-detalle1Forma.translate(0,9,0);
-detalle2Forma.translate(0,8.7,0);
-detalle3Forma.translate(0,9.5,0);
+cabeza1Forma.translate(0,11,0);
+cabeza2Forma.translate(0,13,0);
+detalle1Forma.translate(0,7,0);
+detalle2Forma.translate(0,6.7,0);
+detalle3Forma.translate(0,7.5,0);
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
