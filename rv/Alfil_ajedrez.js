@@ -9,9 +9,9 @@ var cabeza2Forma = new THREE.SphereGeometry(.5);
 
 base1Forma.translate(0,1,0);
 base2Forma.translate(0,2,0);
-troncoForma.translate(0,6,0);
-cabeza1Forma.translate(0,11,0);
-cabeza2Forma.translate(0,13,0);
+troncoForma.translate(0,8,0);
+cabeza1Forma.translate(0,12,0);
+cabeza2Forma.translate(0,15,0);
 detalle1Forma.translate(0,7,0);
 detalle2Forma.translate(0,6.7,0);
 detalle3Forma.translate(0,7.5,0);
