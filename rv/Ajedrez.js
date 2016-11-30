@@ -174,9 +174,11 @@ function setup(){
 
   reyMalla.rotateX(Math.PI/2);
   reyMalla.translateY(3);
+  reyMalla.translateZ(-40);
   
   reyMalla1.rotateX(Math.PI/2);
   reyMalla1.translateY(3);
+  reyMalla1.translateZ(-40);
   
   //Tablero
   var campoVision = 45;
