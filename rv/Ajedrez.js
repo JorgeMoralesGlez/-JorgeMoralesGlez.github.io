@@ -342,6 +342,83 @@ function setup(){
   alfilMalla3.translateX(50);
   alfilMalla3.translateZ(-70);
   
+  //Peon
+  var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
+  var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
+  var troncoForma = new THREE.CylinderGeometry(2,4,10,20,10,false);
+  var cabezaForma = new THREE.SphereGeometry(3);
+
+  base2Forma.translate(0,1,0);
+  troncoForma.translate(0,5,0);
+  cabezaForma.translate(0,12,0);
+
+  var base1Malla = new THREE.Mesh(base1Forma);
+  var base2Malla= new THREE.Mesh(base2Forma);
+  var troncoMalla= new THREE.Mesh(troncoForma);
+  var cabezaMalla= new THREE.Mesh(cabezaForma);
+
+  var peonForma = new THREE.Geometry();
+  peonForma.merge(base1Malla.geometry, base1Malla.matrix);
+  peonForma.merge(base2Malla.geometry, base2Malla.matrix);
+  peonForma.merge(troncoMalla.geometry, troncoMalla.matrix);
+  peonForma.merge(cabezaMalla.geometry, cabezaMalla.matrix);
+  //var material= new THREE.MeshNormalMaterial();
+  var peonMalla = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla1 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla2 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla3 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla4 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla5 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla6 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla7 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla8 = new THREE.Mesh(peonForma, ceramicablanca);
+  var peonMalla9 = new THREE.Mesh(peonForma, ceramicanegra);
+  var peonMalla10 = new THREE.Mesh(peonForma, ceramicanegra);
+  var peonMalla11 = new THREE.Mesh(peonForma, ceramicanegra);
+  var peonMalla12 = new THREE.Mesh(peonForma, ceramicanegra);
+  var peonMalla13 = new THREE.Mesh(peonForma, ceramicanegra);
+  var peonMalla14 = new THREE.Mesh(peonForma, ceramicanegra);
+  var peonMalla15 = new THREE.Mesh(peonForma, ceramicanegra);
+  
+  peonMalla.rotateX(Math.PI/2);
+  peonMalla.translateY(3);
+  peonMalla.translateZ(-10);
+  
+  peonMalla1.rotateX(Math.PI/2);
+  peonMalla1.translateY(3);
+  peonMalla1.translateZ(-10);
+  peonMalla1.translateX(10);
+  
+  peonMalla2.rotateX(Math.PI/2);
+  peonMalla2.translateY(3);
+  peonMalla2.translateZ(-10);
+  peonMalla2.translateX(20);
+  
+  peonMalla3.rotateX(Math.PI/2);
+  peonMalla3.translateY(3);
+  peonMalla3.translateZ(-10);
+  peonMalla3.translateX(30);
+  
+  peonMalla4.rotateX(Math.PI/2);
+  peonMalla4.translateY(3);
+  peonMalla4.translateZ(-10);
+  peonMalla4.translateX(40);
+  
+  peonMalla5.rotateX(Math.PI/2);
+  peonMalla5.translateY(3);
+  peonMalla5.translateZ(-10);
+  peonMalla5.translateX(50);
+  
+  peonMalla6.rotateX(Math.PI/2);
+  peonMalla6.translateY(3);
+  peonMalla6.translateZ(-10);
+  peonMalla6.translateX(60);
+  
+  peonMalla7.rotateX(Math.PI/2);
+  peonMalla7.translateY(3);
+  peonMalla7.translateZ(-10);
+  peonMalla7.translateX(70);
+  
   //Tablero
   var campoVision = 45;
   var relacionAspecto = window.innerWidth / window.innerHeight;
