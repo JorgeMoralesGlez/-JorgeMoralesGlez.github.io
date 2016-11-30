@@ -1,7 +1,7 @@
 var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
 var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
 var troncoForma = new THREE.CylinderGeometry(1.5,3,12,12,12,false);
-var detalle1Forma = new THREE.CylinderGeometry(3,3,.5,20,.5,false);
+var detalle1Forma = new THREE.CylinderGeometry(3.5,3.5,.5,20,.5,false);
 var detalle2Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
 var detalle3Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
 var cabeza1Forma = new THREE.SphereGeometry(2);
