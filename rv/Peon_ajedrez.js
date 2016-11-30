@@ -1,11 +1,11 @@
 var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
 var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
-var troncoForma = new THREE.CylinderGeometry(2,4,10,20,10,false);
-var cabezaForma = new THREE.SphereGeometry(3);
+var troncoForma = new THREE.CylinderGeometry(2,4,7,7,7,false);
+var cabezaForma = new THREE.SphereGeometry(2);
 
 base2Forma.translate(0,1,0);
 troncoForma.translate(0,5,0);
-cabezaForma.translate(0,12,0);
+cabezaForma.translate(0,9,0);
 
 var base1Malla = new THREE.Mesh(base1Forma);
 var base2Malla= new THREE.Mesh(base2Forma);
