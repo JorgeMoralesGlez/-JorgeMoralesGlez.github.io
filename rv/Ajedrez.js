@@ -281,6 +281,67 @@ function setup(){
   reinaMalla1.translateX(40);
   reinaMalla1.translateZ(-70);
   
+  //Alfil
+  var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
+  var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
+  var troncoForma = new THREE.CylinderGeometry(2,3,20,20,20,false);
+  var detalle1Forma = new THREE.CylinderGeometry(4,4,.5,20,.5,false);
+  var detalle2Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
+  var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
+  var cabeza1Forma = new THREE.SphereGeometry(3);
+  var cabeza2Forma = new THREE.SphereGeometry(1);
+
+  base1Forma.translate(0,-9,0);
+  base2Forma.translate(0,-8,0);
+  troncoForma.translate(0,1,0);
+  cabeza1Forma.translate(0,13,0);
+  cabeza2Forma.translate(0,16,0);
+  detalle1Forma.translate(0,9,0);
+  detalle2Forma.translate(0,8.7,0);
+  detalle3Forma.translate(0,9.5,0);
+
+  var base1Malla = new THREE.Mesh(base1Forma);
+  var base2Malla= new THREE.Mesh(base2Forma);
+  var troncoMalla= new THREE.Mesh(troncoForma);
+  var cabeza1Malla= new THREE.Mesh(cabeza1Forma);
+  var cabeza2Malla= new THREE.Mesh(cabeza2Forma);
+  var detalle1Malla= new THREE.Mesh(detalle1Forma);
+  var detalle2Malla= new THREE.Mesh(detalle2Forma);
+  var detalle3Malla= new THREE.Mesh(detalle3Forma);
+
+  var alfilForma = new THREE.Geometry();
+  alfilForma.merge(base1Malla.geometry, base1Malla.matrix);
+  alfilForma.merge(base2Malla.geometry, base2Malla.matrix);
+  alfilForma.merge(troncoMalla.geometry, troncoMalla.matrix);
+  alfilForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
+  alfilForma.merge(cabeza2Malla.geometry, cabeza2Malla.matrix);
+  alfilForma.merge(detalle1Malla.geometry, detalle1Malla.matrix);
+  alfilForma.merge(detalle2Malla.geometry, detalle2Malla.matrix);
+  alfilForma.merge(detalle3Malla.geometry, detalle3Malla.matrix);
+  //var material= new THREE.MeshNormalMaterial();
+  var alfilMalla = new THREE.Mesh(alfilForma, ceramicablanca);
+  var alfilMalla1 = new THREE.Mesh(alfilForma, ceramicanegra);
+  var alfilMalla2 = new THREE.Mesh(alfilForma, ceramicablanca);
+  var alfilMalla3 = new THREE.Mesh(alfilForma, ceramicanegra);
+  
+  alfilMalla.rotateX(Math.PI/2);
+  alfilMalla.translateY(3);
+  alfilMalla.translateX(20);
+  
+  alfilMalla1.rotateX(Math.PI/2);
+  alfilMalla1.translateY(3);
+  alfilMalla1.translateX(20);
+  alfilMalla1.translateZ(-70);
+  
+  alfilMalla2.rotateX(Math.PI/2);
+  alfilMalla2.translateY(3);
+  alfilMalla2.translateX(50);
+  
+  alfilMalla3.rotateX(Math.PI/2);
+  alfilMalla3.translateY(3);
+  alfilMalla3.translateX(50);
+  alfilMalla1.translateZ(-70);
+  
   //Tablero
   var campoVision = 45;
   var relacionAspecto = window.innerWidth / window.innerHeight;
@@ -333,6 +394,10 @@ function setup(){
   escena.add(reyMalla1);
   escena.add(reinaMalla);
   escena.add(reinaMalla1);
+  escena.add(alfilMalla);
+  escena.add(alfilMalla1);
+  escena.add(alfilMalla2);
+  escena.add(alfilMalla3);
   renderizador = new THREE.WebGLRenderer();
   renderizador.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderizador.domElement);
