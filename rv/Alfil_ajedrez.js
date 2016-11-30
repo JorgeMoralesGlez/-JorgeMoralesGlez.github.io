@@ -7,9 +7,9 @@ var detalle3Forma = new THREE.CylinderGeometry(3,3,.3,20,.3,false);
 var cabeza1Forma = new THREE.SphereGeometry(3);
 var cabeza2Forma = new THREE.SphereGeometry(1);
 
-base1Forma.translate(0,-9,0);
-base2Forma.translate(0,-8,0);
-troncoForma.translate(0,1,0);
+base1Forma.translate(0,1,0);
+base2Forma.translate(0,2,0);
+troncoForma.translate(0,3,0);
 cabeza1Forma.translate(0,13,0);
 cabeza2Forma.translate(0,16,0);
 detalle1Forma.translate(0,9,0);
