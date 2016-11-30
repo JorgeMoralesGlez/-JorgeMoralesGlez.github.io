@@ -325,22 +325,22 @@ function setup(){
   var alfilMalla3 = new THREE.Mesh(alfilForma, ceramicanegra);
   
   alfilMalla.rotateX(Math.PI/2);
-  alfilMalla.translateY(6);
+  alfilMalla.translateY(9);
   alfilMalla.translateX(20);
   
   alfilMalla1.rotateX(Math.PI/2);
-  alfilMalla1.translateY(6);
+  alfilMalla1.translateY(9);
   alfilMalla1.translateX(20);
   alfilMalla1.translateZ(-70);
   
   alfilMalla2.rotateX(Math.PI/2);
-  alfilMalla2.translateY(6);
+  alfilMalla2.translateY(9);
   alfilMalla2.translateX(50);
   
   alfilMalla3.rotateX(Math.PI/2);
-  alfilMalla3.translateY(6);
+  alfilMalla3.translateY(9);
   alfilMalla3.translateX(50);
-  alfilMalla1.translateZ(-70);
+  alfilMalla3.translateZ(-70);
   
   //Tablero
   var campoVision = 45;
