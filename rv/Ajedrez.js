@@ -330,7 +330,9 @@ function setup(){
   escena.add(torreMalla2);
   escena.add(torreMalla3);
   escena.add(reyMalla);
-  escena.add(reyMalla1)
+  escena.add(reyMalla1);
+  escena.add(reinaMalla);
+  escena.add(reinaMalla1);
   renderizador = new THREE.WebGLRenderer();
   renderizador.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderizador.domElement);
