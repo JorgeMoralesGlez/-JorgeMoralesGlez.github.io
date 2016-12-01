@@ -529,86 +529,86 @@ function setup(){
     }
   }
   
-  valor = new Array(8)
-  valor[0] = new Array(8);
+  valor = new Array(80)
+  valor[0] = new Array(80);
   valor[0][0] = torreMalla;
-  valor[0][1] = vacio;
-  valor[0][2] = alfilMalla;
-  valor[0][3] = reyMalla;
-  valor[0][4] = reinaMalla;
-  valor[0][5] = alfilMalla2;
-  valor[0][6] = vacio;
-  valor[0][7] = torreMalla3;
+  valor[0][10] = vacio;
+  valor[0][20] = alfilMalla;
+  valor[0][30] = reyMalla;
+  valor[0][40] = reinaMalla;
+  valor[0][50] = alfilMalla2;
+  valor[0][60] = vacio;
+  valor[0][70] = torreMalla3;
 
-  valor[1] = new Array(8);
-  valor[1][0] = peonMalla;
-  valor[1][1] = peonMalla1;
-  valor[1][2] = peonMalla2;
-  valor[1][3] = peonMalla3;
-  valor[1][4] = peonMalla4;
-  valor[1][5] = peonMalla5;
-  valor[1][6] = peonMalla6;
-  valor[1][7] = peonMalla7;
+  valor[10] = new Array(8);
+  valor[10][0] = peonMalla;
+  valor[10][10] = peonMalla1;
+  valor[10][20] = peonMalla2;
+  valor[10][30] = peonMalla3;
+  valor[10][40] = peonMalla4;
+  valor[10][50] = peonMalla5;
+  valor[10][60] = peonMalla6;
+  valor[10][70] = peonMalla7;
 
-  valor[2] = new Array(8);
-  valor[2][0] = vacio;
-  valor[2][1] = vacio;
-  valor[2][2] = vacio;
-  valor[2][3] = vacio;
-  valor[2][4] = vacio;
-  valor[2][5] = vacio;
-  valor[2][6] = vacio;
-  valor[2][7] = vacio;
+  valor[20] = new Array(8);
+  valor[20][0] = vacio;
+  valor[20][10] = vacio;
+  valor[20][20] = vacio;
+  valor[20][30] = vacio;
+  valor[20][40] = vacio;
+  valor[20][50] = vacio;
+  valor[20][60] = vacio;
+  valor[20][70] = vacio;
 
-  valor[3] = new Array(8);
-  valor[3][0] = vacio;
-  valor[3][1] = vacio;
-  valor[3][2] = vacio;
-  valor[3][3] = vacio;
-  valor[3][4] = vacio;
-  valor[3][5] = vacio;
-  valor[3][6] = vacio;
-  valor[3][7] = vacio;
+  valor[30] = new Array(80);
+  valor[30][0] = vacio;
+  valor[30][10] = vacio;
+  valor[30][20] = vacio;
+  valor[30][30] = vacio;
+  valor[30][40] = vacio;
+  valor[30][50] = vacio;
+  valor[30][60] = vacio;
+  valor[30][70] = vacio;
 
-  valor[4] = new Array(8);
-  valor[4][0] = vacio;
-  valor[4][1] = vacio;
-  valor[4][2] = vacio;
-  valor[4][3] = vacio;
-  valor[4][4] = vacio;
-  valor[4][5] = vacio;
-  valor[4][6] = vacio;
-  valor[4][7] = vacio;
+  valor[40] = new Array(80);
+  valor[40][0] = vacio;
+  valor[40][10] = vacio;
+  valor[40][20] = vacio;
+  valor[40][30] = vacio;
+  valor[40][40] = vacio;
+  valor[40][50] = vacio;
+  valor[40][60] = vacio;
+  valor[40][70] = vacio;
 
-  valor[5] = new Array(8);
-  valor[5][0] = vacio;
-  valor[5][1] = vacio;
-  valor[5][2] = vacio;
-  valor[5][3] = vacio;
-  valor[5][4] = vacio;
-  valor[5][5] = vacio;
-  valor[5][6] = vacio;
-  valor[5][7] = vacio;
+  valor[50] = new Array(80);
+  valor[50][0] = vacio;
+  valor[50][10] = vacio;
+  valor[50][20] = vacio;
+  valor[50][30] = vacio;
+  valor[50][40] = vacio;
+  valor[50][50] = vacio;
+  valor[50][60] = vacio;
+  valor[50][70] = vacio;
 
-  valor[6] = new Array(8);
-  valor[6][0] = peonMalla8;
-  valor[6][1] = peonMalla9;
-  valor[6][2] = peonMalla10;
-  valor[6][3] = peonMalla11;
-  valor[6][4] = peonMalla12;
-  valor[6][5] = peonMalla13;
-  valor[6][6] = peonMalla14;
-  valor[6][7] = peonMalla15;
+  valor[60] = new Array(80);
+  valor[60][0] = peonMalla8;
+  valor[60][10] = peonMalla9;
+  valor[60][20] = peonMalla10;
+  valor[60][30] = peonMalla11;
+  valor[60][40] = peonMalla12;
+  valor[60][50] = peonMalla13;
+  valor[60][60] = peonMalla14;
+  valor[60][70] = peonMalla15;
 
-  valor[7] = new Array(8);
-  valor[7][0] = torreMalla1;
-  valor[7][1] = vacio;
-  valor[7][2] = alfilMalla1;
-  valor[7][3] = reyMalla1;
-  valor[7][4] = reinaMalla1;
-  valor[7][5] = alfilMalla3;
-  valor[7][6] = vacio;
-  valor[7][7] = torreMalla2;  
+  valor[70] = new Array(8);
+  valor[70][0] = torreMalla1;
+  valor[70][10] = vacio;
+  valor[70][20] = alfilMalla1;
+  valor[70][30] = reyMalla1;
+  valor[70][40] = reinaMalla1;
+  valor[70][50] = alfilMalla3;
+  valor[70][60] = vacio;
+  valor[70][70] = torreMalla2;  
   
   
   var base = new THREE.Mesh( new THREE.BoxGeometry(90, 90, 2), marmolcafe );
@@ -700,20 +700,20 @@ function loop(){
       //var b = valor[0][0];
       //valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b;
       //valor[0][0]= a;
-    }else if(auxx==1 && auxy==0){
+    }else if(auxx==10 && auxy==0){
       var c = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d = valor[1][0];
-      valor[1][0].position.x=seleccionadorMalla.position.x;
-      valor[1][0].position.y=seleccionadorMalla.position.y;
+      var d = valor[10][0];
+      valor[10][0].position.x=seleccionadorMalla.position.x;
+      valor[10][0].position.y=seleccionadorMalla.position.y;
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c;
-      valor[1][0]= d;
-    }else if(auxx==0 && auxy==1){
+      valor[10][0]= d;
+    }else if(auxx==0 && auxy==10){
       var e = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f = valor[0][1];
-      valor[0][1].position.x=seleccionadorMalla.position.x;
-      valor[0][1].position.y=seleccionadorMalla.position.y;
+      var f = valor[0][10];
+      valor[0][10].position.x=seleccionadorMalla.position.x;
+      valor[0][10].position.y=seleccionadorMalla.position.y;
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e;
-      valor[0][1]= f;
+      valor[0][10]= f;
     }
     seleccionadorMalla.position.x=0;
     seleccionadorMalla.position.y=0;
