@@ -531,7 +531,7 @@ function setup(){
   valor = new Array(8)
   valor[0] = new Array(8);
   valor[0][0] = torreMalla;
-  valor[0][1] = " ";
+  valor[0][1] = null;
   valor[0][2] = alfilMalla;
   valor[0][3] = reyMalla;
   valor[0][4] = reinaMalla;
@@ -695,7 +695,7 @@ function loop(){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]=valor[0][0];
       valor[0][0].position.x=seleccionadorMalla.position.x;
       valor[0][0].position.y=seleccionadorMalla.position.y;
-      valor[0][0]= " ";                 
+      valor[0][0]= null;                 
     //}else if(auxx==1 && auxy==0){
       //valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]=valor[1][0];
       //valor[1][0].position.x=seleccionadorMalla.position.x;
@@ -718,18 +718,21 @@ function loop(){
           switch (tecla){
               case 37 :   
                   seleccionadorMalla.translateX(10);
+                  escena.remove(posicionadorMalla);
                   break;
               case 38 : 
                   seleccionadorMalla.translateZ(-10);
+                  escena.remove(posicionadorMalla);
                   break;
               case 39 :  
                   seleccionadorMalla.translateZ(10);
+                  escena.remove(posicionadorMalla);
                   break;
               case 40 : 
                   seleccionadorMalla.translateX(-10);
+                  escena.remove(posicionadorMalla);
                   break;
               case 13 :
-                  escena.remove(posicionadorMalla);
                   posicionadorMalla = new THREE.Mesh(seleccionadorForma, posicionador);
                   posicionadorMalla.rotateX(Math.PI/2);
                   posicionadorMalla.position.x=seleccionadorMalla.position.x;
