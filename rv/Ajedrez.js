@@ -27,6 +27,7 @@ var reinaMalla, reinaMalla1;
 var peonMalla, peonMalla1, peonMalla2, peonMalla3, peonMalla4, peonMalla5, peonMalla6, peonMalla7, peonMalla8, peonMalla9;
 var peonMalla10, peonMalla11, peonMalla12, peonMalla13, peonMalla14, peonMalla15;
 var cuyo=1;
+var vacio;
 
 
 function setup(){
@@ -531,12 +532,12 @@ function setup(){
   valor = new Array(8)
   valor[0] = new Array(8);
   valor[0][0] = torreMalla;
-  valor[0][1] = null;
+  valor[0][1] = vacio;
   valor[0][2] = alfilMalla;
   valor[0][3] = reyMalla;
   valor[0][4] = reinaMalla;
   valor[0][5] = alfilMalla2;
-  valor[0][6] = " ";
+  valor[0][6] = vacio;
   valor[0][7] = torreMalla3;
 
   valor[1] = new Array(8);
@@ -550,44 +551,44 @@ function setup(){
   valor[1][7] = peonMalla7;
 
   valor[2] = new Array(8);
-  valor[2][0] = " ";
-  valor[2][1] = " ";
-  valor[2][2] = " ";
-  valor[2][3] = " ";
-  valor[2][4] = " ";
-  valor[2][5] = " ";
-  valor[2][6] = " ";
-  valor[2][7] = " ";
+  valor[2][0] = vacio;
+  valor[2][1] = vacio;
+  valor[2][2] = vacio;
+  valor[2][3] = vacio;
+  valor[2][4] = vacio;
+  valor[2][5] = vacio;
+  valor[2][6] = vacio;
+  valor[2][7] = vacio;
 
   valor[3] = new Array(8);
-  valor[3][0] = " ";
-  valor[3][1] = " ";
-  valor[3][2] = " ";
-  valor[3][3] = " ";
-  valor[3][4] = " ";
-  valor[3][5] = " ";
-  valor[3][6] = " ";
-  valor[3][7] = " ";
+  valor[3][0] = vacio;
+  valor[3][1] = vacio;
+  valor[3][2] = vacio;
+  valor[3][3] = vacio;
+  valor[3][4] = vacio;
+  valor[3][5] = vacio;
+  valor[3][6] = vacio;
+  valor[3][7] = vacio;
 
   valor[4] = new Array(8);
-  valor[4][0] = " ";
-  valor[4][1] = " ";
-  valor[4][2] = " ";
-  valor[4][3] = " ";
-  valor[4][4] = " ";
-  valor[4][5] = " ";
-  valor[4][6] = " ";
-  valor[4][7] = " ";
+  valor[4][0] = vacio;
+  valor[4][1] = vacio;
+  valor[4][2] = vacio;
+  valor[4][3] = vacio;
+  valor[4][4] = vacio;
+  valor[4][5] = vacio;
+  valor[4][6] = vacio;
+  valor[4][7] = vacio;
 
   valor[5] = new Array(8);
-  valor[5][0] = " ";
-  valor[5][1] = " ";
-  valor[5][2] = " ";
-  valor[5][3] = " ";
-  valor[5][4] = " ";
-  valor[5][5] = " ";
-  valor[5][6] = " ";
-  valor[5][7] = " ";
+  valor[5][0] = vacio;
+  valor[5][1] = vacio;
+  valor[5][2] = vacio;
+  valor[5][3] = vacio;
+  valor[5][4] = vacio;
+  valor[5][5] = vacio;
+  valor[5][6] = vacio;
+  valor[5][7] = vacio;
 
   valor[6] = new Array(8);
   valor[6][0] = peonMalla8;
@@ -601,12 +602,12 @@ function setup(){
 
   valor[7] = new Array(8);
   valor[7][0] = torreMalla1;
-  valor[7][1] = " ";
+  valor[7][1] = vacio;
   valor[7][2] = alfilMalla1;
   valor[7][3] = reyMalla1;
   valor[7][4] = reinaMalla1;
   valor[7][5] = alfilMalla3;
-  valor[7][6] = " ";
+  valor[7][6] = vacio;
   valor[7][7] = torreMalla2;  
   
   
