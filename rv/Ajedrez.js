@@ -685,15 +685,15 @@ function setup(){
 
 function loop(){
   if(cuyo==2){
-      auxx=seleccionadorMalla.position.x;
-      auxy=seleccionadorMalla.position.y;
+      auxx=parseInt(seleccionadorMalla.position.x);
+      auxy=parseInt(seleccionadorMalla.position.y);
       cuyo=cuyo+1;
       requestAnimationFrame(loop);
       renderizador.render(escena,camara);
   }
   else if(cuyo==4){
     alert(auxx)
-    if(auxx=!0){
+    if(auxx==0){
       valor[0][0].position.x=seleccionadorMalla.position.x;
       valor[0][0].position.y=seleccionadorMalla.position.y;
       //var a = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
