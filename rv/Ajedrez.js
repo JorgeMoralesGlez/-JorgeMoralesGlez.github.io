@@ -702,6 +702,12 @@ function loop(){
       valor[1][0].position.y=seleccionadorMalla.position.y;
       valor[1][0]=null;
     }
+    }else if(auxx==0 && auxy==1){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]=valor[0][1];
+      valor[0][1].position.x=seleccionadorMalla.position.x;
+      valor[0][1].position.y=seleccionadorMalla.position.y;
+      valor[0][1]=null;
+    }
     seleccionadorMalla.position.x=0;
     seleccionadorMalla.position.y=0;
     seleccionadorMalla.position.z=30;
