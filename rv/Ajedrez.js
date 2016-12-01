@@ -701,19 +701,26 @@ function loop(){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b;
       valor[0][0]= a;
     }else if(auxx==10 && auxy==0){
+      valor[10][0].position.x=seleccionadorMalla.position.x;
+      valor[10][0].position.y=seleccionadorMalla.position.y;      
       var c = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
       var d = valor[10][0];
-      valor[10][0].position.x=seleccionadorMalla.position.x;
-      valor[10][0].position.y=seleccionadorMalla.position.y;
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c;
       valor[10][0]= d;
     }else if(auxx==0 && auxy==10){
-      var e = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f = valor[0][10];
       valor[0][10].position.x=seleccionadorMalla.position.x;
       valor[0][10].position.y=seleccionadorMalla.position.y;
+      var e = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var f = valor[0][10];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e;
       valor[0][10]= f;
+    }else if(auxx==0 && auxy==20){
+      valor[0][20].position.x=seleccionadorMalla.position.x;
+      valor[0][20].position.y=seleccionadorMalla.position.y;
+      var g = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var h = valor[0][20];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g;
+      valor[0][20]= h;
     }
     seleccionadorMalla.position.x=0;
     seleccionadorMalla.position.y=0;
