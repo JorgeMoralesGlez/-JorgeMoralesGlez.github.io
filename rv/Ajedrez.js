@@ -692,6 +692,7 @@ function loop(){
       renderizador.render(escena,camara);
   }
   else if(cuyo==4){
+    alert (valor[0][0])
     if(auxx==0 && auxy==0){
       valor[0][0].position.x=seleccionadorMalla.position.x;
       valor[0][0].position.y=seleccionadorMalla.position.y;
