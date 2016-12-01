@@ -737,13 +737,13 @@ function loop(){
       var tecla = objeto.which;
           switch (tecla){
               case 37 :   
-                  seleccionadorMalla.translateX(-10);
+                  seleccionadorMalla.translateX(10);
                   break;
               case 38 : 
                   seleccionadorMalla.translateZ(10);
                   break;
               case 39 :  
-                  seleccionadorMalla.translateX(10);
+                  seleccionadorMalla.translateX(-10);
                   break;
               case 40 : 
                   seleccionadorMalla.translateZ(-10);
