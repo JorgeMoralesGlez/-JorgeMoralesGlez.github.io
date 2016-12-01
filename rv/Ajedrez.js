@@ -687,6 +687,7 @@ function loop(){
       auxx=posicionadorMalla.position.x;
       auxy=posicionadorMalla.position.y;
       cuyo=cuyo+1;
+      escena.remove(posicionadorMalla);
       requestAnimationFrame(loop);
       renderizador.render(escena,camara);
   }
@@ -718,19 +719,15 @@ function loop(){
           switch (tecla){
               case 37 :   
                   seleccionadorMalla.translateX(10);
-                  escena.remove(posicionadorMalla);
                   break;
               case 38 : 
                   seleccionadorMalla.translateZ(-10);
-                  escena.remove(posicionadorMalla);
                   break;
               case 39 :  
                   seleccionadorMalla.translateZ(10);
-                  escena.remove(posicionadorMalla);
                   break;
               case 40 : 
                   seleccionadorMalla.translateX(-10);
-                  escena.remove(posicionadorMalla);
                   break;
               case 13 :
                   posicionadorMalla = new THREE.Mesh(seleccionadorForma, posicionador);
