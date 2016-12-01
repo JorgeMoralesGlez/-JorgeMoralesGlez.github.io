@@ -736,17 +736,18 @@ function loop(){
       function desplazar(objeto){
       var tecla = objeto.which;
           switch (tecla){
-              case 37 :   
-                  seleccionadorMalla.translateZ(-10);
-                  break;
-              case 38 : 
+              case 37 : 
                   seleccionadorMalla.translateX(10);
                   break;
-              case 39 :  
+              case 38 : 
                   seleccionadorMalla.translateZ(10);
                   break;
-              case 40 : 
+              case 39 :  
                   seleccionadorMalla.translateX(-10);
+                  break;
+              case 40 : 
+                  seleccionadorMalla.translateZ(-10);
+                  
                   break;
               case 13 :
                   //escena.remove(posicionadorMalla);
