@@ -693,13 +693,13 @@ function loop(){
   }
   else if(cuyo==4){
     alert(auxx)
-    if(auxx==0){
+    if(auxx==0 && auxy==0){
       valor[0][0].position.x=seleccionadorMalla.position.x;
       valor[0][0].position.y=seleccionadorMalla.position.y;
-      //var a = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      //var b = valor[0][0];
-      //valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b;
-      //valor[0][0]= a;
+      var a = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var b = valor[0][0];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b;
+      valor[0][0]= a;
     }else if(auxx==10 && auxy==0){
       var c = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
       var d = valor[10][0];
