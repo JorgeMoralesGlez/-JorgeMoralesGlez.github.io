@@ -740,13 +740,13 @@ function loop(){
                   seleccionadorMalla.translateX(-10);
                   break;
               case 38 : 
-                  seleccionadorMalla.translateX(10);
+                  seleccionadorMalla.translateZ(10);
                   break;
               case 39 :  
-                  seleccionadorMalla.translateZ(-10);
+                  seleccionadorMalla.translateX(10);
                   break;
               case 40 : 
-                  seleccionadorMalla.translateZ(10);
+                  seleccionadorMalla.translateZ(-10);
                   break;
               case 13 :
                   //escena.remove(posicionadorMalla);
