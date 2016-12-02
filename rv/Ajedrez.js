@@ -532,82 +532,82 @@ function setup(){
   valor = new Array(80)
   valor[0] = new Array(80);
   valor[0][0] = torreMalla;
-  valor[0][10] = vacio;
-  valor[0][20] = alfilMalla;
-  valor[0][30] = reyMalla;
-  valor[0][40] = reinaMalla;
-  valor[0][50] = alfilMalla2;
-  valor[0][60] = vacio;
-  valor[0][70] = torreMalla3;
+  valor[0][10] = peonMalla;
+  valor[0][20] = vacio;
+  valor[0][30] = vacio;
+  valor[0][40] = vacio;
+  valor[0][50] = vacio;
+  valor[0][60] = peonMalla8;
+  valor[0][70] = torreMalla1;
 
   valor[10] = new Array(8);
-  valor[10][0] = peonMalla;
+  valor[10][0] = vacio;
   valor[10][10] = peonMalla1;
-  valor[10][20] = peonMalla2;
-  valor[10][30] = peonMalla3;
-  valor[10][40] = peonMalla4;
-  valor[10][50] = peonMalla5;
-  valor[10][60] = peonMalla6;
-  valor[10][70] = peonMalla7;
+  valor[10][20] = vacio;
+  valor[10][30] = vacio;
+  valor[10][40] = vacio;
+  valor[10][50] = vacio;
+  valor[10][60] = peonMalla9;
+  valor[10][70] = vacio;
 
   valor[20] = new Array(8);
-  valor[20][0] = vacio;
-  valor[20][10] = vacio;
+  valor[20][0] = alfilMalla;
+  valor[20][10] = peonMalla2;
   valor[20][20] = vacio;
   valor[20][30] = vacio;
   valor[20][40] = vacio;
   valor[20][50] = vacio;
-  valor[20][60] = vacio;
-  valor[20][70] = vacio;
+  valor[20][60] = peonMalla10;
+  valor[20][70] = alfilMalla1;
 
   valor[30] = new Array(80);
-  valor[30][0] = vacio;
-  valor[30][10] = vacio;
+  valor[30][0] = reyMalla;
+  valor[30][10] = peonMalla3;
   valor[30][20] = vacio;
   valor[30][30] = vacio;
   valor[30][40] = vacio;
   valor[30][50] = vacio;
-  valor[30][60] = vacio;
-  valor[30][70] = vacio;
+  valor[30][60] = peonMalla11;
+  valor[30][70] = reyMalla1;
 
   valor[40] = new Array(80);
-  valor[40][0] = vacio;
-  valor[40][10] = vacio;
+  valor[40][0] = reinaMalla;
+  valor[40][10] = peonMalla4;
   valor[40][20] = vacio;
   valor[40][30] = vacio;
   valor[40][40] = vacio;
   valor[40][50] = vacio;
-  valor[40][60] = vacio;
-  valor[40][70] = vacio;
+  valor[40][60] = peonMalla12;
+  valor[40][70] = reinaMalla1;
 
   valor[50] = new Array(80);
-  valor[50][0] = vacio;
-  valor[50][10] = vacio;
+  valor[50][0] = alfilMalla2;
+  valor[50][10] = peonMalla5;
   valor[50][20] = vacio;
   valor[50][30] = vacio;
   valor[50][40] = vacio;
   valor[50][50] = vacio;
-  valor[50][60] = vacio;
-  valor[50][70] = vacio;
+  valor[50][60] = peonMalla13;
+  valor[50][70] = alfilMalla3;
 
   valor[60] = new Array(80);
-  valor[60][0] = peonMalla8;
-  valor[60][10] = peonMalla9;
-  valor[60][20] = peonMalla10;
-  valor[60][30] = peonMalla11;
-  valor[60][40] = peonMalla12;
-  valor[60][50] = peonMalla13;
+  valor[60][0] = vacio;
+  valor[60][10] = peonMalla6;
+  valor[60][20] = vacio;
+  valor[60][30] = vacio;
+  valor[60][40] = vacio;
+  valor[60][50] = vacio;
   valor[60][60] = peonMalla14;
-  valor[60][70] = peonMalla15;
+  valor[60][70] = vacio;
 
   valor[70] = new Array(8);
-  valor[70][0] = torreMalla1;
-  valor[70][10] = vacio;
-  valor[70][20] = alfilMalla1;
-  valor[70][30] = reyMalla1;
-  valor[70][40] = reinaMalla1;
-  valor[70][50] = alfilMalla3;
-  valor[70][60] = vacio;
+  valor[70][0] = torreMalla3;
+  valor[70][10] = peonMalla7;
+  valor[70][20] = vacio;
+  valor[70][30] = vacio;
+  valor[70][40] = vacio;
+  valor[70][50] = vacio;
+  valor[70][60] = peonMalla15;
   valor[70][70] = torreMalla2;  
   
   
@@ -748,18 +748,6 @@ function loop(){
               case 40 : 
                   seleccionadorMalla.translateX(10);
                   break;
-              //case 37 : 
-                  //seleccionadorMalla.translateX(10);
-                  //break;
-              //case 38 : 
-                  //seleccionadorMalla.translateZ(10);
-                  //break;
-              //case 39 :  
-                  //seleccionadorMalla.translateX(-10);
-                  //break;
-              //case 40 : 
-                  //seleccionadorMalla.translateZ(-10);
-                  //break;
               case 13 :
                   //escena.remove(posicionadorMalla);
                   //posicionadorMalla = new THREE.Mesh(seleccionadorForma, posicionador);
