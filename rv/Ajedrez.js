@@ -1040,8 +1040,8 @@ function loop(){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][10].position.y
       valor[50][10].position.x=seleccionadorMalla.position.x;
       valor[50][10].position.y=seleccionadorMalla.position.y;      
-      var f3 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f2 = valor[50][10];
+      var f2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var f3 = valor[50][10];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f3;
       valor[50][10]= f2;
     }else if(auxx==60 && auxy==10){
@@ -1049,8 +1049,8 @@ function loop(){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][10].position.y
       valor[60][10].position.x=seleccionadorMalla.position.x;
       valor[60][10].position.y=seleccionadorMalla.position.y;      
-      var g3 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g2 = valor[60][10];
+      var g2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var g3 = valor[60][10];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g3;
       valor[60][10]= g2;
     }else if(auxx==70 && auxy==10){
@@ -1058,8 +1058,8 @@ function loop(){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][10].position.y
       valor[70][10].position.x=seleccionadorMalla.position.x;
       valor[70][10].position.y=seleccionadorMalla.position.y;      
-      var h3 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h2 = valor[70][10];
+      var h2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var h3 = valor[70][10];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h3;
       valor[70][10]= h2;
       
@@ -1080,7 +1080,7 @@ function loop(){
       var b4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
       var b5 = valor[10][20];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b5;
-      valor[10][10]= b4;
+      valor[10][20]= b4;
     }else if(auxx==20 && auxy==20){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][20].position.x
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][20].position.y
@@ -1096,7 +1096,7 @@ function loop(){
       valor[30][20].position.x=seleccionadorMalla.position.x;
       valor[30][20].position.y=seleccionadorMalla.position.y;      
       var d4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d5 = valor[30][10];
+      var d5 = valor[30][20];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d5;
       valor[30][20]= d4;
     }else if(auxx==40 && auxy==20){
@@ -1123,7 +1123,7 @@ function loop(){
       valor[60][20].position.x=seleccionadorMalla.position.x;
       valor[60][20].position.y=seleccionadorMalla.position.y;      
       var g4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g5 = valor[60][10];
+      var g5 = valor[60][20];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g5;
       valor[60][20]= g4;
     }else if(auxx==70 && auxy==20){
@@ -1206,8 +1206,8 @@ function loop(){
       valor[70][30].position.y=seleccionadorMalla.position.y;      
       var h6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
       var h7 = valor[70][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h5;
-      valor[70][30]= h4;
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h7;
+      valor[70][30]= h6;
     
     }else if(auxx==0 && auxy==40){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][40].position.x
@@ -1263,7 +1263,7 @@ function loop(){
       var f9 = valor[50][40];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f9;
       valor[50][40]= f8;
-    }else if(auxx==60 && auxy==20){
+    }else if(auxx==60 && auxy==40){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][40].position.x
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][40].position.y
       valor[60][40].position.x=seleccionadorMalla.position.x;
@@ -1282,78 +1282,151 @@ function loop(){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h9;
       valor[70][40]= h8;
     
-    }else if(auxx==0 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][20].position.y
-      valor[0][20].position.x=seleccionadorMalla.position.x;
-      valor[0][20].position.y=seleccionadorMalla.position.y;
-      var a4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a5 = valor[0][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a5;
-      valor[0][20]= a4;
-    }else if(auxx==10 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][20].position.y
-      valor[10][20].position.x=seleccionadorMalla.position.x;
-      valor[10][20].position.y=seleccionadorMalla.position.y;      
-      var b4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b5 = valor[10][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b5;
-      valor[10][10]= b4;
-    }else if(auxx==20 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][20].position.y
-      valor[20][20].position.x=seleccionadorMalla.position.x;
-      valor[20][20].position.y=seleccionadorMalla.position.y;      
-      var c4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c5 = valor[20][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c5;
-      valor[20][20]= c4; 
-    }else if(auxx==30 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][20].position.y
-      valor[30][20].position.x=seleccionadorMalla.position.x;
-      valor[30][20].position.y=seleccionadorMalla.position.y;      
-      var d4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d5 = valor[30][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d5;
-      valor[30][20]= d4;
-    }else if(auxx==40 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][20].position.y
-      valor[40][20].position.x=seleccionadorMalla.position.x;
-      valor[40][20].position.y=seleccionadorMalla.position.y;      
-      var e4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e5 = valor[40][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e5;
-      valor[40][20]= e4;
-    }else if(auxx==50 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][20].position.y
-      valor[50][20].position.x=seleccionadorMalla.position.x;
-      valor[50][20].position.y=seleccionadorMalla.position.y;      
-      var f4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f5 = valor[50][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f5;
-      valor[50][20]= f4;
-    }else if(auxx==60 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][20].position.y
-      valor[60][20].position.x=seleccionadorMalla.position.x;
-      valor[60][20].position.y=seleccionadorMalla.position.y;      
-      var g4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g5 = valor[60][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g5;
-      valor[60][20]= g4;
-    }else if(auxx==70 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][20].position.y
-      valor[70][20].position.x=seleccionadorMalla.position.x;
-      valor[70][20].position.y=seleccionadorMalla.position.y;      
-      var h4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h5 = valor[70][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h5;
-      valor[70][20]= h4;
+    }else if(auxx==0 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][50].position.y
+      valor[0][50].position.x=seleccionadorMalla.position.x;
+      valor[0][50].position.y=seleccionadorMalla.position.y;
+      var a10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var a11 = valor[0][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a11;
+      valor[0][50]= a10;
+    }else if(auxx==10 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][50].position.y
+      valor[10][50].position.x=seleccionadorMalla.position.x;
+      valor[10][50].position.y=seleccionadorMalla.position.y;      
+      var b10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var b11 = valor[10][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b11;
+      valor[10][50]= b10;
+    }else if(auxx==20 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][50].position.y
+      valor[20][50].position.x=seleccionadorMalla.position.x;
+      valor[20][50].position.y=seleccionadorMalla.position.y;      
+      var c10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var c11 = valor[20][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c11;
+      valor[20][50]= c10; 
+    }else if(auxx==30 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][50].position.y
+      valor[30][50].position.x=seleccionadorMalla.position.x;
+      valor[30][50].position.y=seleccionadorMalla.position.y;      
+      var d10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var d11 = valor[30][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d11;
+      valor[30][50]= d10;
+    }else if(auxx==40 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][50].position.y
+      valor[40][50].position.x=seleccionadorMalla.position.x;
+      valor[40][50].position.y=seleccionadorMalla.position.y;      
+      var e10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var e11 = valor[40][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e11;
+      valor[40][50]= e10;
+    }else if(auxx==50 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][50].position.y
+      valor[50][50].position.x=seleccionadorMalla.position.x;
+      valor[50][50].position.y=seleccionadorMalla.position.y;      
+      var f10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var f11 = valor[50][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f11;
+      valor[50][50]= f10;
+    }else if(auxx==60 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][50].position.y
+      valor[60][50].position.x=seleccionadorMalla.position.x;
+      valor[60][50].position.y=seleccionadorMalla.position.y;      
+      var g10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var g11 = valor[60][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g11;
+      valor[60][50]= g10;
+    }else if(auxx==70 && auxy==50){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][50].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][50].position.y
+      valor[70][50].position.x=seleccionadorMalla.position.x;
+      valor[70][50].position.y=seleccionadorMalla.position.y;      
+      var h10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var h11 = valor[70][50];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h11;
+      valor[70][50]= h10;
+    
+    }else if(auxx==0 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][60].position.y
+      valor[0][60].position.x=seleccionadorMalla.position.x;
+      valor[0][60].position.y=seleccionadorMalla.position.y;
+      var a12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var a13 = valor[0][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a12;
+      valor[0][60]= a13;
+    }else if(auxx==10 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][60].position.y
+      valor[10][60].position.x=seleccionadorMalla.position.x;
+      valor[10][60].position.y=seleccionadorMalla.position.y;      
+      var b12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var b13 = valor[10][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b13;
+      valor[10][60]= b12;
+    }else if(auxx==20 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][60].position.y
+      valor[20][60].position.x=seleccionadorMalla.position.x;
+      valor[20][60].position.y=seleccionadorMalla.position.y;      
+      var c12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var c13 = valor[20][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c13;
+      valor[20][60]= c12; 
+    }else if(auxx==30 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][60].position.y
+      valor[30][60].position.x=seleccionadorMalla.position.x;
+      valor[30][60].position.y=seleccionadorMalla.position.y;      
+      var d12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var d13 = valor[30][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d13;
+      valor[30][60]= d12;
+    }else if(auxx==40 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][60].position.y
+      valor[40][60].position.x=seleccionadorMalla.position.x;
+      valor[40][60].position.y=seleccionadorMalla.position.y;      
+      var e12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var e13 = valor[40][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e13;
+      valor[40][60]= e12;
+    }else if(auxx==50 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][60].position.y
+      valor[50][60].position.x=seleccionadorMalla.position.x;
+      valor[50][60].position.y=seleccionadorMalla.position.y;      
+      var f12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var f13 = valor[50][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f13;
+      valor[50][60]= f12;
+    }else if(auxx==60 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][60].position.y
+      valor[60][60].position.x=seleccionadorMalla.position.x;
+      valor[60][60].position.y=seleccionadorMalla.position.y;      
+      var g12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var g13 = valor[60][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g13;
+      valor[60][60]= g12;
+    }else if(auxx==70 && auxy==60){
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][60].position.x
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][60].position.y
+      valor[70][60].position.x=seleccionadorMalla.position.x;
+      valor[70][60].position.y=seleccionadorMalla.position.y;      
+      var h12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
+      var h13 = valor[70][60];
+      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h13;
+      valor[70][60]= h12;
     }
 
     seleccionadorMalla.position.x=0;
