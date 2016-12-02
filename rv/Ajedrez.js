@@ -910,7 +910,7 @@ function setup(){
 function loop(){
   if(cuyo==2){
       auxx=parseInt(posicionadorMalla.position.x);
-      auxy=parseInt(posicionanadorMalla.position.y);
+      auxy=parseInt(posicionadorMalla.position.y);
       cuyo=cuyo+1;
       requestAnimationFrame(loop);
       renderizador.render(escena,camara);
@@ -1011,9 +1011,9 @@ function loop(){
     seleccionadorMalla.position.x=0;
     seleccionadorMalla.position.y=0;
     seleccionadorMalla.position.z=30;
-    //posicionadorMalla.position.x=0;
-    //posicionadorMalla.position.y=0;
-    //posicionadorMalla.position.z=1000;
+    posicionadorMalla.position.x=0;
+    posicionadorMalla.position.y=0;
+    posicionadorMalla.position.z=1000;
     cuyo=1;
     requestAnimationFrame(loop);
     renderizador.render(escena,camara);
