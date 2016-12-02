@@ -1282,7 +1282,7 @@ function loop(){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h9;
       valor[70][40]= h8;
     
-    } }else if(auxx==0 && auxy==20){
+    }else if(auxx==0 && auxy==20){
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][20].position.x
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][20].position.y
       valor[0][20].position.x=seleccionadorMalla.position.x;
@@ -1354,7 +1354,6 @@ function loop(){
       var h5 = valor[70][20];
       valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h5;
       valor[70][20]= h4;
-    
     }
 
     seleccionadorMalla.position.x=0;
