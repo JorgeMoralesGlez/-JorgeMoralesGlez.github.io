@@ -27,8 +27,10 @@ var reinaMalla, reinaMalla1;
 var peonMalla, peonMalla1, peonMalla2, peonMalla3, peonMalla4, peonMalla5, peonMalla6, peonMalla7, peonMalla8, peonMalla9;
 var peonMalla10, peonMalla11, peonMalla12, peonMalla13, peonMalla14, peonMalla15;
 var cuyo=1;
-var vacio;
-
+var vacio1, vacio2, vacio3, vacio4, vacio5, vacio6, vacio7, vacio8, vacio9, vacio10;
+var vacio12, vacio13, vacio14, vacio15, vacio16, vacio17, vacio18, vacio19, vacio11, vacio20;
+var vacio21, vacio22, vacio23, vacio24, vacio25, vacio26, vacio27, vacio28, vacio29, vacio30;
+var vacio31, vacio32, vacio33, vacio34, vacio35, vacio36;
 
 function setup(){
   //Texturas
@@ -392,7 +394,6 @@ function setup(){
   peonForma.merge(base2Malla.geometry, base2Malla.matrix);
   peonForma.merge(troncoMalla.geometry, troncoMalla.matrix);
   peonForma.merge(cabezaMalla.geometry, cabezaMalla.matrix);
-  //var material= new THREE.MeshNormalMaterial();
   peonMalla = new THREE.Mesh(peonForma, ceramicablanca);
   peonMalla1 = new THREE.Mesh(peonForma, ceramicablanca);
   peonMalla2 = new THREE.Mesh(peonForma, ceramicablanca);
@@ -488,6 +489,193 @@ function setup(){
   peonMalla15.translateZ(-60);
   peonMalla15.translateX(70);
   
+  //Vacios
+  var materialt= new THREE.MeshLambertMaterial({color: 0xFFFFFF, transparent: true});
+  materialt.opacity = 0;
+  
+  vacio1 = new THREE.Mesh(peonForma, materialt);
+  vacio2 = new THREE.Mesh(peonForma, materialt);
+  vacio3 = new THREE.Mesh(peonForma, materialt); 
+  vacio4 = new THREE.Mesh(peonForma, materialt);
+  vacio5 = new THREE.Mesh(peonForma, materialt);
+  vacio6 = new THREE.Mesh(peonForma, materialt);
+  vacio7 = new THREE.Mesh(peonForma, materialt);
+  vacio8 = new THREE.Mesh(peonForma, materialt);
+  vacio9 = new THREE.Mesh(peonForma, materialt);
+  vacio10 = new THREE.Mesh(peonForma, materialt);
+  vacio11 = new THREE.Mesh(peonForma, materialt);
+  vacio12 = new THREE.Mesh(peonForma, materialt);
+  vacio13 = new THREE.Mesh(peonForma, materialt);
+  vacio14 = new THREE.Mesh(peonForma, materialt);
+  vacio15 = new THREE.Mesh(peonForma, materialt);
+  vacio16 = new THREE.Mesh(peonForma, materialt);
+  vacio17 = new THREE.Mesh(peonForma, materialt);
+  vacio18 = new THREE.Mesh(peonForma, materialt);
+  vacio19 = new THREE.Mesh(peonForma, materialt);
+  vacio20 = new THREE.Mesh(peonForma, materialt);
+  vacio21 = new THREE.Mesh(peonForma, materialt);
+  vacio22 = new THREE.Mesh(peonForma, materialt);
+  vacio23 = new THREE.Mesh(peonForma, materialt);
+  vacio24 = new THREE.Mesh(peonForma, materialt);
+  vacio25 = new THREE.Mesh(peonForma, materialt);
+  vacio26 = new THREE.Mesh(peonForma, materialt);
+  vacio27 = new THREE.Mesh(peonForma, materialt);
+  vacio28 = new THREE.Mesh(peonForma, materialt);
+  vacio29 = new THREE.Mesh(peonForma, materialt);
+  vacio30 = new THREE.Mesh(peonForma, materialt);
+  vacio31 = new THREE.Mesh(peonForma, materialt);
+  vacio32 = new THREE.Mesh(peonForma, materialt);
+  vacio33 = new THREE.Mesh(peonForma, materialt);
+  vacio34 = new THREE.Mesh(peonForma, materialt);
+  vacio35 = new THREE.Mesh(peonForma, materialt);
+  vacio36 = new THREE.Mesh(peonForma, materialt);
+  vacio37 = new THREE.Mesh(peonForma, materialt);
+  vacio38 = new THREE.Mesh(peonForma, materialt);
+  
+  vacio1.translateY(3);
+  vacio1.translateZ(-20);
+  vacio1.translateX(0);  
+  
+  vacio9.translateY(3);
+  vacio9.translateZ(-30);
+  vacio9.translateX(0);
+  
+  vacio17.translateY(3);
+  vacio17.translateZ(-40);
+  vacio17.translateX(0); 
+  
+  vacio25.translateY(3);
+  vacio25.translateZ(-50);
+  vacio25.translateX(0); 
+  
+  vacio2.translateY(3);
+  vacio2.translateZ(-20);
+  vacio2.translateX(10);
+  
+  vacio10.translateY(3);
+  vacio10.translateZ(-30);
+  vacio10.translateX(10);
+  
+  vacio18.translateY(3);
+  vacio18.translateZ(-40);
+  vacio18.translateX(10);
+  
+  vacio26.translateY(3);
+  vacio26.translateZ(-50);
+  vacio26.translateX(10);
+  
+  vacio3.translateY(3);
+  vacio3.translateZ(-20);
+  vacio3.translateX(20);
+  
+  vacio11.translateY(3);
+  vacio11.translateZ(-30);
+  vacio11.translateX(20);
+  
+  vacio19.translateY(3);
+  vacio19.translateZ(-40);
+  vacio19.translateX(20);
+  
+  vacio27.translateY(3);
+  vacio27.translateZ(-50);
+  vacio27.translateX(20);
+  
+  vacio4.translateY(3);
+  vacio4.translateZ(-20);
+  vacio4.translateX(30);
+  
+  vacio12.translateY(3);
+  vacio12.translateZ(-30);
+  vacio12.translateX(30);
+  
+  vacio20.translateY(3);
+  vacio20.translateZ(-40);
+  vacio20.translateX(30);
+  
+  vacio28.translateY(3);
+  vacio28.translateZ(-50);
+  vacio28.translateX(30);
+  
+  vacio5.translateY(3);
+  vacio5.translateZ(-20);
+  vacio5.translateX(40);
+  
+  vacio13.translateY(3);
+  vacio13.translateZ(-30);
+  vacio13.translateX(40);
+  
+  vacio21.translateY(3);
+  vacio21.translateZ(-40);
+  vacio21.translateX(40);
+  
+  vacio29.translateY(3);
+  vacio29.translateZ(-50);
+  vacio29.translateX(40);
+
+  vacio6.translateY(3);
+  vacio6.translateZ(-20);
+  vacio6.translateX(50);
+  
+  vacio14.translateY(3);
+  vacio14.translateZ(-30);
+  vacio14.translateX(50);
+  
+  vacio22.translateY(3);
+  vacio22.translateZ(-40);
+  vacio22.translateX(50);
+  
+  vacio30.translateY(3);
+  vacio30.translateZ(-50);
+  vacio30.translateX(50);
+  
+  vacio7.translateY(3);
+  vacio7.translateZ(-20);
+  vacio7.translateX(60);
+  
+  vacio15.translateY(3);
+  vacio15.translateZ(-30);
+  vacio15.translateX(60);
+  
+  vacio23.translateY(3);
+  vacio23.translateZ(-40);
+  vacio23.translateX(60);
+  
+  vacio31.translateY(3);
+  vacio31.translateZ(-50);
+  vacio31.translateX(60);
+  
+  vacio8.translateY(3);
+  vacio8.translateZ(-20);
+  vacio8.translateX(70);
+  
+  vacio16.translateY(3);
+  vacio16.translateZ(-30);
+  vacio16.translateX(70);
+  
+  vacio24.translateY(3);
+  vacio24.translateZ(-40);
+  vacio24.translateX(70);
+  
+  vacio32.translateY(3);
+  vacio32.translateZ(-50);
+  vacio32.translateX(70);
+  
+  vacio33.translateY(3);
+  vacio33.translateZ(0);
+  vacio33.translateX(10);
+  
+  vacio34.translateY(3);
+  vacio34.translateZ(-70);
+  vacio34.translateX(10);
+  
+  vacio35.translateY(3);
+  vacio35.translateZ(-70);
+  vacio35.translateX(60);
+  
+  vacio36.translateY(3);
+  vacio36.translateZ(0);
+  vacio36.translateX(60);
+  
   //Tablero
   var campoVision = 45;
   var relacionAspecto = window.innerWidth / window.innerHeight;
@@ -533,80 +721,80 @@ function setup(){
   valor[0] = new Array(80);
   valor[0][0] = torreMalla;
   valor[0][10] = peonMalla;
-  valor[0][20] = vacio;
-  valor[0][30] = vacio;
-  valor[0][40] = vacio;
-  valor[0][50] = vacio;
+  valor[0][20] = vacio1;
+  valor[0][30] = vacio9;
+  valor[0][40] = vacio17;
+  valor[0][50] = vacio25;
   valor[0][60] = peonMalla8;
   valor[0][70] = torreMalla1;
 
   valor[10] = new Array(8);
-  valor[10][0] = vacio;
+  valor[10][0] = vacio33;
   valor[10][10] = peonMalla1;
-  valor[10][20] = vacio;
-  valor[10][30] = vacio;
-  valor[10][40] = vacio;
-  valor[10][50] = vacio;
+  valor[10][20] = vacio2;
+  valor[10][30] = vacio10;
+  valor[10][40] = vacio18;
+  valor[10][50] = vacio26;
   valor[10][60] = peonMalla9;
-  valor[10][70] = vacio;
+  valor[10][70] = vacio34;
 
   valor[20] = new Array(8);
   valor[20][0] = alfilMalla;
   valor[20][10] = peonMalla2;
-  valor[20][20] = vacio;
-  valor[20][30] = vacio;
-  valor[20][40] = vacio;
-  valor[20][50] = vacio;
+  valor[20][20] = vacio3;
+  valor[20][30] = vacio11;
+  valor[20][40] = vacio19;
+  valor[20][50] = vacio27;
   valor[20][60] = peonMalla10;
   valor[20][70] = alfilMalla1;
 
   valor[30] = new Array(80);
   valor[30][0] = reyMalla;
   valor[30][10] = peonMalla3;
-  valor[30][20] = vacio;
-  valor[30][30] = vacio;
-  valor[30][40] = vacio;
-  valor[30][50] = vacio;
+  valor[30][20] = vacio4;
+  valor[30][30] = vacio12;
+  valor[30][40] = vacio20;
+  valor[30][50] = vacio28;
   valor[30][60] = peonMalla11;
   valor[30][70] = reyMalla1;
 
   valor[40] = new Array(80);
   valor[40][0] = reinaMalla;
   valor[40][10] = peonMalla4;
-  valor[40][20] = vacio;
-  valor[40][30] = vacio;
-  valor[40][40] = vacio;
-  valor[40][50] = vacio;
+  valor[40][20] = vacio5;
+  valor[40][30] = vacio13;
+  valor[40][40] = vacio21;
+  valor[40][50] = vacio29;
   valor[40][60] = peonMalla12;
   valor[40][70] = reinaMalla1;
 
   valor[50] = new Array(80);
   valor[50][0] = alfilMalla2;
   valor[50][10] = peonMalla5;
-  valor[50][20] = vacio;
-  valor[50][30] = vacio;
-  valor[50][40] = vacio;
-  valor[50][50] = vacio;
+  valor[50][20] = vacio6;
+  valor[50][30] = vacio14;
+  valor[50][40] = vacio22;
+  valor[50][50] = vacio30;
   valor[50][60] = peonMalla13;
   valor[50][70] = alfilMalla3;
 
   valor[60] = new Array(80);
-  valor[60][0] = vacio;
+  valor[60][0] = vacio35;
   valor[60][10] = peonMalla6;
-  valor[60][20] = vacio;
-  valor[60][30] = vacio;
-  valor[60][40] = vacio;
-  valor[60][50] = vacio;
+  valor[60][20] = vacio7;
+  valor[60][30] = vacio15;
+  valor[60][40] = vacio23;
+  valor[60][50] = vacio31;
   valor[60][60] = peonMalla14;
-  valor[60][70] = vacio;
+  valor[60][70] = vacio36;
 
   valor[70] = new Array(8);
   valor[70][0] = torreMalla3;
   valor[70][10] = peonMalla7;
-  valor[70][20] = vacio;
-  valor[70][30] = vacio;
-  valor[70][40] = vacio;
-  valor[70][50] = vacio;
+  valor[70][20] = vacio8;
+  valor[70][30] = vacio16;
+  valor[70][40] = vacio24;
+  valor[70][50] = vacio32;
   valor[70][60] = peonMalla15;
   valor[70][70] = torreMalla2;  
   
@@ -645,6 +833,42 @@ function setup(){
   escena.add(peonMalla13);
   escena.add(peonMalla14);
   escena.add(peonMalla15);
+  escena.add(vacio1);
+  escena.add(vacio2);
+  escena.add(vacio3);
+  escena.add(vacio4);
+  escena.add(vacio5);
+  escena.add(vacio6);
+  escena.add(vacio7);
+  escena.add(vacio8);
+  escena.add(vacio9);
+  escena.add(vacio10);
+  escena.add(vacio11);
+  escena.add(vacio12);
+  escena.add(vacio13);
+  escena.add(vacio14);
+  escena.add(vacio15);
+  escena.add(vacio16);
+  escena.add(vacio17);
+  escena.add(vacio18);
+  escena.add(vacio19);
+  escena.add(vacio20);
+  escena.add(vacio21);
+  escena.add(vacio22);
+  escena.add(vacio23);
+  escena.add(vacio24);
+  escena.add(vacio25);
+  escena.add(vacio26);
+  escena.add(vacio27);
+  escena.add(vacio28);
+  escena.add(vacio29);
+  escena.add(vacio30);
+  escena.add(vacio31);
+  escena.add(vacio32);
+  escena.add(vacio33);
+  escena.add(vacio34);
+  escena.add(vacio35);
+  escena.add(vacio36);
   escena.add(iluminacion);
   renderizador = new THREE.WebGLRenderer();
   renderizador.setSize(window.innerWidth, window.innerHeight);
