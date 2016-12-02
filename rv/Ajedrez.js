@@ -909,8 +909,8 @@ function setup(){
 
 function loop(){
   if(cuyo==2){
-      auxx=parseInt(seleccionadorMalla.position.x);
-      auxy=parseInt(seleccionadorMalla.position.y);
+      auxx=parseInt(posicionadorMalla.position.x);
+      auxy=parseInt(posicionanadorMalla.position.y);
       cuyo=cuyo+1;
       requestAnimationFrame(loop);
       renderizador.render(escena,camara);
@@ -1035,13 +1035,13 @@ function loop(){
                   seleccionadorMalla.translateX(10);
                   break;
               case 13 :
-                  //escena.remove(posicionadorMalla);
-                  //posicionadorMalla = new THREE.Mesh(seleccionadorForma, posicionador);
-                  //posicionadorMalla.rotateX(Math.PI/2);
-                  //posicionadorMalla.position.x=seleccionadorMalla.position.x;
-                  //posicionadorMalla.position.y=seleccionadorMalla.position.y;
-                  //posicionadorMalla.position.z=seleccionadorMalla.position.z;
-                  //escena.add(posicionadorMalla);
+                  escena.remove(posicionadorMalla);
+                  posicionadorMalla = new THREE.Mesh(seleccionadorForma, posicionador);
+                  posicionadorMalla.rotateX(Math.PI/2);
+                  posicionadorMalla.position.x=seleccionadorMalla.position.x;
+                  posicionadorMalla.position.y=seleccionadorMalla.position.y;
+                  posicionadorMalla.position.z=seleccionadorMalla.position.z;
+                  escena.add(posicionadorMalla);
                   cuyo=cuyo+1;
                   break;
           default :alert("Se ha equivocado, debe pulsar las flechas del teclado");
