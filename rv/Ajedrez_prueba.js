@@ -326,7 +326,7 @@ function Reina(textura){
   reinaForma.merge(cubierta1Malla.geometry, cubierta1Malla.matrix);
   reinaForma.merge(cubierta2Malla.geometry, cubierta2Malla.matrix);
   reinaForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
-  this.add(new THREE.Mesh(reyForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.add(new THREE.Mesh(reinaForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
 }
