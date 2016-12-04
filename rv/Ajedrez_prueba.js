@@ -1006,6 +1006,24 @@ function loop(){
     escena.sense();
     escena.plan();
     escena.act();
+    function desplazar(objeto){
+      		var tecla = objeto.which;
+          		switch (tecla){
+              			case 37 : 
+                  			select.translateZ(10);
+                  			break;
+             			 case 38 : 
+                  			select.translateX(-10);
+                 			break;
+              			case 39 :  
+                  			select.translateZ(-10);
+                  			break;
+              			case 40 : 
+                  			select.translateX(10);
+                  			break;
+			 	default :alert("Se ha equivocado, debe pulsar las flechas del teclado");
+				     }
+	}
     renderizador.render(escena, camara);
 }
 
@@ -1025,25 +1043,6 @@ function TexturaSetup(){
 
 //--------------------------------------------Movimiento--------------------------------------------------
 
-function Tecla( event ){
-	function desplazar(objeto){
-      		var tecla = objeto.which;
-          		switch (tecla){
-              			case 37 : 
-                  			select.translateZ(10);
-                  			break;
-             			 case 38 : 
-                  			select.translateX(-10);
-                 			break;
-              			case 39 :  
-                  			select.translateZ(-10);
-                  			break;
-              			case 40 : 
-                  			select.translateX(10);
-                  			break;
-				     }
-	}
-}
 
 var raycaster = new THREE.Raycaster();
 var TEXTURAS= new THREE.Object3D();
