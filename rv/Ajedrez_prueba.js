@@ -117,9 +117,6 @@ function Torre(textura){
   this.add(new THREE.Mesh(torreForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
-  this.step = 0.1;
-  this.colision = 0;
-  this.radius = 4;
   this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
 }
 Torre.prototype=new Agent();
@@ -167,10 +164,6 @@ function Alfil(textura){
   this.add(new THREE.Mesh(alfilForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
-  this.step = 0.1;
-  this.colision = 0;
-  this.radius = 4;
-  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
 }
 Alfil.prototype=new Agent();
 
@@ -240,10 +233,6 @@ function Rey(textura){
   this.add(new THREE.Mesh(reyForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
-  this.step = 0.1;
-  this.colision = 0;
-  this.radius = 4;
-  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
 }
 Rey.prototype=new Agent();
 
@@ -340,10 +329,6 @@ function Reina(textura){
   this.add(new THREE.Mesh(reyForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
-  this.step = 0.1;
-  this.colision = 0;
-  this.radius = 4;
-  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
 }
 Reina.prototype=new Agent();
 
@@ -373,10 +358,6 @@ function Peon(textura){
   this.add(new THREE.Mesh(peonForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
-  this.step = 0.1;
-  this.colision = 0;
-  this.radius = 4;
-  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
 }
 Peon.prototype=new Agent();
 
@@ -406,10 +387,6 @@ function Vacio(textura){
   this.add(new THREE.Mesh(peonForma, new THREE.MeshLambertMaterial({map:textura, transparent: true, opacity: 0})));
   this.castShadow=true;
   this.receiveShadow=true;  
-  this.step = 0.1;
-  this.colision = 0;
-  this.radius = 4;
-  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
 }
 Vacio.prototype=new Agent();
 
