@@ -1023,6 +1023,28 @@ function TexturaSetup(){
                   function(textura){ TEXTURAS.madera = textura;});
 }
 
+//--------------------------------------------Movimiento--------------------------------------------------
+
+function Tecla( event ){
+	function desplazar(objeto){
+      		var tecla = objeto.which;
+          		switch (tecla){
+              			case 37 : 
+                  			seleccionadorMalla.translateZ(10);
+                  			break;
+             			 case 38 : 
+                  			seleccionadorMalla.translateX(-10);
+                 			break;
+              			case 39 :  
+                  			seleccionadorMalla.translateZ(-10);
+                  			break;
+              			case 40 : 
+                  			seleccionadorMalla.translateX(10);
+                  			break;
+				     }
+	}
+}
+
 var raycaster = new THREE.Raycaster();
 var TEXTURAS= new THREE.Object3D();
 var escena = new Environment();
