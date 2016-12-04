@@ -976,7 +976,7 @@ var setupDone=false;
 
 function loop(){
   requestAnimationFrame(loop);
-  if(TEXTURAS.madera!==undefined && TEXTURAS.torreBlanca!==undefined && TEXTURAS.marmolBlanco!==undefined && TEXTURAS.marmolNegro!==undefined && !setupDone){
+  if(TEXTURAS.madera!==undefined && TEXTURAS.ceramicablanca!==undefined && TEXTURAS.ceramicanegra!==undefined && TEXTURAS.marmolblanco!==undefined && TEXTURAS.marmolnegro!==undefined && !setupDone){
       setup();
       renderizador.render(escena, camara);
   }
