@@ -425,6 +425,23 @@ function Tablero (texturaBlanco, texturaNegro, texturaMadera){
   escena.add(base);
 }
 
+//----------------------------------------------Seleccionador------------------------------------------
+
+function Seleccionador(){
+  Agent.call(this);
+  var base1selec = new THREE.CylinderGeometry(2,2,6,6,6,false);
+  var base2selec = new THREE.CylinderGeometry(4,0,4,4,4,false);
+  base2selec.translate(0,-4,0);
+  var base1selec = new THREE.Mesh(base1selec);
+  var base2selec= new THREE.Mesh(base2selec);
+  var seleccionadorForma = new THREE.Geometry();
+  seleccionadorForma.merge(base1selec.geometry, base1selec.matrix);
+  seleccionadorForma.merge(base2selec.geometry, base2selec.matrix);
+  var material= new THREE.MeshBasicMaterial({color: 0xB40100});
+  var seleccionadorMalla = new THREE.Mesh(seleccionadorForma, material);
+  var posicionador= new THREE.MeshBasicMaterial({color: 0x0096D6});
+}
+
 //----------------------------------------------Setup--------------------------------------------------
 
 function setup(){
@@ -789,6 +806,10 @@ function setup(){
   vacio36.translateY(3);
   vacio36.translateZ(0);
   vacio36.translateX(60);
+  
+  select = new Seleccionador();
+  select.rotateX(Math.PI/2);
+  select.translateY(30);
   
   valor = new Array(80)
   valor[0] = new Array(80);
