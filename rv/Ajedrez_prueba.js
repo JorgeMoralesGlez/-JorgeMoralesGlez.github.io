@@ -869,7 +869,6 @@ function setup(){
   valor[70][60] = peonMalla15;
   valor[70][70] = torreMalla2;  
   
-  escena.add(base);
   escena.add(torreMalla);
   escena.add(torreMalla1);
   escena.add(torreMalla2);
