@@ -441,6 +441,7 @@ function Seleccionador(){
   var seleccionador = new THREE.Mesh(seleccionadorForma, material);
 	this.add(seleccionador);
 }
+Seleccionador.prototype=new Agent();
 
 //----------------------------------------------Setup--------------------------------------------------
 
@@ -957,6 +958,7 @@ function setup(){
   escena.add(vacio35);
   escena.add(vacio36);
   escena.add(iluminacion);
+  escena.add(select);
   Tablero(TEXTURAS.marmolnegro, TEXTURAS.marmolblanco, TEXTURAS.madera);
 
   iluminacion.castShadow=true;
