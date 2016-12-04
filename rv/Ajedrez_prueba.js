@@ -981,3 +981,11 @@ function TexturaSetup(){
     cargador.load("marnol_cafe.jpg",
                   function(textura){ TEXTURAS.madera = textura;});
 }
+
+var raycaster = new THREE.Raycaster();
+var TEXTURAS= new THREE.Object3D();
+var escena = new Environment();
+var camara = new THREE.PerspectiveCamera();
+var renderizador = new THREE.WebGLRenderer();
+TexturaSetup();
+loop();
