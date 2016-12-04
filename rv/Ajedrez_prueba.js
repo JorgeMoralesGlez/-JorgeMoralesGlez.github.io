@@ -422,6 +422,7 @@ function Tablero (texturaBlanco, texturaNegro, texturaMadera){
   base.position.y=35;
   base.position.z=-2;
   base.receiveShadow=true;
+  escena.add(base);
 }
 
 //----------------------------------------------Setup--------------------------------------------------
@@ -966,7 +967,7 @@ function setup(){
   peonMalla13.castShadow=true;
   peonMalla14.castShadow=true;
   peonMalla15.castShadow=true;
-  renderizador.setSize(window.innerWidth, window.innerHeight);
+  renderizador.setSize(window.innerWidth-100, window.innerHeight-100);
   document.body.appendChild(renderizador.domElement);
   renderizador.shadowMapEnabled=true;
 }
