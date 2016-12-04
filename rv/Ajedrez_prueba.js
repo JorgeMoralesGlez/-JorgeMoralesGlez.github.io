@@ -438,8 +438,8 @@ function Seleccionador(){
   seleccionadorForma.merge(base1selec.geometry, base1selec.matrix);
   seleccionadorForma.merge(base2selec.geometry, base2selec.matrix);
   var material= new THREE.MeshBasicMaterial({color: 0xB40100});
-  var seleccionadorMalla = new THREE.Mesh(seleccionadorForma, material);
-  var posicionador= new THREE.MeshBasicMaterial({color: 0x0096D6});
+  var seleccionador = new THREE.Mesh(seleccionadorForma, material);
+	this.add(seleccionador);
 }
 
 //----------------------------------------------Setup--------------------------------------------------
