@@ -1003,6 +1003,24 @@ function loop(){
       setup();
       renderizador.render(escena, camara);
   }
+    window.onload=function(){document.onkeydown=desplazar};
+      function desplazar(objeto){
+      var tecla = objeto.which;
+          switch (tecla){
+              case 37 : 
+                  select.translateZ(10);
+                  break;
+              case 38 : 
+                  select.translateX(-10);
+                  break;
+              case 39 :  
+                  select.translateZ(-10);
+                  break;
+              case 40 : 
+                  select.translateX(10);
+                  break;
+		}
+    }
     escena.sense();
     escena.plan();
     escena.act();
@@ -1026,24 +1044,7 @@ function TexturaSetup(){
 //--------------------------------------------Movimiento--------------------------------------------------
 
 function Movimiento(){
-	    window.onload=function(){document.onkeydown=desplazar};
-      function desplazar(objeto){
-      var tecla = objeto.which;
-          switch (tecla){
-              case 37 : 
-                  select.translateZ(10);
-                  break;
-              case 38 : 
-                  select.translateX(-10);
-                  break;
-              case 39 :  
-                  select.translateZ(-10);
-                  break;
-              case 40 : 
-                  select.translateX(10);
-                  break;
-		}
-      }
+	    
 }
 
 var raycaster = new THREE.Raycaster();
