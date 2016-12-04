@@ -935,7 +935,7 @@ function setup(){
   escena.add(vacio35);
   escena.add(vacio36);
   escena.add(iluminacion);
-  Tablero(TEXTURAS.marmolNegro, TEXTURAS.marmolBlanco, TEXTURAS.madera);
+  Tablero(TEXTURAS.marmolnegro, TEXTURAS.marmolblanco, TEXTURAS.madera);
 
   iluminacion.castShadow=true;
   torreMalla.castShadow=true;
