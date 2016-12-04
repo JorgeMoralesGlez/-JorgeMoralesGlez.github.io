@@ -1001,6 +1001,7 @@ function loop(){
   requestAnimationFrame(loop);
   if(TEXTURAS.madera!==undefined && TEXTURAS.torreBlanca!==undefined && TEXTURAS.marmolBlanco!==undefined && TEXTURAS.marmolNegro!==undefined && !setupDone){
       setup();
+      renderizador.render(escena, camara);
   }
     escena.sense();
     escena.plan();
