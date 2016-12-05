@@ -1059,10 +1059,8 @@ function TexturaSetup(){
 function guardarPosicion(x, y){
     auxx=parseInt(x);
     auxy=parseInt(y);
-    alert(auxx);
-    cuyo=cuyo+1;
-    torreMalla.position.x=40;
-    torreMalla.position.y=40;
+    a = valor[x][y];
+    alert(a);
 }
 
 var torreMalla, torreMalla1, torreMalla2, torreMalla3;
