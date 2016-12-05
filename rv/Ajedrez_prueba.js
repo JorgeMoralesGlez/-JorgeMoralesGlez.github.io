@@ -121,6 +121,10 @@ function Torre(textura){
 }
 Torre.prototype=new Agent();
 
+function Torreplan(x, y){
+  
+}
+
 //---------------------------------------------Alfil----------------------------------------------------------
 
 function Alfil(textura){
@@ -1003,6 +1007,10 @@ function loop(){
       setup();
       renderizador.render(escena, camara);
   }
+  if (cuyo == 2){ 
+	  guardarPosicion(xselect, yselect);
+  }
+  else{
     window.onload=function(){document.onkeydown=desplazar};
       function desplazar(objeto){
       var tecla = objeto.which;
@@ -1019,8 +1027,13 @@ function loop(){
               case 40 : 
                   select.translateX(10);
                   break;
+	      case 13 :
+		  var xselect = select.position.x
+		  var yselect = select.position.y
+		  cuyo=cuyo+1;
 		}
     }
+  }
     escena.sense();
     escena.plan();
     escena.act();
@@ -1043,10 +1056,18 @@ function TexturaSetup(){
 
 //--------------------------------------------Movimiento--------------------------------------------------
 
-function Movimiento(){
-	    
+function guardarPosicion(x, y){
+    auxx=parseInt(x);
+    auxy=parseInt(y);
+    cuyo=cuyo+1;
+    valor[x][y].position.x=40;
+    valor[x][y].position.x=40;
 }
 
+var valor;
+var auxx;
+var auxy;
+var cuyo = 1;
 var raycaster = new THREE.Raycaster();
 var TEXTURAS= new THREE.Object3D();
 var escena = new Environment();
