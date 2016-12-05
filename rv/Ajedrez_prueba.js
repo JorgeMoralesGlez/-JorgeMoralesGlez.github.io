@@ -1061,8 +1061,8 @@ function guardarPosicion(x, y){
     auxy=parseInt(y);
     alert(auxx);
     cuyo=cuyo+1;
-    valor[x][y].position.x=40;
-    valor[x][y].position.y=40;
+    torreMalla.position.x=40;
+    torreMalla.position.y=40;
 }
 
 var torreMalla, torreMalla1, torreMalla2, torreMalla3;
