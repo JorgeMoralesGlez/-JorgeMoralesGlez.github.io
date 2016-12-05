@@ -1061,9 +1061,20 @@ function guardarPosicion(x, y){
     auxy=parseInt(y);
     cuyo=cuyo+1;
     valor[x][y].position.x=40;
-    valor[x][y].position.x=40;
+    valor[x][y].position.y=40;
 }
 
+var torreMalla, torreMalla1, torreMalla2, torreMalla3;
+var alfilMalla, alfilMalla1, alfilMalla2, alfilMalla3;
+var reyMalla, reyMalla1;
+var reinaMalla, reinaMalla1;
+var peonMalla, peonMalla1, peonMalla2, peonMalla3, peonMalla4, peonMalla5, peonMalla6, peonMalla7, peonMalla8, peonMalla9;
+var peonMalla10, peonMalla11, peonMalla12, peonMalla13, peonMalla14, peonMalla15;
+var cuyo=1;
+var vacio1, vacio2, vacio3, vacio4, vacio5, vacio6, vacio7, vacio8, vacio9, vacio10;
+var vacio12, vacio13, vacio14, vacio15, vacio16, vacio17, vacio18, vacio19, vacio11, vacio20;
+var vacio21, vacio22, vacio23, vacio24, vacio25, vacio26, vacio27, vacio28, vacio29, vacio30;
+var vacio31, vacio32, vacio33, vacio34, vacio35, vacio36;
 var valor, xselect, yselect;
 var auxx;
 var auxy;
