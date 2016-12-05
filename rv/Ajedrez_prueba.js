@@ -1028,8 +1028,8 @@ function loop(){
                   select.translateX(10);
                   break;
 	      case 13 :
-		  var xselect = select.position.x
-		  var yselect = select.position.y
+		  xselect = select.position.x
+		  yselect = select.position.y
 		  cuyo=cuyo+1;
 		}
     }
@@ -1064,7 +1064,7 @@ function guardarPosicion(x, y){
     valor[x][y].position.x=40;
 }
 
-var valor;
+var valor, xselect, yselect;
 var auxx;
 var auxy;
 var cuyo = 1;
