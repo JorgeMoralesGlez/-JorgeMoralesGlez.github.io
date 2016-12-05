@@ -1059,6 +1059,7 @@ function TexturaSetup(){
 function guardarPosicion(x, y){
     auxx=parseInt(x);
     auxy=parseInt(y);
+    alert(auxx);
     cuyo=cuyo+1;
     valor[x][y].position.x=40;
     valor[x][y].position.y=40;
