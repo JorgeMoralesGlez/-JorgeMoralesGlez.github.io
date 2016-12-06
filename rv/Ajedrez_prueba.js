@@ -269,12 +269,14 @@ function Alfilplan(x0, y0, xf, yf, side){
   var xf = parseInt(xf);
   var yf = parseInt(yf);
   var side = parseInt(side);
+	
   if(xf>=x0 && yf>=y0){
      alert("primerif");
      for(i=0; i<=xf; i++){
 	for(j=0; j<=yf; j++){
         	if(yf!=y0 && xf!=x0){	
 	  		piezaActual.position.y+=1;
+			piezaActual.position.x+=1;
   		}else if(yf==y0 && xf==x0){
 			valor[xfs][yfs]= piezaActual;
 	        	valor[x0s][y0s]= piezaPosterior;
