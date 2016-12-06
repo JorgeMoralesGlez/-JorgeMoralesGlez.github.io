@@ -273,8 +273,10 @@ function Alfilplan(x0, y0, xf, yf, side){
   var div3 = xf/10;
   var div4 = yf/10;
   if(xf>x0 && yf>x0){
+     alert("primerif");
      if(div3==div4)
      {
+	     alert("ifdivision");
 	     for(i=0; i<=xf; i++){
 		for(j=0; j<=yf; j++){
 			if(yf!=y0 && xf!=x0){	
@@ -294,6 +296,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     alert("nosepuede");     
      }
    }else if(xf>x0 && yf<y0){
+	alert("segundoif");
 	for(i=0; i<=yf; i++){
 	     if(yf!=y0){
 	        piezaActual.position.y-=1;
