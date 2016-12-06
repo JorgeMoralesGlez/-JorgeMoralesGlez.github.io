@@ -277,7 +277,7 @@ function Alfilplan(x0, y0, xf, yf, side){
   alert(y0)
   alert(xf)
   alert(yf)
-  if(xf>x0 && yf>x0){
+  if(xf>x0 && yf>y0){
      alert("primerif");
      if(div3==div4)
      {
