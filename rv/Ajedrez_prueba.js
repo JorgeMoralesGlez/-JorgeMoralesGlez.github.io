@@ -1260,7 +1260,7 @@ function guardarPosicion(){
 	     //}
 	//else{
 	//alert("no es tu turno");
-	cuyo=1;
+	cuyo=cuyo+1;
 	//}
     requestAnimationFrame(loop);
     renderizador.render(escena, camara);
