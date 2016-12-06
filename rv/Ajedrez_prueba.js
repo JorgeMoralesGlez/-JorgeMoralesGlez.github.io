@@ -1,3 +1,4 @@
+//------------------------------------------------------------------------------------------------AGENTES - ENVIRONMENT
 function Agent(x=0,y=0){
   THREE.Object3D.call(this);
   this.position.x = x;
@@ -6,11 +7,9 @@ function Agent(x=0,y=0){
 
 Agent.prototype = new THREE.Object3D();
 
-Agent.prototype.sense = function(enviroment){};
+Agent.prototype.sense = function(environment){};
 Agent.prototype.plan = function(environment) {};
 Agent.prototype.act = function(environment) {};
-
-//-----El agente opera sobre un entorno, el cual está definido por el constructor Environment()
 
 function Environment(){
   THREE.Scene.call(this);
@@ -39,6 +38,8 @@ Environment.prototype.act = function(){
   }
 };
 
+
+//------------------------------------------------------------------------------------------------------VARIABLES GLOBALES
 var torreMalla, torreMalla1, torreMalla2, torreMalla3;
 var alfilMalla, alfilMalla1, alfilMalla2, alfilMalla3;
 var reyMalla, reyMalla1;
@@ -53,10 +54,9 @@ var vacio31, vacio32, vacio33, vacio34, vacio35, vacio36;
 var valor, xselect, yselect;
 var auxx;
 var auxy;
-var cuyo = 1;
 
-//----------------------------------------TORRE-------------------------------------------------
 
+//--------------------------------------------------------------------------------------------------------TORRE
 function Torre(textura){ 
   Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
@@ -107,7 +107,6 @@ function Torre(textura){
   pico3.translate(0,12,0);
   pico4.translate(0,12,0);
   
-
   var base1Malla = new THREE.Mesh(base1Forma);
   var base2Malla= new THREE.Mesh(base2Forma);
   var base3Malla= new THREE.Mesh(base3Forma);
@@ -134,15 +133,81 @@ function Torre(textura){
   this.castShadow=true;
   this.receiveShadow=true;  
   this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
+
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+    }
 }
 Torre.prototype=new Agent();
 
-function Torreplan(x, y){
-  
+var i, j, k, l;
+function Torreplan(x0, y0, xf, yf, side){
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  if(x0==xf && y0<=yf){
+	  //alert("primerif");
+     for(i=0; i<=yf; i++){  
+        if(yf!=y0){	
+	  piezaActual.position.y+=1;
+  	}else if(yf==y0){
+		valor[xfs][yfs]= piezaActual;
+	        valor[x0s][y0s]= piezaPosterior;
+	        alert("Terminó tu turno prro");
+		break;}
+        y0+=1;
+     }
+   }else if(x0==xf && y0>=yf){
+	for(j=0; j<=yf; j++){
+	     if(yf!=y0){
+	        piezaActual.position.y-=1;
+  	     }else if(yf==y0){
+		valor[xfs][yfs]= piezaActual;
+	        valor[x0s][y0s]= piezaPosterior;
+	        alert("Terminó tu turno prro");
+		break;}
+	  y0-=1;
+         }
+     }
+     else if(x0<=xf && y0==yf){
+     	for(k=0; k<=xf; k++){
+        	if(xf!=x0){
+	  		piezaActual.position.x+=1;
+  		}else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+	        	valor[x0s][y0s]= piezaPosterior;
+	        	alert("Terminó tu turno prro");
+			break;}
+        x0+=1;
+     	}
+     }else if(x0>=xf && y0==yf){
+	for(l=0; l<=xf; l++){
+	     if(xf!=x0){
+	        piezaActual.position.x-=1;
+  	     }else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+	        	valor[x0s][y0s]= piezaPosterior;
+	        	alert("Terminó tu turno prro");
+			break;}
+	  x0-=1;
+         }
+     }else{alert("nosepuede");}
+	
+  requestAnimationFrame(loop);
+  renderizador.render(escena,camara);
 }
 
-//---------------------------------------------Alfil----------------------------------------------------------
 
+//--------------------------------------------------------------------------------------------------------ALFIL
 function Alfil(textura){
   Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
@@ -184,11 +249,82 @@ function Alfil(textura){
   this.add(new THREE.Mesh(alfilForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+    }
 }
 Alfil.prototype=new Agent();
 
-//---------------------------------------------------Rey---------------------------------------------------
+function Alfilplan(x0, y0, xf, yf, side){
+  alert("Alfilplan");
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  if(x0<=xf && y0<=yf){
+	  //alert("primerif");
+     for(i=0; i<=xf; i++){
+	for(j=0; j<=yf; j++){
+        	if(yf!=y0 && xf!=x0){	
+	  		piezaActual.position.y+=1;
+  		}else if(yf==y0 && xf==x0){
+			valor[xfs][yfs]= piezaActual;
+	        	valor[x0s][y0s]= piezaPosterior;
+	        	alert("Terminó tu turno prro");
+			break;}
+	}
+	x0+=1;
+        y0+=1;
+     }
+   }else if(x0<=xf && y0>=yf){
+	for(i=0; i<=yf; i++){
+	     if(yf!=y0){
+	        piezaActual.position.y-=1;
+  	     }else if(yf==y0){
+		valor[xfs][yfs]= piezaActual;
+	        valor[x0s][y0s]= piezaPosterior;
+	        alert("Terminó tu turno prro");
+		break;}
+	  y0-=1;
+         }
+     }
+     else if(x0>=xf && y0<=yf){
+     	for(i=0; i<=xf; i++){
+        	if(xf!=x0){
+	  		piezaActual.position.x+=1;
+  		}else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+	        	valor[x0s][y0s]= piezaPosterior;
+	        	alert("Terminó tu turno prro");
+			break;}
+        x0+=1;
+     	}
+     }else if(x0>=xf && y0>=yf){
+	for(i=0; i<=xf; i++){
+	     if(xf!=x0){
+	        piezaActual.position.x-=1;
+  	     }else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+	        	valor[x0s][y0s]= piezaPosterior;
+	        	alert("Terminó tu turno prro");
+			break;}
+	  x0-=1;
+         }
+     }else{alert("nosepuede");}
+	
+  requestAnimationFrame(loop);
+  renderizador.render(escena,camara);
+}
 
+//----------------------------------------------------------------------------------------------------------MIRREY
 function Rey(textura){
   Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
@@ -252,12 +388,18 @@ function Rey(textura){
   reyForma.merge(cabeza5Malla.geometry, cabeza5Malla.matrix);
   this.add(new THREE.Mesh(reyForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
-  this.receiveShadow=true;  
+  this.receiveShadow=true;
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+    }
 }
 Rey.prototype=new Agent();
 
-//-------------------------------------------------Reina-------------------------------------------------
 
+//--------------------------------------------------------------------------------------------------------------REINA
 function Reina(textura){
   Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
@@ -348,12 +490,18 @@ function Reina(textura){
   reinaForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
   this.add(new THREE.Mesh(reinaForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
-  this.receiveShadow=true;  
+  this.receiveShadow=true;
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+    }
 }
 Reina.prototype=new Agent();
 
-//-------------------------------------------------Peon-----------------------------------------------------------
 
+//-------------------------------------------------------------------------------------------------------PEON
 function Peon(textura){
   Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
@@ -378,11 +526,17 @@ function Peon(textura){
   this.add(new THREE.Mesh(peonForma, new THREE.MeshLambertMaterial({map:textura})));
   this.castShadow=true;
   this.receiveShadow=true;  
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+    }
 }
 Peon.prototype=new Agent();
 
-//---------------------------------------------Vacio-----------------------------------------------------------------
 
+//-----------------------------------------------------------------------------------------------------------VACIO
 function Vacio(textura){
   Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
@@ -410,8 +564,8 @@ function Vacio(textura){
 }
 Vacio.prototype=new Agent();
 
-//-----------------------------------------------Tablero----------------------------------------------------
 
+//-----------------------------------------------------------------------------------------------------------TABLERO
 function Tablero (texturaBlanco, texturaNegro, texturaMadera){
   var cubo= new Array();
   var a=2;
@@ -445,8 +599,8 @@ function Tablero (texturaBlanco, texturaNegro, texturaMadera){
   escena.add(base);
 }
 
-//----------------------------------------------Seleccionador------------------------------------------
 
+//-------------------------------------------------------------------------------------------------------SELECCIONADOR
 function Seleccionador(){
   Agent.call(this);
   var base1selec = new THREE.CylinderGeometry(2,2,6,6,6,false);
@@ -459,13 +613,14 @@ function Seleccionador(){
   seleccionadorForma.merge(base2selec.geometry, base2selec.matrix);
   var material= new THREE.MeshBasicMaterial({color: 0xB40100});
   var seleccionador = new THREE.Mesh(seleccionadorForma, material);
-	this.add(seleccionador);
+  this.add(seleccionador);
 }
 Seleccionador.prototype=new Agent();
 
-//----------------------------------------------Setup--------------------------------------------------
 
+//---------------------------------------------------------------------------------------------------------SETUP
 function setup(){
+	//CAMARA
   var campoVision = 45;
   var relacionAspecto = window.innerWidth / window.innerHeight;
   var planoCercano = 1;
@@ -477,11 +632,12 @@ function setup(){
   camara.lookAt(new THREE.Vector3(40,40,0));
   camara.rotateZ(Math.PI/2);
   setupDone=true;
+	//ILUMINACION
   var iluminacion= new THREE.PointLight(0xFFFFFF);
   iluminacion.position.y= 40;
   iluminacion.position.x= 40;
   iluminacion.position.z= 50;
-  
+  	//TORRES
   torreMalla = new Torre(TEXTURAS.ceramicablanca);
   torreMalla1 = new Torre(TEXTURAS.ceramicanegra);
   torreMalla2 = new Torre(TEXTURAS.ceramicanegra);
@@ -502,7 +658,7 @@ function setup(){
   torreMalla3.rotateX(Math.PI/2);
   torreMalla3.translateY(3);
   torreMalla3.translateX(70);
-  
+  	//REYES
   reyMalla = new Rey(TEXTURAS.ceramicablanca);
   reyMalla1 = new Rey(TEXTURAS.ceramicanegra);
 
@@ -514,7 +670,7 @@ function setup(){
   reyMalla1.translateY(3);
   reyMalla1.translateZ(-70);
   reyMalla1.translateX(30);  
-  
+  	//REINAS
   reinaMalla = new Reina(TEXTURAS.ceramicablanca);
   reinaMalla1 = new Reina(TEXTURAS.ceramicanegra);
 
@@ -526,7 +682,7 @@ function setup(){
   reinaMalla1.translateY(3);
   reinaMalla1.translateX(40);
   reinaMalla1.translateZ(-70);
-
+	//ALFIL
   alfilMalla = new Alfil(TEXTURAS.ceramicablanca);
   alfilMalla1 = new Alfil(TEXTURAS.ceramicanegra);
   alfilMalla2 = new Alfil(TEXTURAS.ceramicablanca);
@@ -549,7 +705,7 @@ function setup(){
   alfilMalla3.translateY(3);
   alfilMalla3.translateX(50);
   alfilMalla3.translateZ(-70);
-  
+  	//PEON
   peonMalla = new Peon(TEXTURAS.ceramicablanca);
   peonMalla1 = new Peon(TEXTURAS.ceramicablanca);
   peonMalla2 = new Peon(TEXTURAS.ceramicablanca);
@@ -644,7 +800,7 @@ function setup(){
   peonMalla15.translateY(3);
   peonMalla15.translateZ(-60);
   peonMalla15.translateX(70);
-  
+  	//VACIO
   vacio1 = new Vacio(TEXTURAS.ceramicanegra);
   vacio2 = new Vacio(TEXTURAS.ceramicanegra);
   vacio3 = new Vacio(TEXTURAS.ceramicanegra); 
@@ -827,13 +983,13 @@ function setup(){
   vacio36.translateY(3);
   vacio36.translateZ(0);
   vacio36.translateX(60);
-  
+  	//SELECTOR
   select = new Seleccionador();
   select.rotateX(Math.PI/2);
   select.translateY(30);
-  
-  valor = new Array(80)
-  valor[0] = new Array(80);
+  	//VALOR (CADA POSICION TABLERO)
+  valor = new Array(8)
+  valor[0] = new Array(8);
   valor[0][0] = torreMalla;
   valor[0][10] = peonMalla;
   valor[0][20] = vacio1;
@@ -843,7 +999,7 @@ function setup(){
   valor[0][60] = peonMalla8;
   valor[0][70] = torreMalla1;
 
-  valor[10] = new Array(80);
+  valor[10] = new Array(8);
   valor[10][0] = vacio33;
   valor[10][10] = peonMalla1;
   valor[10][20] = vacio2;
@@ -853,7 +1009,7 @@ function setup(){
   valor[10][60] = peonMalla9;
   valor[10][70] = vacio34;
 
-  valor[20] = new Array(80);
+  valor[20] = new Array(8);
   valor[20][0] = alfilMalla;
   valor[20][10] = peonMalla2;
   valor[20][20] = vacio3;
@@ -863,7 +1019,7 @@ function setup(){
   valor[20][60] = peonMalla10;
   valor[20][70] = alfilMalla1;
 
-  valor[30] = new Array(80);
+  valor[30] = new Array(8);
   valor[30][0] = reyMalla;
   valor[30][10] = peonMalla3;
   valor[30][20] = vacio4;
@@ -873,7 +1029,7 @@ function setup(){
   valor[30][60] = peonMalla11;
   valor[30][70] = reyMalla1;
 
-  valor[40] = new Array(80);
+  valor[40] = new Array(8);
   valor[40][0] = reinaMalla;
   valor[40][10] = peonMalla4;
   valor[40][20] = vacio5;
@@ -883,7 +1039,7 @@ function setup(){
   valor[40][60] = peonMalla12;
   valor[40][70] = reinaMalla1;
 
-  valor[50] = new Array(80);
+  valor[50] = new Array(8);
   valor[50][0] = alfilMalla2;
   valor[50][10] = peonMalla5;
   valor[50][20] = vacio6;
@@ -893,7 +1049,7 @@ function setup(){
   valor[50][60] = peonMalla13;
   valor[50][70] = alfilMalla3;
 
-  valor[60] = new Array(80);
+  valor[60] = new Array(8);
   valor[60][0] = vacio35;
   valor[60][10] = peonMalla6;
   valor[60][20] = vacio7;
@@ -903,7 +1059,7 @@ function setup(){
   valor[60][60] = peonMalla14;
   valor[60][70] = vacio36;
 
-  valor[70] = new Array(80);
+  valor[70] = new Array(8);
   valor[70][0] = torreMalla3;
   valor[70][10] = peonMalla7;
   valor[70][20] = vacio8;
@@ -912,7 +1068,7 @@ function setup(){
   valor[70][50] = vacio32;
   valor[70][60] = peonMalla15;
   valor[70][70] = torreMalla2;  
-  
+  	//ESCENA
   escena.add(torreMalla);
   escena.add(torreMalla1);
   escena.add(torreMalla2);
@@ -980,7 +1136,7 @@ function setup(){
   escena.add(iluminacion);
   escena.add(select);
   Tablero(TEXTURAS.marmolnegro, TEXTURAS.marmolblanco, TEXTURAS.madera);
-
+	//SOMBRAS
   iluminacion.castShadow=true;
   torreMalla.castShadow=true;
   torreMalla1.castShadow=true;
@@ -1015,19 +1171,47 @@ function setup(){
   renderizador.shadowMapEnabled=true;
 }
 
+//-----------------------------------------------------------------------------------------------------------------LOOP
 var setupDone=false;
-
 function loop(){
-  requestAnimationFrame(loop);
   if(TEXTURAS.madera!==undefined && TEXTURAS.ceramicablanca!==undefined && TEXTURAS.ceramicanegra!==undefined && TEXTURAS.marmolblanco!==undefined && TEXTURAS.marmolnegro!==undefined && !setupDone){
       setup();
       renderizador.render(escena, camara);
   }
-  if (cuyo == 2){ 
-	  guardarPosicion(xselect, yselect);
+  if(cuyo==2){
+      guardarPosicion();
+  }
+  else if(cuyo==4){
+    planGeneral();
   }
   else{
-    window.onload=function(){document.onkeydown=desplazar};
+    teclado();
+  }
+    escena.sense();
+    escena.plan();
+    escena.act();
+    requestAnimationFrame(loop);
+    renderizador.render(escena, camara);
+}
+
+//---------------------------------------------------------------------------------------------------LOADER DE TEXTURAS
+var cargador = new THREE.TextureLoader();
+function TexturaSetup(){
+    cargador.load("ceramica_negra.jpg",
+                  function(textura){ TEXTURAS.ceramicanegra = textura;});
+    cargador.load("ceramica_blanca.jpg",
+                  function(textura){ TEXTURAS.ceramicablanca = textura;});
+    cargador.load("marnol_blanco.jpg",
+                  function(textura){ TEXTURAS.marmolblanco = textura;});
+    cargador.load("marnol_negro.jpg",
+                  function(textura){ TEXTURAS.marmolnegro = textura;});
+    cargador.load("marnol_cafe.jpg",
+                  function(textura){ TEXTURAS.madera = textura;});
+}
+
+//------------------------------------------------------------------------------------------------------MOVIMIENTO
+function teclado(){
+	window.onload=function(){document.onkeydown=desplazar};
       function desplazar(objeto){
       var tecla = objeto.which;
           switch (tecla){
@@ -1044,40 +1228,58 @@ function loop(){
                   select.translateX(10);
                   break;
 	      case 13 :
-		  xselect = select.position.x
-		  yselect = select.position.y
 		  cuyo=cuyo+1;
 		}
-    }
-  }
-    escena.sense();
-    escena.plan();
-    escena.act();
+      }
+}
+
+var flag = 1;
+function guardarPosicion(){
+    auxx=select.position.x;
+    auxy=select.position.y;
+    if(valor[auxx][auxy].side==1 && flag%2!=0){
+	cuyo=cuyo+1;
+	flag=flag+1;
+    }else if(valor[auxx][auxy].side==0 && flag%2==0){
+	    cuyo=cuyo+1;
+	    flag=flag+1;
+	     }
+	else{
+	alert("no es tu turno");
+	cuyo=1;
+	}
+    requestAnimationFrame(loop);
     renderizador.render(escena, camara);
 }
 
-var cargador = new THREE.TextureLoader();
-function TexturaSetup(){
-    cargador.load("ceramica_negra.jpg",
-                  function(textura){ TEXTURAS.ceramicanegra = textura;});
-    cargador.load("ceramica_blanca.jpg",
-                  function(textura){ TEXTURAS.ceramicablanca = textura;});
-    cargador.load("marnol_blanco.jpg",
-                  function(textura){ TEXTURAS.marmolblanco = textura;});
-    cargador.load("marnol_negro.jpg",
-                  function(textura){ TEXTURAS.marmolnegro = textura;});
-    cargador.load("marnol_cafe.jpg",
-                  function(textura){ TEXTURAS.madera = textura;});
-}
-
-//--------------------------------------------Movimiento--------------------------------------------------
-
-function guardarPosicion(x, y){
-    cuyo = cuyo + 1
-    auxx=parseInt(x);
-    auxy=parseInt(y);
-    var a = valor[auxx][auxy];
-    alert(a);
+var nombre=new THREE.Object3D;
+var piezaActual, piezaPosterior;
+function planGeneral(){
+	nombre = valor[auxx][auxy];
+	piezaActual = nombre;
+	piezaPosterior = valor[select.position.x][select.position.y];
+	      if(nombre instanceof Torre){
+		Torreplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
+	}else if(nombre instanceof Alfil){
+		Alfilplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
+	}else if(nombre instanceof Rey){
+		
+	}else if(nombre instanceof Reina){
+		
+	}else if(nombre instanceof Peon){
+		
+	}else if(nombre instanceof Vacio){
+		
+	}
+	select.position.x=0;
+    select.position.y=0;
+    select.position.z=30;
+    //posicionadorMalla.position.x=0;
+    //posicionadorMalla.position.y=0;
+    //posicionadorMalla.position.z=1000;
+    requestAnimationFrame(loop);
+    renderizador.render(escena,camara);
+	cuyo=1;
 }
 
 var raycaster = new THREE.Raycaster();
@@ -1085,5 +1287,7 @@ var TEXTURAS= new THREE.Object3D();
 var escena = new Environment();
 var camara = new THREE.PerspectiveCamera();
 var renderizador = new THREE.WebGLRenderer();
+
+//-------------------------------------------------------------------------------------------------------------PROGRAMA
 TexturaSetup();
 loop();
