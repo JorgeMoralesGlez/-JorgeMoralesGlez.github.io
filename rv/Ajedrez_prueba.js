@@ -270,7 +270,7 @@ function Alfilplan(x0, y0, xf, yf, side){
   var yf = parseInt(yf);
   var side = parseInt(side);
   if(x0<=xf && y0<=yf){
-	  //alert("primerif");
+     alert("primerif");
      for(i=0; i<=xf; i++){
 	for(j=0; j<=yf; j++){
         	if(yf!=y0 && xf!=x0){	
@@ -285,6 +285,7 @@ function Alfilplan(x0, y0, xf, yf, side){
         y0+=1;
      }
    }else if(x0<=xf && y0>=yf){
+	alert("segundoif");
 	for(i=0; i<=yf; i++){
 	     if(yf!=y0){
 	        piezaActual.position.y-=1;
@@ -297,6 +298,7 @@ function Alfilplan(x0, y0, xf, yf, side){
          }
      }
      else if(x0>=xf && y0<=yf){
+	alert("tercerif");
      	for(i=0; i<=xf; i++){
         	if(xf!=x0){
 	  		piezaActual.position.x+=1;
@@ -308,6 +310,7 @@ function Alfilplan(x0, y0, xf, yf, side){
         x0+=1;
      	}
      }else if(x0>=xf && y0>=yf){
+	alert("cuartoif");
 	for(i=0; i<=xf; i++){
 	     if(xf!=x0){
 	        piezaActual.position.x-=1;
