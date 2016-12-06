@@ -284,18 +284,15 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     alert("ifdivision");
 	     for(i=0; i<=xf; i++){
 		for(j=0; j<=yf; j++){
-			if(yf>y0 && xf>x0){	
-				piezaActual.position.y+=1;
-				piezaActual.position.x+=1;
-			}else if(yf==y0 && xf==x0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				break;}
+			piezaActual.position.y+=1;
 		}
+	        piezaActual.position.x+=1;
 		x0+=1;
 		y0+=1;
-	     }
+	    }
+	    valor[xfs][yfs]= piezaActual;
+	    valor[x0s][y0s]= piezaPosterior;
+	    alert("Terminó tu turno prro");
      }else
      {
 	     alert("nosepuede");     
