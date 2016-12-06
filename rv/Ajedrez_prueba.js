@@ -269,6 +269,8 @@ function Alfilplan(x0, y0, xf, yf, side){
   var xf = parseInt(xf);
   var yf = parseInt(yf);
   var side = parseInt(side);
+  alert(x0)
+  alert(xf)
 	
   if(xf>=x0 && yf>=y0){
      alert("primerif");
