@@ -202,8 +202,6 @@ function Torreplan(x0, y0, xf, yf, side){
          }
      }else{alert("nosepuede");}
 	
-  requestAnimationFrame(loop);
-  renderizador.render(escena,camara);
 }
 
 
@@ -345,9 +343,6 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     alert("nosepuede");     
      }
   }else if(x0==xf || y0==yf){alert("nosepuede");}
-	
-  requestAnimationFrame(loop);
-  renderizador.render(escena,camara);
 }
 
 //----------------------------------------------------------------------------------------------------------MIRREY
@@ -1322,8 +1317,6 @@ function guardarPosicion(){
 	alert("no es tu turno");
 	cuyo=1;
 	}
-    requestAnimationFrame(loop);
-    renderizador.render(escena, camara);
 }
 
 var nombre=new THREE.Object3D;
@@ -1351,8 +1344,6 @@ function planGeneral(){
     //posicionadorMalla.position.x=0;
     //posicionadorMalla.position.y=0;
     //posicionadorMalla.position.z=1000;
-    requestAnimationFrame(loop);
-    renderizador.render(escena,camara);
 	cuyo=1;
 }
 
