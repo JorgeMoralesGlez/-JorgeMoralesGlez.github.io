@@ -271,12 +271,8 @@ function Alfilplan(x0, y0, xf, yf, side){
   var side = parseInt(side);
   alert(x0)
   alert(xf)
-  if (x0==xf)
-  {
-	  alert("quepedo");
-  }
-	
-  if(xf>=x0 && yf>=y0){
+	  
+  if(xf>=x0){
      alert("primerif");
      for(i=0; i<=xf; i++){
 	for(j=0; j<=yf; j++){
