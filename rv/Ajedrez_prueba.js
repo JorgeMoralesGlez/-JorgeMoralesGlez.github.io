@@ -272,7 +272,7 @@ function Alfilplan(x0, y0, xf, yf, side){
   alert(x0)
   alert(xf)
 	
-  if(xf>x0 yf>x0){
+  if(xf>x0 && yf>x0){
      alert("primerif");
      for(i=0; i<=xf; i++){
 	for(j=0; j<=yf; j++){
