@@ -269,14 +269,14 @@ function Alfilplan(x0, y0, xf, yf, side){
   var xf = parseInt(xf);
   var yf = parseInt(yf);
   var side = parseInt(side);
-  var div1 = x0/10;
-  var div2 = y0/10;
-  var div3 = xf/10;
-  var div4 = yf/10;
-  alert(x0)
-  alert(y0)
-  alert(xf)
-  alert(yf)
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
+  alert(div1)
+  alert(div2)
+  alert(div3)
+  alert(div4)
   if(xf>x0 && yf>y0){
      alert("primerif");
      if(div3==div4)
