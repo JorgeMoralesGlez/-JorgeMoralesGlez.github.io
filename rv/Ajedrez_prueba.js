@@ -259,6 +259,7 @@ function Alfil(textura){
 Alfil.prototype=new Agent();
 
 function Alfilplan(x0, y0, xf, yf, side){
+  alert("alfilplan");
   var x0s = x0;
   var y0s = y0;
   var xfs = xf;
@@ -412,6 +413,9 @@ function Rey(textura){
 }
 Rey.prototype=new Agent();
 
+function Reyplan(x0, y0, xf, yf, side){
+  alert("Reyplan");
+}
 
 //--------------------------------------------------------------------------------------------------------------REINA
 function Reina(textura){
@@ -514,6 +518,9 @@ function Reina(textura){
 }
 Reina.prototype=new Agent();
 
+function Reinaplan(x0, y0, xf, yf, side){
+  alert("Reinaplan");
+}
 
 //-------------------------------------------------------------------------------------------------------PEON
 function Peon(textura){
@@ -549,7 +556,10 @@ function Peon(textura){
 }
 Peon.prototype=new Agent();
 
-
+function Peonplan(x0, y0, xf, yf, side){
+  alert("Peonplan");
+}
+	
 //-----------------------------------------------------------------------------------------------------------VACIO
 function Vacio(textura){
   Agent.call(this);
@@ -1277,11 +1287,11 @@ function planGeneral(){
 	}else if(nombre instanceof Alfil){
 		Alfilplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
 	}else if(nombre instanceof Rey){
-		
+		Reyplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
 	}else if(nombre instanceof Reina){
-		
+		Reinaplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
 	}else if(nombre instanceof Peon){
-		
+		Peonplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
 	}else if(nombre instanceof Vacio){
 		
 	}
