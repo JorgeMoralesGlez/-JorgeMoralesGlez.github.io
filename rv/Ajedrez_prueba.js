@@ -259,7 +259,6 @@ function Alfil(textura){
 Alfil.prototype=new Agent();
 
 function Alfilplan(x0, y0, xf, yf, side){
-  alert("Alfilplan");
   var x0s = x0;
   var y0s = y0;
   var xfs = xf;
@@ -269,27 +268,32 @@ function Alfilplan(x0, y0, xf, yf, side){
   var xf = parseInt(xf);
   var yf = parseInt(yf);
   var side = parseInt(side);
-  alert(x0)
-  alert(xf)
-	
+  var div1 = x0/10;
+  var div2 = y0/10;
+  var div3 = xf/10;
+  var div4 = yf/10;
   if(xf>x0 && yf>x0){
-     alert("primerif");
-     for(i=0; i<=xf; i++){
-	for(j=0; j<=yf; j++){
-        	if(yf!=y0 && xf!=x0){	
-	  		piezaActual.position.y+=1;
-			piezaActual.position.x+=1;
-  		}else if(yf==y0 && xf==x0){
-			valor[xfs][yfs]= piezaActual;
-	        	valor[x0s][y0s]= piezaPosterior;
-	        	alert("Terminó tu turno prro");
-			break;}
-	}
-	x0+=1;
-        y0+=1;
+     if(div3==div4)
+     {
+	     for(i=0; i<=xf; i++){
+		for(j=0; j<=yf; j++){
+			if(yf!=y0 && xf!=x0){	
+				piezaActual.position.y+=1;
+				piezaActual.position.x+=1;
+			}else if(yf==y0 && xf==x0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		}
+		x0+=1;
+		y0+=1;
+	     }
+     }else
+     {
+	     alert("nosepuede");     
      }
    }else if(xf>x0 && yf<y0){
-	alert("segundoif");
 	for(i=0; i<=yf; i++){
 	     if(yf!=y0){
 	        piezaActual.position.y-=1;
