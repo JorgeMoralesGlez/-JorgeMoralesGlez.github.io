@@ -272,15 +272,9 @@ function Alfilplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  alert (div1)
-  alert (div2)
-  alert (div3)
-  alert (div4)
   if(xf>x0 && yf>y0){
-     alert("primerif");
      if(div3==div4)
      {
-	     alert("ifdivision");
 	     for(i=0; i<=xf; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x+=1;
@@ -297,10 +291,8 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     alert("nosepuede");     
      }
    }else if(xf>x0 && yf<y0){
-     alert("segundoif");
      if(div1==div4)
      {
-	     alert("ifdivision");
 	     for(i=0; i<=xf; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x+=1;
@@ -317,10 +309,8 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     alert("nosepuede");     
      }
    }else if(xf<x0 && yf>y0){
-     alert("tercerif");
      if(div1==div4)
      {
-	     alert("ifdivision");
 	     for(i=0; i<=xf; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x-=1;
@@ -337,10 +327,8 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     alert("nosepuede");     
      }
    }else if(xf<x0 && yf<y0){
-     alert("cuartoif");
      if(div3==div4)
      {
-	     alert("ifdivision");
 	     for(i=0; i<=xf; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x-=1;
@@ -438,6 +426,19 @@ Rey.prototype=new Agent();
 
 function Reyplan(x0, y0, xf, yf, side){
   alert("Reyplan");
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
 }
 
 //--------------------------------------------------------------------------------------------------------------REINA
@@ -543,6 +544,19 @@ Reina.prototype=new Agent();
 
 function Reinaplan(x0, y0, xf, yf, side){
   alert("Reinaplan");
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
 }
 
 //-------------------------------------------------------------------------------------------------------PEON
@@ -581,6 +595,19 @@ Peon.prototype=new Agent();
 
 function Peonplan(x0, y0, xf, yf, side){
   alert("Peonplan");
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
 }
 	
 //-----------------------------------------------------------------------------------------------------------VACIO
