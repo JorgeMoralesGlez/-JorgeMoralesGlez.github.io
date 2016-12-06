@@ -272,7 +272,7 @@ function Alfilplan(x0, y0, xf, yf, side){
   alert(x0)
   alert(xf)
 	
-  if(xf==x0){
+  if(xf>x0 yf>x0){
      alert("primerif");
      for(i=0; i<=xf; i++){
 	for(j=0; j<=yf; j++){
@@ -288,7 +288,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 	x0+=1;
         y0+=1;
      }
-   }else if(xf>=x0 && yf<=y0){
+   }else if(xf>x0 && yf<y0){
 	alert("segundoif");
 	for(i=0; i<=yf; i++){
 	     if(yf!=y0){
@@ -301,7 +301,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 	  y0-=1;
          }
      }
-     else if(xf<=x0 && yf>=y0){
+     else if(xf<x0 && yf>y0){
 	alert("tercerif");
      	for(i=0; i<=xf; i++){
         	if(xf!=x0){
@@ -313,7 +313,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 			break;}
         x0+=1;
      	}
-     }else if(xf<=x0 && yf<=y0){
+     }else if(xf<x0 && yf<y0){
 	alert("cuartoif");
 	for(i=0; i<=xf; i++){
 	     if(xf!=x0){
