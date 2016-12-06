@@ -318,7 +318,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 			break;}
 	  x0-=1;
          }
-     }else{alert("nosepuede");}
+     }else if((x0==xf && y0!=yf)||(x0!=xf && y0==yf)){alert("nosepuede");}
 	
   requestAnimationFrame(loop);
   renderizador.render(escena,camara);
