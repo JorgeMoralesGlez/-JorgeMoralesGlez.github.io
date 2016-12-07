@@ -861,6 +861,22 @@ function Peon(textura){
 }
 Peon.prototype=new Agent();
 
+var p1=0;
+var p2=0;
+var p3=0;
+var p4=0;
+var p5=0;
+var p6=0;
+var p7=0;
+var p8=0;
+var p9=0;
+var p10=0;
+var p11=0;
+var p12=0;
+var p13=0;
+var p14=0;
+var p15=0;
+var p16=0;
 function Peonplan(x0, y0, xf, yf, side){
   alert("Peonplan");
   var x0s = x0;
@@ -876,6 +892,13 @@ function Peonplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
+  if (valor[x0][y0]=valor[10][10]){
+	  p1=1;
+	  alert(p1);
+  }
+  else{
+	  alert(p1);
+  }
 }
 	
 //-----------------------------------------------------------------------------------------------------------VACIO
