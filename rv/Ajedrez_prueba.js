@@ -1136,7 +1136,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-          if ((valor[x0s][y0s]==peonMalla8) && div4==2 && p8==0){
+          if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==0){
 		p8=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1149,7 +1149,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla8) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla8) && div2==1){
 		p8=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1162,11 +1162,11 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla8) && div4==2 && p8==1){
+	  else if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla9) && div4==2 && p9==0){
+	  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==0){
 		p9=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1179,7 +1179,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla9) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla9) && div2==1){
 		p9=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1192,11 +1192,11 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla9) && div4==2 && p9==1){
+	  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla10) && div4==2 && p10==0){
+	  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==0){
 		p10=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1209,7 +1209,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla10) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla10) && div2==1){
 		p10=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1222,11 +1222,11 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla10) && div4==2 && p10==1){
+	  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla11) && div4==2 && p11==0){
+	  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==0){
 		p11=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1239,7 +1239,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla11) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla11) && div2==1){
 		p11=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1252,11 +1252,11 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla11) && div4==2 && p11==1){
+	  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla12) && div4==2 && p12==0){
+	  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==0){
 		p12=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1269,7 +1269,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla12) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla12) && div2==1){
 		p12=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1282,11 +1282,11 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla12) && div4==2 && p12==1){
+	  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla13) && div4==2 && p13==0){
+	  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==0){
 		p13=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1299,7 +1299,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla13) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla13) && div2==1){
 		p13=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1312,11 +1312,11 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla13) && div4==2 && p13==1){
+	  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla14) && div4==2 && p14==0){
+	  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==0){
 		p14=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1329,7 +1329,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla14) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla14) && div2==1){
 		p14=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1342,11 +1342,11 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla14) && div4==2 && p14==1){
+	  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
-          else if ((valor[x0s][y0s]==peonMalla15) && div4==2 && p15==0){
+          else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==0){
 		p15=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1359,7 +1359,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==peonMalla15) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla15) && div2==1){
 		p15=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -1372,7 +1372,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0-=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla15) && div4==2 && p15==1){
+	  else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==1){
 		alert("No se puede");
 		flag = flag + 1;
 	  }
