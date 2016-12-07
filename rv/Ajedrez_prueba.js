@@ -491,7 +491,7 @@ function Reyplan(x0, y0, xf, yf, side){
 	  x0-=1;
          }
   }
-  else(Math.abs(div1)!=1 || Math.abs(div2)!=1 || Math.abs(div3)!=1 || Math.abs(div4)!=1){
+  else if(Math.abs(div1)!=1 || Math.abs(div2)!=1 || Math.abs(div3)!=1 || Math.abs(div4)!=1){
   	  flag = flag + 1;
 	  alert("No se puede");
   }
