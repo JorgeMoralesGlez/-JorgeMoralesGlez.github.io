@@ -473,6 +473,8 @@ function Reyplan(x0, y0, xf, yf, side){
 			alert("Terminó tu turno prro");
 			break;}
 		  y0-=1;
+		  alert(y0);
+		  alert(yf);
 		 }
 	  }
 	  else if(x0<=xf && y0==yf){
