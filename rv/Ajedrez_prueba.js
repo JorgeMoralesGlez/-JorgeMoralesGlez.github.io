@@ -276,7 +276,7 @@ function Alfilplan(x0, y0, xf, yf, side){
   if(xf>x0 && yf>y0){
      if(div3==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x+=1;
 				piezaActual.position.y+=1;
@@ -295,7 +295,7 @@ function Alfilplan(x0, y0, xf, yf, side){
    }else if(xf>x0 && yf<y0){
      if(div1==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x+=1;
 				piezaActual.position.y-=1;
@@ -314,7 +314,7 @@ function Alfilplan(x0, y0, xf, yf, side){
    }else if(xf<x0 && yf>y0){
      if(div1==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x-=1;
 				piezaActual.position.y+=1;
@@ -333,7 +333,7 @@ function Alfilplan(x0, y0, xf, yf, side){
    }else if(xf<x0 && yf<y0){
      if(div3==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 	  			piezaActual.position.x-=1;
 				piezaActual.position.y-=1;
@@ -451,8 +451,7 @@ function Reyplan(x0, y0, xf, yf, side){
   }
   else {
 	  if(x0==xf && y0<=yf){
-	     alert("I");
-	     for(i=0; i<=yf; i++){  
+	     for(i=0; i<=70; i++){  
 		if(yf!=y0){	
 		  piezaActual.position.y+=1;
 		}else if(yf==y0){
@@ -463,8 +462,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		y0+=1;
 	    }
 	  }else if(x0==xf && y0>=yf){
-		alert("II");
-		for(j=0; j<=yf; j++){
+		for(j=0; j<=70; j++){
 		     if(yf!=y0){
 			piezaActual.position.y-=1;
 		     }else if(yf==y0){
@@ -476,8 +474,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		 }
 	  }
 	  else if(x0<=xf && y0==yf){
-		alert("III");
-		for(k=0; k<=xf; k++){
+		for(k=0; k<=70; k++){
 			if(xf!=x0){
 				piezaActual.position.x+=1;
 			}else if(xf==x0){
@@ -488,8 +485,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		x0+=1;
 		}
 	  }else if(x0>=xf && y0==yf){
-		alert("IV");
-		for(l=0; l<=xf; l++){
+		for(l=0; l<=70; l++){
 		     if(xf!=x0){
 			piezaActual.position.x-=1;
 		     }else if(xf==x0){
@@ -501,10 +497,9 @@ function Reyplan(x0, y0, xf, yf, side){
 		 }
 	  }
 	  if(xf>x0 && yf>y0){
-	     alert("V");
 	     if(div3==div4)
 	     {
-		     for(i=0; i<=xf; i++){
+		     for(i=0; i<=70; i++){
 				if(xf!=x0){
 					piezaActual.position.x+=1;
 					piezaActual.position.y+=1;
@@ -521,10 +516,9 @@ function Reyplan(x0, y0, xf, yf, side){
 		     alert("nosepuede");     
 	     }
 	  }else if(xf>x0 && yf<y0){
-	     alert("VI");
 	     if(div1==div4)
 	     {
-		     for(i=0; i<=xf; i++){
+		     for(i=0; i<=70; i++){
 				if(xf!=x0){
 					piezaActual.position.x+=1;
 					piezaActual.position.y-=1;
@@ -541,10 +535,9 @@ function Reyplan(x0, y0, xf, yf, side){
 		     alert("nosepuede");     
 	     }
 	  }else if(xf<x0 && yf>y0){
-	     alert("VII");
 	     if(div1==div4)
 	     {
-		     for(i=0; i<=xf; i++){
+		     for(i=0; i<=70; i++){
 				if(xf!=x0){
 					piezaActual.position.x-=1;
 					piezaActual.position.y+=1;
@@ -561,10 +554,9 @@ function Reyplan(x0, y0, xf, yf, side){
 		     alert("nosepuede");     
 	     }
 	  }else if(xf<x0 && yf<y0){
-	     alert("VIII");
 	     if(div3==div4)
 	     {
-		     for(i=0; i<=xf; i++){
+		     for(i=0; i<=70; i++){
 				if(xf!=x0){
 					piezaActual.position.x-=1;
 					piezaActual.position.y-=1;
@@ -702,7 +694,7 @@ function Reinaplan(x0, y0, xf, yf, side){
   var div4 = (yf-y0)/10;
   if(x0==xf && y0<=yf){
 	  //alert("primerif");
-     for(i=0; i<=yf; i++){  
+     for(i=0; i<=70; i++){  
 	if(yf!=y0){	
 	  piezaActual.position.y+=1;
 	}else if(yf==y0){
@@ -713,7 +705,7 @@ function Reinaplan(x0, y0, xf, yf, side){
 	y0+=1;
     }
   }else if(x0==xf && y0>=yf){
-	for(j=0; j<=yf; j++){
+	for(j=0; j<=70; j++){
 	     if(yf!=y0){
 		piezaActual.position.y-=1;
 	     }else if(yf==y0){
@@ -725,7 +717,7 @@ function Reinaplan(x0, y0, xf, yf, side){
 	 }
   }
   else if(x0<=xf && y0==yf){
-	for(k=0; k<=xf; k++){
+	for(k=0; k<=70; k++){
 		if(xf!=x0){
 			piezaActual.position.x+=1;
 		}else if(xf==x0){
@@ -736,7 +728,7 @@ function Reinaplan(x0, y0, xf, yf, side){
 	x0+=1;
 	}
   }else if(x0>=xf && y0==yf){
-	for(l=0; l<=xf; l++){
+	for(l=0; l<=70; l++){
 	     if(xf!=x0){
 		piezaActual.position.x-=1;
 	     }else if(xf==x0){
@@ -750,7 +742,7 @@ function Reinaplan(x0, y0, xf, yf, side){
   if(xf>x0 && yf>y0){
      if(div3==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 				piezaActual.position.x+=1;
 				piezaActual.position.y+=1;
@@ -769,7 +761,7 @@ function Reinaplan(x0, y0, xf, yf, side){
   }else if(xf>x0 && yf<y0){
      if(div1==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 				piezaActual.position.x+=1;
 				piezaActual.position.y-=1;
@@ -788,7 +780,7 @@ function Reinaplan(x0, y0, xf, yf, side){
   }else if(xf<x0 && yf>y0){
      if(div1==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 				piezaActual.position.x-=1;
 				piezaActual.position.y+=1;
@@ -807,7 +799,7 @@ function Reinaplan(x0, y0, xf, yf, side){
   }else if(xf<x0 && yf<y0){
      if(div3==div4)
      {
-	     for(i=0; i<=xf; i++){
+	     for(i=0; i<=70; i++){
 			if(xf!=x0){
 				piezaActual.position.x-=1;
 				piezaActual.position.y-=1;
@@ -898,7 +890,7 @@ function Peonplan(x0, y0, xf, yf, side){
   else{
 	  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==0){
 		p=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -911,7 +903,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla) && div4==1){
 		p=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -928,7 +920,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==0){
 		p1=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -941,7 +933,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla1) && div4==1){
 		p1=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -958,7 +950,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==0){
 		p2=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -971,7 +963,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla2) && div4==1){
 		p2=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -988,7 +980,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==0){
 		p3=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1001,7 +993,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla3) && div4==1){
 		p3=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1018,7 +1010,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==0){
 		p4=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1031,7 +1023,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla4) && div4==1){
 		p4=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1048,7 +1040,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==0){
 		p5=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1061,7 +1053,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla5) && div4==1){
 		p5=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1078,7 +1070,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==0){
 		p6=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1091,7 +1083,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla6) && div4==1){
 		p6=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1108,7 +1100,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
           else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==0){
 		p7=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1121,7 +1113,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla7) && div4==1){
 		p7=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
@@ -1138,7 +1130,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
           if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==0){
 		p8=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1151,7 +1143,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla8) && div2==1){
 		p8=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1168,7 +1160,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==0){
 		p9=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1181,7 +1173,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla9) && div2==1){
 		p9=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1198,7 +1190,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==0){
 		p10=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1211,7 +1203,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla10) && div2==1){
 		p10=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1228,7 +1220,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==0){
 		p11=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1241,7 +1233,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla11) && div2==1){
 		p11=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1258,7 +1250,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==0){
 		p12=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1271,7 +1263,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla12) && div2==1){
 		p12=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1288,7 +1280,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==0){
 		p13=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1301,7 +1293,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla13) && div2==1){
 		p13=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1318,7 +1310,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==0){
 		p14=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1331,7 +1323,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla14) && div2==1){
 		p14=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1348,7 +1340,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
           else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==0){
 		p15=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
@@ -1361,7 +1353,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  }
 	  else if((valor[x0s][y0s]==peonMalla15) && div2==1){
 		p15=1;
-		for(i=0; i<=yf; i++){  
+		for(i=0; i<=70; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
