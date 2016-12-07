@@ -1822,8 +1822,9 @@ function setup(){
   select = new Seleccionador();
   select.rotateX(Math.PI/2);
   select.translateY(30);
-  select.translateX(0);
-  select.translateZ(0);	
+  select.position.x=0;
+  select.position.y=0;	
+	
   	//VALOR (CADA POSICION TABLERO)
   valor = new Array(8)
   valor[0] = new Array(8);
