@@ -892,12 +892,84 @@ function Peonplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if (valor[x0s][y0s]==valor[0][10]){
-	  p1=1;
-	  alert(p1);
+  if (Math.abs(div1)>2 || Math.abs(div2)>2 || Math.abs(div3)>2 || Math.abs(div4)>2){
+	  alert("No se puede");
   }
   else{
-	  alert(p1);
+	  if ((valor[x0s][y0s]==valor[0][10]) && div4==2 && p1==0){
+		p1=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==valor[0][10]) && div4==1){
+		p1=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==valor[0][10]) && div4==2 && p1==1){
+		alert("No se puede");
+	  }
+	  else if(valor[x0s][y0s]==valor[10][10]){
+		  p2=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[20][10]){
+		  p3=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[30][10]){
+		  p4=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[40][10]){
+		  p5=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[50][10]){
+		  p6=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[60][10]){
+		  p7=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[70][10]){
+		  p8=1;
+	  }
+	  else if (valor[x0s][y0s]==valor[0][60]){
+		  p9=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[10][60]){
+		  p10=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[20][60]){
+		  p11=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[30][60]){
+		  p12=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[40][60]){
+		  p13=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[50][60]){
+		  p14=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[60][60]){
+		  p15=1;
+	  }
+	  else if(valor[x0s][y0s]==valor[70][60]){
+		  p16=1;
+	  }
   }
 }
 	
