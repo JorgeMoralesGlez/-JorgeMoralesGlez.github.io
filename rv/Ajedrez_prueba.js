@@ -892,7 +892,7 @@ function Peonplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if (valor[x0s][y0s]==valor[10][10]){
+  if (valor[x0s][y0s]==valor[0][10]){
 	  p1=1;
 	  alert(p1);
   }
