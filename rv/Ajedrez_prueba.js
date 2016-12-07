@@ -349,7 +349,8 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     flag = flag + 1;
 	     alert("nosepuede");     
      }
-  }else if(x0==xf || y0==yf){
+  }
+  else if(x0==xf || y0==yf){
 	  flag = flag + 1;
 	  alert("nosepuede");
   }
@@ -500,6 +501,83 @@ function Reyplan(x0, y0, xf, yf, side){
 		  x0-=1;
 		 }
 	  }
+	  if(xf>x0 && yf>y0){
+	     if(div3==div4)
+	     {
+		     for(i=0; i<=xf; i++){
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+					piezaActual.position.y+=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					break;}
+		     x0+=1;
+		     }
+	     }else
+	     {
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf>x0 && yf<y0){
+	     if(div1==div4)
+	     {
+		     for(i=0; i<=xf; i++){
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+					piezaActual.position.y-=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					break;}
+		     x0+=1;
+		     }
+	     }else
+	     {
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf<x0 && yf>y0){
+	     if(div1==div4)
+	     {
+		     for(i=0; i<=xf; i++){
+				if(xf!=x0){
+					piezaActual.position.x-=1;
+					piezaActual.position.y+=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					break;}
+		     x0-=1;
+		     }
+	     }else
+	     {
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf<x0 && yf<y0){
+	     if(div3==div4)
+	     {
+		     for(i=0; i<=xf; i++){
+				if(xf!=x0){
+					piezaActual.position.x-=1;
+					piezaActual.position.y-=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					break;}
+		     x0-=1;
+		     }
+	     }else
+	     {
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+  	}
   }
 }
 
