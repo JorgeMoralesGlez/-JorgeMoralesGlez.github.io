@@ -455,7 +455,7 @@ function Reyplan(x0, y0, xf, yf, side){
   }
   else {
 	  if(x0==xf && y0<=yf){
-		  //alert("primerif");
+	     alert("I");
 	     for(i=0; i<=yf; i++){  
 		if(yf!=y0){	
 		  piezaActual.position.y+=1;
@@ -467,6 +467,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		y0+=1;
 	    }
 	  }else if(x0==xf && y0>=yf){
+		alert("II");
 		for(j=0; j<=yf; j++){
 		     if(yf!=y0){
 			piezaActual.position.y-=1;
@@ -479,6 +480,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		 }
 	  }
 	  else if(x0<=xf && y0==yf){
+		alert("III");
 		for(k=0; k<=xf; k++){
 			if(xf!=x0){
 				piezaActual.position.x+=1;
@@ -490,6 +492,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		x0+=1;
 		}
 	  }else if(x0>=xf && y0==yf){
+		alert("IV");
 		for(l=0; l<=xf; l++){
 		     if(xf!=x0){
 			piezaActual.position.x-=1;
@@ -502,6 +505,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		 }
 	  }
 	  if(xf>x0 && yf>y0){
+	     alert("V");
 	     if(div3==div4)
 	     {
 		     for(i=0; i<=xf; i++){
@@ -521,6 +525,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		     alert("nosepuede");     
 	     }
 	  }else if(xf>x0 && yf<y0){
+	     alert("VI");
 	     if(div1==div4)
 	     {
 		     for(i=0; i<=xf; i++){
@@ -540,6 +545,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		     alert("nosepuede");     
 	     }
 	  }else if(xf<x0 && yf>y0){
+	     alert("VII");
 	     if(div1==div4)
 	     {
 		     for(i=0; i<=xf; i++){
@@ -559,6 +565,7 @@ function Reyplan(x0, y0, xf, yf, side){
 		     alert("nosepuede");     
 	     }
 	  }else if(xf<x0 && yf<y0){
+	     alert("VIII");
 	     if(div3==div4)
 	     {
 		     for(i=0; i<=xf; i++){
