@@ -167,7 +167,7 @@ function Torreplan(x0, y0, xf, yf, side){
         y0+=1;
      }
    }else if(x0==xf && y0>=yf){
-	for(j=0; j<=yf; j++){
+	for(j=0; j<=y0; j++){
 	     if(yf!=y0){
 	        piezaActual.position.y-=1;
   	     }else if(yf==y0){
