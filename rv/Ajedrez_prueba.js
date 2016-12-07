@@ -200,7 +200,10 @@ function Torreplan(x0, y0, xf, yf, side){
 			break;}
 	  x0-=1;
          }
-     }else{alert("nosepuede");}
+     }else{
+	     flag = flag + 1;
+	     alert("nosepuede");
+     }
 	
 }
 
@@ -286,6 +289,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     }
      }else
      {
+	     flag = flag + 1;
 	     alert("nosepuede");     
      }
    }else if(xf>x0 && yf<y0){
@@ -304,6 +308,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     }
      }else
      {
+	     flag = flag + 1;
 	     alert("nosepuede");     
      }
    }else if(xf<x0 && yf>y0){
@@ -322,6 +327,7 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     }
      }else
      {
+	     flag = flag + 1;
 	     alert("nosepuede");     
      }
    }else if(xf<x0 && yf<y0){
@@ -340,9 +346,13 @@ function Alfilplan(x0, y0, xf, yf, side){
 	     }
      }else
      {
+	     flag = flag + 1;
 	     alert("nosepuede");     
      }
-  }else if(x0==xf || y0==yf){alert("nosepuede");}
+  }else if(x0==xf || y0==yf){
+	  flag = flag + 1;
+	  alert("nosepuede");
+  }
 }
 
 //----------------------------------------------------------------------------------------------------------MIRREY
