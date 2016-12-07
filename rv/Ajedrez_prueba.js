@@ -2072,8 +2072,8 @@ function teclado(){
 
 var flag = 1;
 function guardarPosicion(){
-    auxx=select.position.x;
-    auxy=select.position.y;
+    auxx=parseInt(select.position.x);
+    auxy=parseInt(select.position.y);
 	alert (auxx);
 	alert(auxy);
     if(valor[auxx][auxy].side==1 && flag%2!=0){
