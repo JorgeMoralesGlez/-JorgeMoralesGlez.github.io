@@ -861,6 +861,7 @@ function Peon(textura){
 }
 Peon.prototype=new Agent();
 
+var p=0;
 var p1=0;
 var p2=0;
 var p3=0;
@@ -876,7 +877,6 @@ var p12=0;
 var p13=0;
 var p14=0;
 var p15=0;
-var p16=0;
 function Peonplan(x0, y0, xf, yf, side){
   alert("Peonplan");
   var x0s = x0;
@@ -896,8 +896,8 @@ function Peonplan(x0, y0, xf, yf, side){
 	  alert("No se puede");
   }
   else{
-	  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p1==0){
-		p1=1;
+	  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==0){
+		p=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
@@ -910,6 +910,36 @@ function Peonplan(x0, y0, xf, yf, side){
     		}
 	  }
 	  else if((valor[x0s][y0s]==peonMalla) && div4==1){
+		p=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==0){
+		p1=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla1) && div4==1){
 		p1=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -922,53 +952,429 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0+=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==peonMalla) && div4==2 && p1==1){
+	  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==1){
 		alert("No se puede");
+		flag = flag + 1;
 	  }
-	  else if(valor[x0s][y0s]==valor[10][10]){
-		  p2=1;
+	  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==0){
+		p2=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
 	  }
-	  else if(valor[x0s][y0s]==valor[20][10]){
-		  p3=1;
+	  else if((valor[x0s][y0s]==peonMalla2) && div4==1){
+		p2=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
 	  }
-	  else if(valor[x0s][y0s]==valor[30][10]){
-		  p4=1;
+	  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==1){
+		alert("No se puede");
+		flag = flag + 1;
 	  }
-	  else if(valor[x0s][y0s]==valor[40][10]){
-		  p5=1;
+	  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==0){
+		p3=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
 	  }
-	  else if(valor[x0s][y0s]==valor[50][10]){
-		  p6=1;
+	  else if((valor[x0s][y0s]==peonMalla3) && div4==1){
+		p3=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
 	  }
-	  else if(valor[x0s][y0s]==valor[60][10]){
-		  p7=1;
+	  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==1){
+		alert("No se puede");
+		flag = flag + 1;
 	  }
-	  else if(valor[x0s][y0s]==valor[70][10]){
-		  p8=1;
+	  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==0){
+		p4=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
 	  }
-	  else if (valor[x0s][y0s]==valor[0][60]){
-		  p9=1;
+	  else if((valor[x0s][y0s]==peonMalla4) && div4==1){
+		p4=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
 	  }
-	  else if(valor[x0s][y0s]==valor[10][60]){
-		  p10=1;
+	  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==1){
+		alert("No se puede");
+		flag = flag + 1;
 	  }
-	  else if(valor[x0s][y0s]==valor[20][60]){
-		  p11=1;
+	  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==0){
+		p5=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
 	  }
-	  else if(valor[x0s][y0s]==valor[30][60]){
-		  p12=1;
+	  else if((valor[x0s][y0s]==peonMalla5) && div4==1){
+		p5=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
 	  }
-	  else if(valor[x0s][y0s]==valor[40][60]){
-		  p13=1;
+	  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==1){
+		alert("No se puede");
+		flag = flag + 1;
 	  }
-	  else if(valor[x0s][y0s]==valor[50][60]){
-		  p14=1;
+	  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==0){
+		p6=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
 	  }
-	  else if(valor[x0s][y0s]==valor[60][60]){
-		  p15=1;
+	  else if((valor[x0s][y0s]==peonMalla6) && div4==1){
+		p6=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
 	  }
-	  else if(valor[x0s][y0s]==valor[70][60]){
-		  p16=1;
+	  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+          else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==0){
+		p7=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla7) && div4==1){
+		p7=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+          if ((valor[x0s][y0s]==peonMalla8) && div4==2 && p8==0){
+		p8=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla8) && div4==1){
+		p8=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla8) && div4==2 && p8==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla9) && div4==2 && p9==0){
+		p9=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla9) && div4==1){
+		p9=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla9) && div4==2 && p9==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla10) && div4==2 && p10==0){
+		p10=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla10) && div4==1){
+		p10=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla10) && div4==2 && p10==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla11) && div4==2 && p11==0){
+		p11=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla11) && div4==1){
+		p11=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla11) && div4==2 && p11==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla12) && div4==2 && p12==0){
+		p12=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla12) && div4==1){
+		p12=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla12) && div4==2 && p12==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla13) && div4==2 && p13==0){
+		p13=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla13) && div4==1){
+		p13=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla13) && div4==2 && p13==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla14) && div4==2 && p14==0){
+		p14=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla14) && div4==1){
+		p14=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla14) && div4==2 && p14==1){
+		alert("No se puede");
+		flag = flag + 1;
+	  }
+          else if ((valor[x0s][y0s]==peonMalla15) && div4==2 && p15==0){
+		p15=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}
+	  }
+	  else if((valor[x0s][y0s]==peonMalla15) && div4==1){
+		p15=1;
+		for(i=0; i<=yf; i++){  
+			if(yf!=y0){	
+	  			piezaActual.position.y+=1;
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				break;}
+		y0+=1;
+    		}	  
+	  }
+	  else if ((valor[x0s][y0s]==peonMalla15) && div4==2 && p15==1){
+		alert("No se puede");
+		flag = flag + 1;
 	  }
   }
 }
