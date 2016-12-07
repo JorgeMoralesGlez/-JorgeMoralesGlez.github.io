@@ -2073,10 +2073,8 @@ function teclado(){
 
 var flag = 1;
 function guardarPosicion(){
-    auxx=parseInt(select.position.x);
-    auxy=parseInt(select.position.y);
-	alert (auxx);
-	alert(auxy);
+    auxx=select.position.x;
+    auxy=select.position.y;
     if(valor[auxx][auxy].side==1 && flag%2!=0){
 	cuyo=cuyo+1;
 	flag=flag+1;
