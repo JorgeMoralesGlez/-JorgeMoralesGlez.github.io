@@ -472,9 +472,7 @@ function Reyplan(x0, y0, xf, yf, side){
 			valor[x0s][y0s]= piezaPosterior;
 			alert("Terminó tu turno prro");
 			break;}
-		  y0-=1;
-		  alert(y0);
-		  alert(yf);
+		 y0-=1;
 		 }
 	  }
 	  else if(x0<=xf && y0==yf){
