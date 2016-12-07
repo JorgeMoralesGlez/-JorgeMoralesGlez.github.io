@@ -896,7 +896,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  alert("No se puede");
   }
   else{
-	  if ((valor[x0s][y0s]==valor[0][10]) && div4==2 && p1==0){
+	  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p1==0){
 		p1=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -909,7 +909,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0+=1;
     		}
 	  }
-	  else if((valor[x0s][y0s]==valor[0][10]) && div4==1){
+	  else if((valor[x0s][y0s]==peonMalla) && div4==1){
 		p1=1;
 		for(i=0; i<=yf; i++){  
 			if(yf!=y0){	
@@ -922,7 +922,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		y0+=1;
     		}	  
 	  }
-	  else if ((valor[x0s][y0s]==valor[0][10]) && div4==2 && p1==1){
+	  else if ((valor[x0s][y0s]==peonMalla) && div4==2 && p1==1){
 		alert("No se puede");
 	  }
 	  else if(valor[x0s][y0s]==valor[10][10]){
