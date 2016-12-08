@@ -1241,7 +1241,7 @@ function Peonplan(x0, y0, xf, yf, side){
           if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p8=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1256,7 +1256,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p8=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
@@ -1276,7 +1276,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p9=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1291,7 +1291,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p9=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
@@ -1311,7 +1311,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p10=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1326,7 +1326,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p10=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
@@ -1346,7 +1346,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p11=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1361,7 +1361,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p11=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
@@ -1381,7 +1381,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p12=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1396,7 +1396,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p12=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
@@ -1416,7 +1416,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p13=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1431,7 +1431,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p13=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
@@ -1451,7 +1451,7 @@ function Peonplan(x0, y0, xf, yf, side){
 	  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p14=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1466,7 +1466,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p14=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
@@ -1486,7 +1486,7 @@ function Peonplan(x0, y0, xf, yf, side){
           else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==0){
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				p15=1;
 				valor[xfs][yfs]= piezaActual;
@@ -1501,7 +1501,7 @@ function Peonplan(x0, y0, xf, yf, side){
 		p15=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
+	  			piezaActual.position.y-=1;
 			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
