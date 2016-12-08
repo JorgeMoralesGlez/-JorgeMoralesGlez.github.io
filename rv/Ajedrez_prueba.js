@@ -455,7 +455,6 @@ function Rey(textura){
 Rey.prototype=new Agent();
 
 function Reyplan(x0, y0, xf, yf, side){
-  alert("Reyplan");
   var x0s = x0;
   var y0s = y0;
   var xfs = xf;
@@ -727,7 +726,6 @@ function Reina(textura){
 Reina.prototype=new Agent();
 
 function Reinaplan(x0, y0, xf, yf, side){
-  alert("Reinaplan");
   var x0s = x0;
   var y0s = y0;
   var xfs = xf;
