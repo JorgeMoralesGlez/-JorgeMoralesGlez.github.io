@@ -154,47 +154,26 @@ function Torreplan(x0, y0, xf, yf, side){
   xf = parseInt(xf);
   yf = parseInt(yf);
   side = parseInt(side);
-  if(x0==xf && y0<=yf){
-    	y0=parseInt(piezaActual.position.y);
-        if(yf!=y0){	
-	  	piezaActual.position.y+=1;
-  	}else if(yf==y0){
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000;  
+	if(x0==xf && y0<=yf){
+	y0=parseInt(piezaActual.position.y);
+	if(yf!=y0){	
+		piezaActual.position.y+=1;
+	}else if(yf==y0){
 		valor[xfs][yfs]= piezaActual;
-	        valor[x0s][y0s]= piezaPosterior;
-	        alert("Terminó tu turno prro");
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno prro");
 		resetSelect();
 		animar=0;
 		cuyo=1;
 		}
-  }else if(x0==xf && y0>=yf){
+	}else if(x0==xf && y0>=yf){
 	y0=parseInt(piezaActual.position.y);
 	if(yf!=y0){
-	        piezaActual.position.y-=1;
-  	}else if(yf==y0){
-		valor[xfs][yfs]= piezaActual;
-	        valor[x0s][y0s]= piezaPosterior;
-	        alert("Terminó tu turno prro");
-		resetSelect();
-		animar=0;
-		cuyo=1;
-	}
-  }else if(x0<=xf && y0==yf){
-	x0=parseInt(piezaActual.position.x);
-        if(xf!=x0){
-	  	piezaActual.position.x+=1;
-  	}else if(xf==x0){
-		valor[xfs][yfs]= piezaActual;
-	        valor[x0s][y0s]= piezaPosterior;
-	        alert("Terminó tu turno prro");
-		resetSelect();
-		animar=0;
-		cuyo=1;
-	}
-  }else if(x0>=xf && y0==yf){
-	x0=parseInt(piezaActual.position.x);
-	if(xf!=x0){
-		piezaActual.position.x-=1;
-  	}else if(xf==x0){
+		piezaActual.position.y-=1;
+	}else if(yf==y0){
 		valor[xfs][yfs]= piezaActual;
 		valor[x0s][y0s]= piezaPosterior;
 		alert("Terminó tu turno prro");
@@ -202,12 +181,43 @@ function Torreplan(x0, y0, xf, yf, side){
 		animar=0;
 		cuyo=1;
 	}
-  }else{
-     resetSelect();	  
-     animar=0;
-     cuyo=1;	
-     alert("nosepuede");
-     flag=flag+1;
+	}else if(x0<=xf && y0==yf){
+	x0=parseInt(piezaActual.position.x);
+	if(xf!=x0){
+		piezaActual.position.x+=1;
+	}else if(xf==x0){
+		valor[xfs][yfs]= piezaActual;
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno prro");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+	}else if(x0>=xf && y0==yf){
+	x0=parseInt(piezaActual.position.x);
+	if(xf!=x0){
+		piezaActual.position.x-=1;
+	}else if(xf==x0){
+		valor[xfs][yfs]= piezaActual;
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno prro");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+	}else{
+	resetSelect();	  
+	animar=0;
+	cuyo=1;	
+	alert("nosepuede");
+	flag=flag+1;
+	}
+  }
+  else{
+	resetSelect();
+	animar=0;
+	cuyo=1;  
+	alert("No se puede");
   }
 }
 
@@ -1780,6 +1790,7 @@ function Vacio(textura){
   this.add(new THREE.Mesh(peonForma, new THREE.MeshLambertMaterial({map:textura, transparent: true, opacity: 0})));
   this.castShadow=true;
   this.receiveShadow=true;  
+  this.side=2;
 }
 Vacio.prototype=new Agent();
 
@@ -2049,44 +2060,44 @@ function setup(){
   peonMalla15.translateZ(-60);
   peonMalla15.translateX(70);
   	//VACIO
-  vacio1 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio2 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio3 = new Vacio(TEXTURAS.ceramicanegra); 
-  vacio4 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio5 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio6 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio7 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio8 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio9 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio10 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio11 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio12 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio13 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio14 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio15 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio16 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio17 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio18 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio19 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio20 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio21 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio22 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio23 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio24 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio25 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio26 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio27 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio28 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio29 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio30 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio31 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio32 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio33 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio34 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio35 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio36 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio37 = new Vacio(TEXTURAS.ceramicanegra);
-  vacio38 = new Vacio(TEXTURAS.ceramicanegra);
+  vacio1 = new Vacio(TEXTURAS.madera);
+  vacio2 = new Vacio(TEXTURAS.madera);
+  vacio3 = new Vacio(TEXTURAS.madera); 
+  vacio4 = new Vacio(TEXTURAS.madera);
+  vacio5 = new Vacio(TEXTURAS.madera);
+  vacio6 = new Vacio(TEXTURAS.madera);
+  vacio7 = new Vacio(TEXTURAS.madera);
+  vacio8 = new Vacio(TEXTURAS.madera);
+  vacio9 = new Vacio(TEXTURAS.madera);
+  vacio10 = new Vacio(TEXTURAS.madera);
+  vacio11 = new Vacio(TEXTURAS.madera);
+  vacio12 = new Vacio(TEXTURAS.madera);
+  vacio13 = new Vacio(TEXTURAS.madera);
+  vacio14 = new Vacio(TEXTURAS.madera);
+  vacio15 = new Vacio(TEXTURAS.madera);
+  vacio16 = new Vacio(TEXTURAS.madera);
+  vacio17 = new Vacio(TEXTURAS.madera);
+  vacio18 = new Vacio(TEXTURAS.madera);
+  vacio19 = new Vacio(TEXTURAS.madera);
+  vacio20 = new Vacio(TEXTURAS.madera);
+  vacio21 = new Vacio(TEXTURAS.madera);
+  vacio22 = new Vacio(TEXTURAS.madera);
+  vacio23 = new Vacio(TEXTURAS.madera);
+  vacio24 = new Vacio(TEXTURAS.madera);
+  vacio25 = new Vacio(TEXTURAS.madera);
+  vacio26 = new Vacio(TEXTURAS.madera);
+  vacio27 = new Vacio(TEXTURAS.madera);
+  vacio28 = new Vacio(TEXTURAS.madera);
+  vacio29 = new Vacio(TEXTURAS.madera);
+  vacio30 = new Vacio(TEXTURAS.madera);
+  vacio31 = new Vacio(TEXTURAS.madera);
+  vacio32 = new Vacio(TEXTURAS.madera);
+  vacio33 = new Vacio(TEXTURAS.madera);
+  vacio34 = new Vacio(TEXTURAS.madera);
+  vacio35 = new Vacio(TEXTURAS.madera);
+  vacio36 = new Vacio(TEXTURAS.madera);
+  vacio37 = new Vacio(TEXTURAS.madera);
+  vacio38 = new Vacio(TEXTURAS.madera);
   
   vacio1.translateY(3);
   vacio1.translateZ(-20);
