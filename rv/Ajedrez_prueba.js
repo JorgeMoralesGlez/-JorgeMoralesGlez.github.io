@@ -1341,6 +1341,7 @@ function Peonplan(x0, y0, xf, yf, side){
   else if(piezaPosterior.side==2)
   {
 	  if (Math.abs(div1)>2 || Math.abs(div2)>2 || Math.abs(div3)>2 || Math.abs(div4)>2 || x0!=xf){
+		  flag=flag+1;
 		  resetSelect();
 		  animar=0;
 		  cuyo=1;	
