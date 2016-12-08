@@ -217,6 +217,7 @@ function Torreplan(x0, y0, xf, yf, side){
 	resetSelect();
 	animar=0;
 	cuyo=1;  
+	flag=flag+1;
 	alert("No se puede");
   }
 }
@@ -285,173 +286,184 @@ function Caballoplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if(div4==2 && div3==1)
+  if(piezaActual.side!=piezaPosterior.side)
   {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x+=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y+=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
+	piezaPosterior.position.z=5000; 
+	  if(div4==2 && div3==1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==2 && div3==-1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-2 && div3==1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-2 && div3==-1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==1 && div3==2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==1 && div3==-2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-1 && div3==2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-1 && div3==-2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;	
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else
+	  {
+		resetSelect();
+		animar=0;
+		cuyo=1;
+		flag=flag+1;
+		alert("No se puede");
+	  }
   }
-  else if(div4==2 && div3==-1)
-  {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x-=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y+=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
-  }
-  else if(div4==-2 && div3==1)
-  {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x+=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y-=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
-  }
-  else if(div4==-2 && div3==-1)
-  {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x-=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y-=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
-  }
-  else if(div4==1 && div3==2)
-  {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x+=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y+=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
-  }
-  else if(div4==1 && div3==-2)
-  {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x-=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y+=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
-  }
-  else if(div4==-1 && div3==2)
-  {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x+=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y-=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
-  }
-  else if(div4==-1 && div3==-2)
-  {
-	x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
-			piezaActual.position.x-=1;
-		}else if(xf==x0){
-			y0=parseInt(piezaActual.position.y);
-			if(yf!=y0)
-			{
-				piezaActual.position.y-=1;	
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;
-			}
-		} 
-  }
-  else
-  {
+  else{
 	resetSelect();
 	animar=0;
-	cuyo=1;
+	cuyo=1;  
 	flag=flag+1;
-	alert("No se puede");
+	alert("No se puede");  
   }
 }
 
@@ -520,12 +532,15 @@ function Alfilplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if(xf>x0 && yf>y0){
-     if(div3==div4)
-     {
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	if(xf>x0 && yf>y0){
+	if(div3==div4)
+	{
 
 		x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
+		if(xf!=x0){
 			piezaActual.position.x+=1;
 			piezaActual.position.y+=1;
 		}else if(xf==x0){
@@ -536,20 +551,20 @@ function Alfilplan(x0, y0, xf, yf, side){
 			animar=0;
 			cuyo=1;
 		}
-     }else
-     {
+	}else
+	{
 	     resetSelect();
 	     animar=0;
 	     cuyo=1;	     
 	     flag = flag + 1;
 	     alert("nosepuede");     
-     }
-   }else if(xf>x0 && yf<y0){
-     if(div1==div4)
-     {
-	     
+	}
+	}else if(xf>x0 && yf<y0){
+	if(div1==div4)
+	{
+
 		x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
+		if(xf!=x0){
 			piezaActual.position.x+=1;
 			piezaActual.position.y-=1;
 		}else if(xf==x0){
@@ -560,19 +575,19 @@ function Alfilplan(x0, y0, xf, yf, side){
 			animar=0;
 			cuyo=1;
 			}
-     }else
-     {
+	}else
+	{
 	     resetSelect();
 	     animar=0;
 	     cuyo=1;	     
 	     flag = flag + 1;
 	     alert("nosepuede");     
-     }
-   }else if(xf<x0 && yf>y0){
-     if(div1==div4)
-     {
+	}
+	}else if(xf<x0 && yf>y0){
+	if(div1==div4)
+	{
 		x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
+		if(xf!=x0){
 			piezaActual.position.x-=1;
 			piezaActual.position.y+=1;
 		}else if(xf==x0){
@@ -583,19 +598,19 @@ function Alfilplan(x0, y0, xf, yf, side){
 			animar=0;
 			cuyo=1;
 		}
-     }else
-     {
+	}else
+	{
 	     resetSelect();
 	     animar=0;
 	     cuyo=1;
 	     flag = flag + 1;
 	     alert("nosepuede");     
-     }
-   }else if(xf<x0 && yf<y0){
-     if(div3==div4)
-     {
+	}
+	}else if(xf<x0 && yf<y0){
+	if(div3==div4)
+	{
 		x0=parseInt(piezaActual.position.x);
-	        if(xf!=x0){
+		if(xf!=x0){
 			piezaActual.position.x-=1;
 			piezaActual.position.y-=1;
 		}else if(xf==x0){
@@ -606,22 +621,31 @@ function Alfilplan(x0, y0, xf, yf, side){
 			animar=0;
 			cuyo=1;			
 		}
-     }else
-     {
+	}else
+	{
 	     resetSelect();
 	     animar=0;
 	     cuyo=1;
 	     flag = flag + 1;
 	     alert("nosepuede");     
-     }
-  }
-  else if(x0==xf || y0==yf){
+	}
+	}
+	else if(x0==xf || y0==yf){
 	  resetSelect();
 	  animar=0;
 	  cuyo=1;
 	  flag = flag + 1;
 	  alert("nosepuede");
+	}
   }
+  else
+  {
+	  resetSelect();
+	  animar=0;
+	  cuyo=1;
+	  flag = flag + 1;
+	  alert("nosepuede");  
+  }		
 }
 
 //----------------------------------------------------------------------------------------------------------REY
