@@ -1573,20 +1573,20 @@ function setup(){
   alfilMalla3 = new Alfil(TEXTURAS.ceramicanegra);
   
   alfilMalla.rotateX(Math.PI/2);
-  alfilMalla.translateY(3);
+  alfilMalla.translateY(2);
   alfilMalla.translateX(20);
   
   alfilMalla1.rotateX(Math.PI/2);
-  alfilMalla1.translateY(3);
+  alfilMalla1.translateY(2);
   alfilMalla1.translateX(20);
   alfilMalla1.translateZ(-70);
   
   alfilMalla2.rotateX(Math.PI/2);
-  alfilMalla2.translateY(3);
+  alfilMalla2.translateY(2);
   alfilMalla2.translateX(50);
   
   alfilMalla3.rotateX(Math.PI/2);
-  alfilMalla3.translateY(3);
+  alfilMalla3.translateY(2);
   alfilMalla3.translateX(50);
   alfilMalla3.translateZ(-70);
   	//PEON
