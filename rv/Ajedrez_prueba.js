@@ -742,56 +742,61 @@ function Reinaplan(x0, y0, xf, yf, side){
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
   if(x0==xf && y0<=yf){
-	  //alert("primerif");
-     for(i=0; i<=70; i++){  
+     y0=parseInt(piezaActual.position.y); 
 	if(yf!=y0){	
 	  piezaActual.position.y+=1;
 	}else if(yf==y0){
 		valor[xfs][yfs]= piezaActual;
 		valor[x0s][y0s]= piezaPosterior;
 		alert("Terminó tu turno prro");
-		break;}
-	y0+=1;
-    }
-  }else if(x0==xf && y0>=yf){
-	for(j=0; j<=70; j++){
+		resetSelect();
+		animar=0;
+		cuyo=1;			
+		}
+  }
+  else if(x0==xf && y0>=yf){
+	y0=parseInt(piezaActual.position.y);
 	     if(yf!=y0){
 		piezaActual.position.y-=1;
 	     }else if(yf==y0){
 		valor[xfs][yfs]= piezaActual;
 		valor[x0s][y0s]= piezaPosterior;
 		alert("Terminó tu turno prro");
-		break;}
-	  y0-=1;
-	 }
+		resetSelect();
+		animar=0;
+		cuyo=1;	
+		}
   }
   else if(x0<=xf && y0==yf){
-	for(k=0; k<=70; k++){
+	x0=parseInt(piezaActual.position.x);
 		if(xf!=x0){
 			piezaActual.position.x+=1;
 		}else if(xf==x0){
 			valor[xfs][yfs]= piezaActual;
 			valor[x0s][y0s]= piezaPosterior;
 			alert("Terminó tu turno prro");
-			break;}
-	x0+=1;
-	}
-  }else if(x0>=xf && y0==yf){
-	for(l=0; l<=70; l++){
+			resetSelect();
+			animar=0;
+			cuyo=1;					
+			}
+  }
+  else if(x0>=xf && y0==yf){
+	x0=parseInt(piezaActual.position.x);
 	     if(xf!=x0){
 		piezaActual.position.x-=1;
 	     }else if(xf==x0){
 			valor[xfs][yfs]= piezaActual;
 			valor[x0s][y0s]= piezaPosterior;
 			alert("Terminó tu turno prro");
-			break;}
-	  x0-=1;
-	 }
+			resetSelect();
+			animar=0;
+			cuyo=1;	
+			}
   }
   if(xf>x0 && yf>y0){
      if(div3==div4)
      {
-	     for(i=0; i<=70; i++){
+	     x0=parseInt(piezaActual.position.x);
 			if(xf!=x0){
 				piezaActual.position.x+=1;
 				piezaActual.position.y+=1;
@@ -799,18 +804,22 @@ function Reinaplan(x0, y0, xf, yf, side){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
 				alert("Terminó tu turno prro");
-				break;}
-	     x0+=1;
-	     }
+				resetSelect();
+				animar=0;
+				cuyo=1;	
+				}
      }else
      {
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	
 	     flag = flag + 1;
 	     alert("nosepuede");     
      }
   }else if(xf>x0 && yf<y0){
      if(div1==div4)
      {
-	     for(i=0; i<=70; i++){
+	     x0=parseInt(piezaActual.position.x);
 			if(xf!=x0){
 				piezaActual.position.x+=1;
 				piezaActual.position.y-=1;
@@ -818,18 +827,22 @@ function Reinaplan(x0, y0, xf, yf, side){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
 				alert("Terminó tu turno prro");
-				break;}
-	     x0+=1;
-	     }
+				resetSelect();
+				animar=0;
+				cuyo=1;	
+				}
      }else
      {
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	
 	     flag = flag + 1;
 	     alert("nosepuede");     
      }
   }else if(xf<x0 && yf>y0){
      if(div1==div4)
      {
-	     for(i=0; i<=70; i++){
+	     x0=parseInt(piezaActual.position.x);
 			if(xf!=x0){
 				piezaActual.position.x-=1;
 				piezaActual.position.y+=1;
@@ -837,18 +850,22 @@ function Reinaplan(x0, y0, xf, yf, side){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
 				alert("Terminó tu turno prro");
-				break;}
-	     x0-=1;
-	     }
+				resetSelect();
+				animar=0;
+				cuyo=1;	
+				}
      }else
      {
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	
 	     flag = flag + 1;
 	     alert("nosepuede");     
      }
   }else if(xf<x0 && yf<y0){
      if(div3==div4)
      {
-	     for(i=0; i<=70; i++){
+	     x0=parseInt(piezaActual.position.x);
 			if(xf!=x0){
 				piezaActual.position.x-=1;
 				piezaActual.position.y-=1;
@@ -856,16 +873,20 @@ function Reinaplan(x0, y0, xf, yf, side){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
 				alert("Terminó tu turno prro");
-				break;}
-	     x0-=1;
-	     }
+				resetSelect();
+				animar=0;
+				cuyo=1;	
+				}
      }else
      {
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	
 	     flag = flag + 1;
 	     alert("nosepuede");     
      }
 }
-  
+
 }
 
 //-------------------------------------------------------------------------------------------------------PEON
