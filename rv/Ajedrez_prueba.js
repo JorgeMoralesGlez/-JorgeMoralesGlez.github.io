@@ -1243,7 +1243,6 @@ function Peonplan(x0, y0, xf, yf, side){
   var div4 = (yf-y0)/10;
   if(piezaActual.side!=piezaPosterior.side && piezaPosterior.side!=2)
   {
-	alert("primerif");
 	piezaPosterior.position.z=5000; 
 	if(xf>x0 && yf>y0){
 		     if(div3==div4)
@@ -1341,7 +1340,7 @@ function Peonplan(x0, y0, xf, yf, side){
   }
   else if(piezaPosterior.side==2)
   {
-	  if (Math.abs(div1)>2 || Math.abs(div2)>2 || Math.abs(div3)>2 || Math.abs(div4)>2){
+	  if (Math.abs(div1)>2 || Math.abs(div2)>2 || Math.abs(div3)>2 || Math.abs(div4)>2 || x0!=xf){
 		  resetSelect();
 		  animar=0;
 		  cuyo=1;	
