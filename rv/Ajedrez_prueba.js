@@ -211,6 +211,121 @@ function Torreplan(x0, y0, xf, yf, side){
   }
 }
 
+//---------------------------------------------------------------------------------------------------------CABALLO
+function Caballo(textura){ 
+  Agent.call(this);
+  var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
+  var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
+  var base3Forma = new THREE.CylinderGeometry(3,4,2,20,2,false);
+  var troncoForma = new THREE.CylinderGeometry(2,2,6,20,6,false);
+  var cubierta1Forma = new THREE.CylinderGeometry(4,3,2,20,2,false);
+  var cubierta2Forma = new THREE.CylinderGeometry(3,3,4,20,3,false);
+  var cabezaForma = new THREE.CylinderGeometry(.25,3,10,20,2,false);
+
+  base2Forma.translate(0,1,0);
+  base3Forma.translate(0,2,0);
+  troncoForma.translate(2,4,0);
+  troncoForma.rotateZ(Math.PI/8);
+  cubierta1Forma.translate(0,8,0);
+  cubierta2Forma.translate(0,10,0);
+  cabezaForma.rotateZ(-Math.PI/2);
+  cabezaForma.translate(5,12,0);
+
+  var base1Malla = new THREE.Mesh(base1Forma);
+  var base2Malla= new THREE.Mesh(base2Forma);
+  var base3Malla= new THREE.Mesh(base3Forma);
+  var toncoMalla= new THREE.Mesh(troncoForma);
+  var cubierta1Malla= new THREE.Mesh(cubierta1Forma);
+  var cubierta2Malla= new THREE.Mesh(cubierta2Forma);
+  var cabezaMalla= new THREE.Mesh(cabezaForma);
+
+  var caballoForma = new THREE.Geometry();
+  caballoForma.merge(base1Malla.geometry, base1Malla.matrix);
+  caballoForma.merge(base2Malla.geometry, base2Malla.matrix);
+  caballoForma.merge(base3Malla.geometry, base3Malla.matrix);
+  caballoForma.merge(toncoMalla.geometry, toncoMalla.matrix);
+  caballoForma.merge(cubierta1Malla.geometry, cubierta1Malla.matrix);
+  caballoForma.merge(cubierta2Malla.geometry, cubierta2Malla.matrix);
+  caballoForma.merge(cabezaMalla.geometry, cabezaMalla.matrix);
+  this.add(new THREE.Mesh(caballoForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.castShadow=true;
+  this.receiveShadow=true;  
+  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
+
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+    }
+}
+Caballo.prototype=new Agent();
+
+function Caballoplan(x0, y0, xf, yf, side){
+  x0s = x0;
+  y0s = y0;
+  xfs = xf;
+  yfs = yf;
+  x0 = parseInt(x0);
+  y0 = parseInt(y0);
+  xf = parseInt(xf);
+  yf = parseInt(yf);
+  side = parseInt(side);
+  if(x0==xf && y0<=yf){
+    y0=parseInt(piezaActual.position.y);
+        if(yf!=y0){	
+	  piezaActual.position.y+=1;
+  	}else if(yf==y0){
+		valor[xfs][yfs]= piezaActual;
+	        valor[x0s][y0s]= piezaPosterior;
+	        alert("Terminó tu turno prro");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+		}
+   }else if(x0==xf && y0>=yf){
+	   y0=parseInt(piezaActual.position.y);
+	     if(yf!=y0){
+	        piezaActual.position.y-=1;
+  	     }else if(yf==y0){
+		valor[xfs][yfs]= piezaActual;
+	        valor[x0s][y0s]= piezaPosterior;
+	        alert("Terminó tu turno prro");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+		}
+     }
+     else if(x0<=xf && y0==yf){
+	      x0=parseInt(piezaActual.position.x);
+        	if(xf!=x0){
+	  		piezaActual.position.x+=1;
+  		}else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+	        	valor[x0s][y0s]= piezaPosterior;
+	        	alert("Terminó tu turno prro");
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			}
+     }else if(x0>=xf && y0==yf){
+	     x0=parseInt(piezaActual.position.x);
+	     if(xf!=x0){
+	        piezaActual.position.x-=1;
+  	     }else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+	        	valor[x0s][y0s]= piezaPosterior;
+	        	alert("Terminó tu turno prro");
+		        resetSelect();
+			animar=0;
+			cuyo=1;
+			}
+     }else{
+	     alert("nosepuede");
+	     flag=flag+1;
+	  }
+}
+
 //--------------------------------------------------------------------------------------------------------ALFIL
 function Alfil(textura){
   Agent.call(this);
@@ -380,7 +495,7 @@ function Alfilplan(x0, y0, xf, yf, side){
   }
 }
 
-//----------------------------------------------------------------------------------------------------------MIRREY
+//----------------------------------------------------------------------------------------------------------REY
 function Rey(textura){
   Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
@@ -1643,6 +1758,35 @@ function setup(){
   torreMalla3.rotateX(Math.PI/2);
   torreMalla3.translateY(3);
   torreMalla3.translateX(70);
+
+	//CABALLOS
+  caballoMalla = new Caballo(TEXTURAS.ceramicablanca);
+  caballoMalla1 = new Caballo(TEXTURAS.ceramicanegra);
+  caballoMalla2 = new Caballo(TEXTURAS.ceramicanegra);
+  caballoMalla3 = new Caballo(TEXTURAS.ceramicablanca);
+
+  caballoMalla.rotateX(Math.PI/2);
+  caballoMalla.translateY(3);
+  caballoMalla.translateX(10);
+  caballoMalla.rotation.y=Math.PI/2;
+
+  caballoMalla1.rotateX(Math.PI/2);
+  caballoMalla1.translateY(3);
+  caballoMalla1.translateZ(-70);
+  caballoMalla1.translateX(10);
+  caballoMalla1.rotation.y=-Math.PI/2;
+
+  caballoMalla2.rotateX(Math.PI/2);
+  caballoMalla2.translateY(3);
+  caballoMalla2.translateZ(-70);
+  caballoMalla2.translateX(60);
+  caballoMalla2.rotation.y=-Math.PI/2;
+
+  caballoMalla3.rotateX(Math.PI/2);
+  caballoMalla3.translateY(3);
+  caballoMalla3.translateX(60);
+  caballoMalla3.rotation.y=Math.PI/2;
+	
   	//REYES
   reyMalla = new Rey(TEXTURAS.ceramicablanca);
   reyMalla1 = new Rey(TEXTURAS.ceramicanegra);
@@ -1988,14 +2132,14 @@ function setup(){
   valor[0][70] = torreMalla1;
 
   valor[10] = new Array(8);
-  valor[10][0] = vacio33;
+  valor[10][0] = caballoMalla;
   valor[10][10] = peonMalla1;
   valor[10][20] = vacio2;
   valor[10][30] = vacio10;
   valor[10][40] = vacio18;
   valor[10][50] = vacio26;
   valor[10][60] = peonMalla9;
-  valor[10][70] = vacio34;
+  valor[10][70] = caballoMalla1;
 
   valor[20] = new Array(8);
   valor[20][0] = alfilMalla;
@@ -2038,14 +2182,14 @@ function setup(){
   valor[50][70] = alfilMalla3;
 
   valor[60] = new Array(8);
-  valor[60][0] = vacio35;
+  valor[60][0] = caballoMalla3;
   valor[60][10] = peonMalla6;
   valor[60][20] = vacio7;
   valor[60][30] = vacio15;
   valor[60][40] = vacio23;
   valor[60][50] = vacio31;
   valor[60][60] = peonMalla14;
-  valor[60][70] = vacio36;
+  valor[60][70] = caballoMalla2;
 
   valor[70] = new Array(8);
   valor[70][0] = torreMalla3;
@@ -2061,6 +2205,10 @@ function setup(){
   escena.add(torreMalla1);
   escena.add(torreMalla2);
   escena.add(torreMalla3);
+  escena.add(caballoMalla);
+  escena.add(caballoMalla1);
+  escena.add(caballoMalla2);
+  escena.add(caballoMalla3);
   escena.add(reyMalla);
   escena.add(reyMalla1);
   escena.add(reinaMalla);
@@ -2249,6 +2397,9 @@ function planGeneral(){
 	if(nombre instanceof Torre && animar != 0){
 	  cuyo=4;
 	  Torreplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
+	}else if(nombre instanceof Caballo && animar!=0){
+	  cuyo=4;
+	  Caballoplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
 	}else if(nombre instanceof Alfil && animar!=0){
 	  cuyo=4;
 	  Alfilplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
