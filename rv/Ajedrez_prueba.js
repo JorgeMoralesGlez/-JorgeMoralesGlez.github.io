@@ -203,6 +203,8 @@ function Torreplan(x0, y0, xf, yf, side){
 		cuyo=1;
 	}
   }else{
+     animar=0;
+     cuyo=1;	
      alert("nosepuede");
      flag=flag+1;
   }
