@@ -799,7 +799,7 @@ function Reyplan(x0, y0, xf, yf, side){
 					cuyo=1;	
 					}
 		  }
-		  if(xf>x0 && yf>y0){
+		  else if(xf>x0 && yf>y0){
 		     if(div3==div4)
 		     {
 			     x0=parseInt(piezaActual.position.x);
