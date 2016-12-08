@@ -300,6 +300,7 @@ function Caballoplan(x0, y0, xf, yf, side){
 	resetSelect();
 	animar=0;
 	cuyo=1;
+	flag=flag+1;
 	alert("No se puede");
   }
 }
