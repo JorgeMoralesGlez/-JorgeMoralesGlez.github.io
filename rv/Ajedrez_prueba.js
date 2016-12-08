@@ -959,11 +959,11 @@ function Peonplan(x0, y0, xf, yf, side){
   }
   else{
 	  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==0){
-		p=1;
 		y0=parseInt(piezaActual.position.y);
 			if(yf!=y0){	
 	  			piezaActual.position.y+=1;
 			}else if(yf==y0){
+				p=1;
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
 				alert("Terminó tu turno prro");
