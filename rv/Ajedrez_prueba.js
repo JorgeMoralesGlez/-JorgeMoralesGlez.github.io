@@ -285,6 +285,10 @@ function Alfilplan(x0, y0, xf, yf, side){
 			piezaActual.position.x+=1;
 			piezaActual.position.y+=1;
 		}else if(xf==x0){
+			alert(x0s);
+			alert(xfs);
+			alert(y0s);
+			alert(yfs);
 			valor[xfs][yfs]= piezaActual;
 			valor[x0s][y0s]= piezaPosterior;
 			alert("Terminó tu turno prro");
