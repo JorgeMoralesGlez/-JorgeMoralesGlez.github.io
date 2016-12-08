@@ -736,159 +736,170 @@ function Reyplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if(Math.abs(div1)>1 || Math.abs(div2)>1 || Math.abs(div3)>1 || Math.abs(div4)>1) {
-	  resetSelect();
-	  animar=0;
-	  cuyo=1;	  
-  	  flag = flag + 1;
-	  alert("No se puede");
-  }
-  else {
-	  if(x0==xf && y0<=yf){
-	     y0=parseInt(piezaActual.position.y); 
-		if(yf!=y0){	
-		  piezaActual.position.y+=1;
-		}else if(yf==y0){
-			valor[xfs][yfs]= piezaActual;
-			valor[x0s][y0s]= piezaPosterior;
-			alert("Terminó tu turno prro");
-			resetSelect();
-			animar=0;
-			cuyo=1;			
-			}
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	  if(Math.abs(div1)>1 || Math.abs(div2)>1 || Math.abs(div3)>1 || Math.abs(div4)>1) {
+		  resetSelect();
+		  animar=0;
+		  cuyo=1;	  
+		  flag = flag + 1;
+		  alert("No se puede");
 	  }
-	  else if(x0==xf && y0>=yf){
-		y0=parseInt(piezaActual.position.y);
-		     if(yf!=y0){
-			piezaActual.position.y-=1;
-		     }else if(yf==y0){
-			valor[xfs][yfs]= piezaActual;
-			valor[x0s][y0s]= piezaPosterior;
-			alert("Terminó tu turno prro");
-			resetSelect();
-			animar=0;
-			cuyo=1;	
-		     	}
-	  }
-	  else if(x0<=xf && y0==yf){
-		x0=parseInt(piezaActual.position.x);
-			if(xf!=x0){
-				piezaActual.position.x+=1;
-			}else if(xf==x0){
+	  else {
+		  if(x0==xf && y0<=yf){
+		     y0=parseInt(piezaActual.position.y); 
+			if(yf!=y0){	
+			  piezaActual.position.y+=1;
+			}else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
 				alert("Terminó tu turno prro");
 				resetSelect();
 				animar=0;
-				cuyo=1;					
+				cuyo=1;			
 				}
-	  }
-	  else if(x0>=xf && y0==yf){
-		x0=parseInt(piezaActual.position.x);
-		     if(xf!=x0){
-			piezaActual.position.x-=1;
-		     }else if(xf==x0){
+		  }
+		  else if(x0==xf && y0>=yf){
+			y0=parseInt(piezaActual.position.y);
+			     if(yf!=y0){
+				piezaActual.position.y-=1;
+			     }else if(yf==y0){
 				valor[xfs][yfs]= piezaActual;
 				valor[x0s][y0s]= piezaPosterior;
 				alert("Terminó tu turno prro");
 				resetSelect();
 				animar=0;
 				cuyo=1;	
-		     		}
+				}
+		  }
+		  else if(x0<=xf && y0==yf){
+			x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;					
+					}
+		  }
+		  else if(x0>=xf && y0==yf){
+			x0=parseInt(piezaActual.position.x);
+			     if(xf!=x0){
+				piezaActual.position.x-=1;
+			     }else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  if(xf>x0 && yf>y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y+=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf>x0 && yf<y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y-=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf<x0 && yf>y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y+=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf<x0 && yf<y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y-=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		}
 	  }
-	  if(xf>x0 && yf>y0){
-	     if(div3==div4)
-	     {
-		     x0=parseInt(piezaActual.position.x);
-				if(xf!=x0){
-					piezaActual.position.x+=1;
-					piezaActual.position.y+=1;
-				}else if(xf==x0){
-					valor[xfs][yfs]= piezaActual;
-					valor[x0s][y0s]= piezaPosterior;
-					alert("Terminó tu turno prro");
-					resetSelect();
-					animar=0;
-					cuyo=1;	
-					}
-	     }else
-	     {
-		     resetSelect();
-		     animar=0;
-		     cuyo=1;	
-		     flag = flag + 1;
-		     alert("nosepuede");     
-	     }
-	  }else if(xf>x0 && yf<y0){
-	     if(div1==div4)
-	     {
-		     x0=parseInt(piezaActual.position.x);
-				if(xf!=x0){
-					piezaActual.position.x+=1;
-					piezaActual.position.y-=1;
-				}else if(xf==x0){
-					valor[xfs][yfs]= piezaActual;
-					valor[x0s][y0s]= piezaPosterior;
-					alert("Terminó tu turno prro");
-					resetSelect();
-					animar=0;
-					cuyo=1;	
-					}
-	     }else
-	     {
-		     resetSelect();
-		     animar=0;
-		     cuyo=1;	
-		     flag = flag + 1;
-		     alert("nosepuede");     
-	     }
-	  }else if(xf<x0 && yf>y0){
-	     if(div1==div4)
-	     {
-		     x0=parseInt(piezaActual.position.x);
-				if(xf!=x0){
-					piezaActual.position.x-=1;
-					piezaActual.position.y+=1;
-				}else if(xf==x0){
-					valor[xfs][yfs]= piezaActual;
-					valor[x0s][y0s]= piezaPosterior;
-					alert("Terminó tu turno prro");
-					resetSelect();
-					animar=0;
-					cuyo=1;	
-					}
-	     }else
-	     {
-		     resetSelect();
-		     animar=0;
-		     cuyo=1;	
-		     flag = flag + 1;
-		     alert("nosepuede");     
-	     }
-	  }else if(xf<x0 && yf<y0){
-	     if(div3==div4)
-	     {
-		     x0=parseInt(piezaActual.position.x);
-				if(xf!=x0){
-					piezaActual.position.x-=1;
-					piezaActual.position.y-=1;
-				}else if(xf==x0){
-					valor[xfs][yfs]= piezaActual;
-					valor[x0s][y0s]= piezaPosterior;
-					alert("Terminó tu turno prro");
-					resetSelect();
-					animar=0;
-					cuyo=1;	
-					}
-	     }else
-	     {
-		     resetSelect();
-	             animar=0;
-		     cuyo=1;	
-		     flag = flag + 1;
-		     alert("nosepuede");     
-	     }
-  	}
+  }
+  else{
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	
+	     flag = flag + 1;
+	     alert("nosepuede");  
   }
 }
 
@@ -1007,50 +1018,27 @@ function Reinaplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if(x0==xf && y0<=yf){
-     y0=parseInt(piezaActual.position.y); 
-	if(yf!=y0){	
-	  piezaActual.position.y+=1;
-	}else if(yf==y0){
-		valor[xfs][yfs]= piezaActual;
-		valor[x0s][y0s]= piezaPosterior;
-		alert("Terminó tu turno prro");
-		resetSelect();
-		animar=0;
-		cuyo=1;			
-		}
-  }
-  else if(x0==xf && y0>=yf){
-	y0=parseInt(piezaActual.position.y);
-	     if(yf!=y0){
-		piezaActual.position.y-=1;
-	     }else if(yf==y0){
-		valor[xfs][yfs]= piezaActual;
-		valor[x0s][y0s]= piezaPosterior;
-		alert("Terminó tu turno prro");
-		resetSelect();
-		animar=0;
-		cuyo=1;	
-		}
-  }
-  else if(x0<=xf && y0==yf){
-	x0=parseInt(piezaActual.position.x);
-		if(xf!=x0){
-			piezaActual.position.x+=1;
-		}else if(xf==x0){
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	  if(x0==xf && y0<=yf){
+	     y0=parseInt(piezaActual.position.y); 
+		if(yf!=y0){	
+		  piezaActual.position.y+=1;
+		}else if(yf==y0){
 			valor[xfs][yfs]= piezaActual;
 			valor[x0s][y0s]= piezaPosterior;
 			alert("Terminó tu turno prro");
 			resetSelect();
 			animar=0;
-			cuyo=1;					
+			cuyo=1;			
 			}
-  }
-  else if(x0>=xf && y0==yf){
-	x0=parseInt(piezaActual.position.x);
-	     if(xf!=x0){
-		piezaActual.position.x-=1;
-	     }else if(xf==x0){
+	  }
+	  else if(x0==xf && y0>=yf){
+		y0=parseInt(piezaActual.position.y);
+		     if(yf!=y0){
+			piezaActual.position.y-=1;
+		     }else if(yf==y0){
 			valor[xfs][yfs]= piezaActual;
 			valor[x0s][y0s]= piezaPosterior;
 			alert("Terminó tu turno prro");
@@ -1058,101 +1046,135 @@ function Reinaplan(x0, y0, xf, yf, side){
 			animar=0;
 			cuyo=1;	
 			}
+	  }
+	  else if(x0<=xf && y0==yf){
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+			}else if(xf==x0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				resetSelect();
+				animar=0;
+				cuyo=1;					
+				}
+	  }
+	  else if(x0>=xf && y0==yf){
+		x0=parseInt(piezaActual.position.x);
+		     if(xf!=x0){
+			piezaActual.position.x-=1;
+		     }else if(xf==x0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				resetSelect();
+				animar=0;
+				cuyo=1;	
+				}
+	  }
+	  if(xf>x0 && yf>y0){
+	     if(div3==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+					piezaActual.position.y+=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf>x0 && yf<y0){
+	     if(div1==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+					piezaActual.position.y-=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf<x0 && yf>y0){
+	     if(div1==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x-=1;
+					piezaActual.position.y+=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf<x0 && yf<y0){
+	     if(div3==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x-=1;
+					piezaActual.position.y-=1;
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }
   }
-  if(xf>x0 && yf>y0){
-     if(div3==div4)
-     {
-	     x0=parseInt(piezaActual.position.x);
-			if(xf!=x0){
-				piezaActual.position.x+=1;
-				piezaActual.position.y+=1;
-			}else if(xf==x0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-     }else
-     {
-	     resetSelect();
-	     animar=0;
-	     cuyo=1;	
-	     flag = flag + 1;
-	     alert("nosepuede");     
-     }
-  }else if(xf>x0 && yf<y0){
-     if(div1==div4)
-     {
-	     x0=parseInt(piezaActual.position.x);
-			if(xf!=x0){
-				piezaActual.position.x+=1;
-				piezaActual.position.y-=1;
-			}else if(xf==x0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-     }else
-     {
-	     resetSelect();
-	     animar=0;
-	     cuyo=1;	
-	     flag = flag + 1;
-	     alert("nosepuede");     
-     }
-  }else if(xf<x0 && yf>y0){
-     if(div1==div4)
-     {
-	     x0=parseInt(piezaActual.position.x);
-			if(xf!=x0){
-				piezaActual.position.x-=1;
-				piezaActual.position.y+=1;
-			}else if(xf==x0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-     }else
-     {
-	     resetSelect();
-	     animar=0;
-	     cuyo=1;	
-	     flag = flag + 1;
-	     alert("nosepuede");     
-     }
-  }else if(xf<x0 && yf<y0){
-     if(div3==div4)
-     {
-	     x0=parseInt(piezaActual.position.x);
-			if(xf!=x0){
-				piezaActual.position.x-=1;
-				piezaActual.position.y-=1;
-			}else if(xf==x0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-     }else
-     {
-	     resetSelect();
-	     animar=0;
-	     cuyo=1;	
-	     flag = flag + 1;
-	     alert("nosepuede");     
-     }
-}
-
+  else
+  {
+     resetSelect();
+     animar=0;
+     cuyo=1;	
+     flag = flag + 1;
+     alert("nosepuede");  	  
+  }
 }
 
 //-------------------------------------------------------------------------------------------------------PEON
@@ -1219,573 +1241,679 @@ function Peonplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if (Math.abs(div1)>2 || Math.abs(div2)>2 || Math.abs(div3)>2 || Math.abs(div4)>2){
-	  resetSelect();
-	  animar=0;
-	  cuyo=1;	
-	  alert("No se puede");
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	if(xf>x0 && yf>y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y+=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf>x0 && yf<y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y-=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf<x0 && yf>y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y+=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf<x0 && yf<y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y-=1;
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno prro");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		}
+  else if(piezaPosterior.side==2)
+  {
+	  if (Math.abs(div1)>2 || Math.abs(div2)>2 || Math.abs(div3)>2 || Math.abs(div4)>2){
+		  resetSelect();
+		  animar=0;
+		  cuyo=1;	
+		  alert("No se puede");
+	  }
+	  else{
+		  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla) && div4==1){
+			p=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;	
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p1=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla1) && div4==1){
+			p1=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					} 
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;	
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p2=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla2) && div4==1){
+			p2=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;	  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p3=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla3) && div4==1){
+			p3=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p4=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla4) && div4==1){
+			p4=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p5=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla5) && div4==1){
+			p5=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p6=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla6) && div4==1){
+			p6=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					p7=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla7) && div4==1){
+			p7=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p8=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla8) && div2==1){
+			p8=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p9=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla9) && div2==1){
+			p9=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p10=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla10) && div2==1){
+			p10=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p11=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla11) && div2==1){
+			p11=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p12=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla12) && div2==1){
+			p12=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					} 
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p13=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla13) && div2==1){
+			p13=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p14=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla14) && div2==1){
+			p14=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					p15=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla15) && div2==1){
+			p15=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno prro");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+	  }
   }
   else{
-	  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla) && div4==1){
-		p=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;	
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p1=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla1) && div4==1){
-		p1=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				} 
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;	
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p2=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla2) && div4==1){
-		p2=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;	  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p3=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla3) && div4==1){
-		p3=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p4=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla4) && div4==1){
-		p4=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}	  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p5=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla5) && div4==1){
-		p5=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}	  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p6=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla6) && div4==1){
-		p6=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-          else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				p7=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla7) && div4==1){
-		p7=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y+=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}	  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-          if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p8=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla8) && div2==1){
-		p8=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}	  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p9=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla9) && div2==1){
-		p9=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p10=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla10) && div2==1){
-		p10=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p11=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla11) && div2==1){
-		p11=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;  
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p12=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla12) && div2==1){
-		p12=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				} 
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p13=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla13) && div2==1){
-		p13=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}	  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p14=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla14) && div2==1){
-		p14=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}	  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;
-		alert("No se puede");
-		flag = flag + 1;
-	  }
-          else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==0){
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				p15=1;
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}
-	  }
-	  else if((valor[x0s][y0s]==peonMalla15) && div2==1){
-		p15=1;
-		y0=parseInt(piezaActual.position.y);
-			if(yf!=y0){	
-	  			piezaActual.position.y-=1;
-			}else if(yf==y0){
-				valor[xfs][yfs]= piezaActual;
-				valor[x0s][y0s]= piezaPosterior;
-				alert("Terminó tu turno prro");
-				resetSelect();
-				animar=0;
-				cuyo=1;	
-				}	  
-	  }
-	  else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==1){
-		resetSelect();
-		animar=0;
-		cuyo=1;
-		alert("No se puede");
-		flag = flag + 1;
-	  }
+	resetSelect();
+	animar=0;
+	cuyo=1;
+	alert("No se puede");
+	flag = flag + 1;	  
   }
 }
 	
