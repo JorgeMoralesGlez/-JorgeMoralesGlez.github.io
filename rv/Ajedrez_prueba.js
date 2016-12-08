@@ -262,7 +262,46 @@ function Caballo(textura){
 Caballo.prototype=new Agent();
 
 function Caballoplan(x0, y0, xf, yf, side){
-
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
+  if(div4==2 && div3==1)
+  {
+	x0=parseInt(piezaActual.position.x);
+	        if(xf!=x0){
+			piezaActual.position.x+=1;
+		}else if(xf==x0){
+			x0=parseInt(piezaActual.position.y);
+			if(yf!=y0)
+			{
+				piezaActual.position.y+=1;	
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				resetSelect();
+				animar=0;
+				cuyo=1;
+			}
+		} 
+  }
+  else
+  {
+	resetSelect();
+	animar=0;
+	cuyo=1;
+	alert("No se puede");
+  }
 }
 
 //--------------------------------------------------------------------------------------------------------ALFIL
