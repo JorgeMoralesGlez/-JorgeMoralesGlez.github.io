@@ -145,68 +145,68 @@ Torre.prototype=new Agent();
 
 var i, j, k, l;
 function Torreplan(x0, y0, xf, yf, side){
-  var x0s = x0;
-  var y0s = y0;
-  var xfs = xf;
-  var yfs = yf;
-  var x0 = parseInt(x0);
-  var y0 = parseInt(y0);
-  var xf = parseInt(xf);
-  var yf = parseInt(yf);
-  var side = parseInt(side);
+  x0s = x0;
+  y0s = y0;
+  xfs = xf;
+  yfs = yf;
+  x0 = parseInt(x0);
+  y0 = parseInt(y0);
+  xf = parseInt(xf);
+  yf = parseInt(yf);
+  side = parseInt(side);
   if(x0==xf && y0<=yf){
-	  //alert("primerif");
-     for(i=0; i<=70; i++){  
+    	y0=parseInt(piezaActual.position.y);
         if(yf!=y0){	
-	  piezaActual.position.y+=1;
+	  	piezaActual.position.y+=1;
   	}else if(yf==y0){
 		valor[xfs][yfs]= piezaActual;
 	        valor[x0s][y0s]= piezaPosterior;
 	        alert("Terminó tu turno prro");
-		break;}
-        y0+=1;
-     }
-   }else if(x0==xf && y0>=yf){
-	for(j=0; j<=70; j++){
-	     if(yf!=y0){
+		resetSelect();
+		animar=0;
+		cuyo=1;
+		}
+  }else if(x0==xf && y0>=yf){
+	y0=parseInt(piezaActual.position.y);
+	if(yf!=y0){
 	        piezaActual.position.y-=1;
-  	     }else if(yf==y0){
+  	}else if(yf==y0){
 		valor[xfs][yfs]= piezaActual;
 	        valor[x0s][y0s]= piezaPosterior;
 	        alert("Terminó tu turno prro");
-		break;}
-	  y0-=1;
-         }
-     }
-     else if(x0<=xf && y0==yf){
-     	for(k=0; k<=70; k++){
-        	if(xf!=x0){
-	  		piezaActual.position.x+=1;
-  		}else if(xf==x0){
-			valor[xfs][yfs]= piezaActual;
-	        	valor[x0s][y0s]= piezaPosterior;
-	        	alert("Terminó tu turno prro");
-			break;}
-        x0+=1;
-     	}
-     }else if(x0>=xf && y0==yf){
-	for(l=0; l<=70; l++){
-	     if(xf!=x0){
-	        piezaActual.position.x-=1;
-  	     }else if(xf==x0){
-			valor[xfs][yfs]= piezaActual;
-	        	valor[x0s][y0s]= piezaPosterior;
-	        	alert("Terminó tu turno prro");
-			break;}
-	  x0-=1;
-         }
-     }else{
-	     flag = flag + 1;
-	     alert("nosepuede");
-     }
-	
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+  }else if(x0<=xf && y0==yf){
+	x0=parseInt(piezaActual.position.x);
+        if(xf!=x0){
+	  	piezaActual.position.x+=1;
+  	}else if(xf==x0){
+		valor[xfs][yfs]= piezaActual;
+	        valor[x0s][y0s]= piezaPosterior;
+	        alert("Terminó tu turno prro");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+  }else if(x0>=xf && y0==yf){
+	x0=parseInt(piezaActual.position.x);
+	if(xf!=x0){
+		piezaActual.position.x-=1;
+  	}else if(xf==x0){
+		valor[xfs][yfs]= piezaActual;
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno prro");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+  }else{
+     alert("nosepuede");
+     flag=flag+1;
+  }
 }
-
 
 //--------------------------------------------------------------------------------------------------------ALFIL
 function Alfil(textura){
@@ -2012,23 +2012,24 @@ function setup(){
 //-----------------------------------------------------------------------------------------------------------------LOOP
 var setupDone=false;
 function loop(){
+  requestAnimationFrame(loop);
   if(TEXTURAS.madera!==undefined && TEXTURAS.ceramicablanca!==undefined && TEXTURAS.ceramicanegra!==undefined && TEXTURAS.marmolblanco!==undefined && TEXTURAS.marmolnegro!==undefined && !setupDone){
       setup();
-      renderizador.render(escena, camara);
   }
   if(cuyo==2){
       guardarPosicion();
   }
   else if(cuyo==4){
+    animar=1;
     planGeneral();
   }
   else{
     teclado();
+     animar=0;
   }
     escena.sense();
     escena.plan();
     escena.act();
-    requestAnimationFrame(loop);
     renderizador.render(escena, camara);
 }
 
@@ -2080,8 +2081,8 @@ function guardarPosicion(){
 	flag=flag+1;
     }else if(valor[auxx][auxy].side==0 && flag%2==0){
 	    cuyo=cuyo+1;
-	    flag=flag +1;
-	    }
+	    flag=flag+1;
+	     }
 	else{
 	alert("no es tu turno");
 	cuyo=1;
@@ -2090,30 +2091,31 @@ function guardarPosicion(){
 
 var nombre=new THREE.Object3D;
 var piezaActual, piezaPosterior;
+var animar=0;
 function planGeneral(){
 	nombre = valor[auxx][auxy];
 	piezaActual = nombre;
 	piezaPosterior = valor[select.position.x][select.position.y];
-	      if(nombre instanceof Torre){
-		Torreplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
+	if(nombre instanceof Torre && animar != 0){
+	  cuyo=4;
+	  Torreplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
 	}else if(nombre instanceof Alfil){
-		Alfilplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
-	}else if(nombre instanceof Rey){
-		Reyplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
-	}else if(nombre instanceof Reina){
-		Reinaplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
-	}else if(nombre instanceof Peon){
-		Peonplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
-	}else if(nombre instanceof Vacio){
 		
+	}else if(nombre instanceof Rey){
+		
+	}else if(nombre instanceof Reina){
+		
+	}else if(nombre instanceof Peon){
+		
+	}else if(nombre instanceof Vacio){
+		alert("vacio");
 	}
+}
+
+function resetSelect(){
 	select.position.x=0;
-    select.position.y=0;
-    select.position.z=30;
-    //posicionadorMalla.position.x=0;
-    //posicionadorMalla.position.y=0;
-    //posicionadorMalla.position.z=1000;
-	cuyo=1;
+        select.position.y=0;
+        select.position.z=30;	
 }
 
 var raycaster = new THREE.Raycaster();
