@@ -2075,11 +2075,11 @@ function setup(){
   reyMalla1 = new Rey(TEXTURAS.ceramicanegra);
 
   reyMalla.rotateX(Math.PI/2);
-  reyMalla.position.z(3);
+  reyMalla.position.z=3;
   reyMalla.translateX(30);
   
   reyMalla1.rotateX(Math.PI/2);
-  reyMalla1.position.z(3);
+  reyMalla1.position.z=3;
   reyMalla1.translateZ(-70);
   reyMalla1.translateX(30);  
   	//REINAS
@@ -2631,25 +2631,31 @@ function TexturaSetup(){
 
 //------------------------------------------------------------------------------------------------------MOVIMIENTO
 function teclado(){  
-      window.onload=function(){document.onkeydown=desplazar};
-      function desplazar(objeto){
-      var tecla = objeto.which;
-	  switch (tecla){
-	      case 37 : 
-		  select.translateZ(10);
-		  break;
-	      case 38 : 
-		  select.translateX(-10);
-		  break;
-	      case 39 :  
-		  select.translateZ(-10);
-		  break;
-	      case 40 : 
-		  select.translateX(10);
-		  break;
-	      case 13 :
-		  cuyo=cuyo+1;
-		}
+      if(reyMalla.position.z=5000 || reyMalla1.position==5000)
+      {
+	      alert("Se acabo el juego");
+      }
+      else{
+	      window.onload=function(){document.onkeydown=desplazar};
+	      function desplazar(objeto){
+	      var tecla = objeto.which;
+		  switch (tecla){
+		      case 37 : 
+			  select.translateZ(10);
+			  break;
+		      case 38 : 
+			  select.translateX(-10);
+			  break;
+		      case 39 :  
+			  select.translateZ(-10);
+			  break;
+		      case 40 : 
+			  select.translateX(10);
+			  break;
+		      case 13 :
+			  cuyo=cuyo+1;
+			}
+	      }
       }
 }
 
