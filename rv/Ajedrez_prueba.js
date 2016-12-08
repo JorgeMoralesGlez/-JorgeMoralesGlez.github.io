@@ -2123,15 +2123,19 @@ function planGeneral(){
 	if(nombre instanceof Torre && animar != 0){
 	  cuyo=4;
 	  Torreplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
-	}else if(nombre instanceof Alfil){
-		
-	}else if(nombre instanceof Rey){
-		
-	}else if(nombre instanceof Reina){
-		
-	}else if(nombre instanceof Peon){
-		
-	}else if(nombre instanceof Vacio){
+	}else if(nombre instanceof Alfil && animar!=0){
+	  cuyo=4;
+	  Alfilplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Rey && animar!=0){
+	  cuyo=4;
+	  Reyplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Reina && animar!=0){
+	  cuyo=4;
+	  Reinaplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Peon && animar!=0){
+	  cuyo=4;
+	  Peonplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Vacio && animar!=0){
 		alert("vacio");
 	}
 }
