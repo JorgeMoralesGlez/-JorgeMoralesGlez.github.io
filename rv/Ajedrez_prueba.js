@@ -1243,6 +1243,7 @@ function Peonplan(x0, y0, xf, yf, side){
   var div4 = (yf-y0)/10;
   if(piezaActual.side!=piezaPosterior.side && piezaPosterior.side!=2)
   {
+	alert("primerif");
 	piezaPosterior.position.z=5000; 
 	if(xf>x0 && yf>y0){
 		     if(div3==div4)
