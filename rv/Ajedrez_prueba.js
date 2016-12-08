@@ -2631,7 +2631,7 @@ function TexturaSetup(){
 
 //------------------------------------------------------------------------------------------------------MOVIMIENTO
 function teclado(){
-      if(reyMalla.position.z==5000 || reyMalla1.position.z==5000)){
+      if(reyMalla.position.z==5000 || reyMalla1.position.z==5000){
 	      alert("Se acabo el juego")
       }
       else{   
