@@ -2677,7 +2677,11 @@ function planGeneral(){
 	nombre = valor[auxx][auxy];
 	piezaActual = nombre;
 	piezaPosterior = valor[select.position.x][select.position.y];
-	if(nombre instanceof Torre && animar != 0){
+	if(reyMalla.position.z==5000 || reyMalla1.position.z==5000)
+	{
+	  alert("Se acabo el juego");	
+	}
+	else if(nombre instanceof Torre && animar != 0){
 	  cuyo=4;
 	  Torreplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
 	}else if(nombre instanceof Caballo && animar!=0){
