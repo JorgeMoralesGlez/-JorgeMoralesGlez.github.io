@@ -938,7 +938,6 @@ var p13=0;
 var p14=0;
 var p15=0;
 function Peonplan(x0, y0, xf, yf, side){
-  alert("Peonplan");
   var x0s = x0;
   var y0s = y0;
   var xfs = xf;
