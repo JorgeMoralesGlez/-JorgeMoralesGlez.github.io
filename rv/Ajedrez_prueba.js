@@ -355,6 +355,86 @@ function Caballoplan(x0, y0, xf, yf, side){
 			}
 		} 
   }
+  else if(div4==1 && div3==2)
+  {
+	x0=parseInt(piezaActual.position.x);
+	        if(xf!=x0){
+			piezaActual.position.x+=1;
+		}else if(xf==x0){
+			y0=parseInt(piezaActual.position.y);
+			if(yf!=y0)
+			{
+				piezaActual.position.y+=1;	
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				resetSelect();
+				animar=0;
+				cuyo=1;
+			}
+		} 
+  }
+  else if(div4==1 && div3==-2)
+  {
+	x0=parseInt(piezaActual.position.x);
+	        if(xf!=x0){
+			piezaActual.position.x-=1;
+		}else if(xf==x0){
+			y0=parseInt(piezaActual.position.y);
+			if(yf!=y0)
+			{
+				piezaActual.position.y+=1;	
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				resetSelect();
+				animar=0;
+				cuyo=1;
+			}
+		} 
+  }
+  else if(div4==-1 && div3==2)
+  {
+	x0=parseInt(piezaActual.position.x);
+	        if(xf!=x0){
+			piezaActual.position.x+=1;
+		}else if(xf==x0){
+			y0=parseInt(piezaActual.position.y);
+			if(yf!=y0)
+			{
+				piezaActual.position.y-=1;	
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				resetSelect();
+				animar=0;
+				cuyo=1;
+			}
+		} 
+  }
+  else if(div4==-1 && div3==-2)
+  {
+	x0=parseInt(piezaActual.position.x);
+	        if(xf!=x0){
+			piezaActual.position.x-=1;
+		}else if(xf==x0){
+			y0=parseInt(piezaActual.position.y);
+			if(yf!=y0)
+			{
+				piezaActual.position.y-=1;	
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno prro");
+				resetSelect();
+				animar=0;
+				cuyo=1;
+			}
+		} 
+  }
   else
   {
 	resetSelect();
