@@ -2075,11 +2075,11 @@ function setup(){
   reyMalla1 = new Rey(TEXTURAS.ceramicanegra);
 
   reyMalla.rotateX(Math.PI/2);
-  reyMalla.translateY(3);
+  reyMalla.position.z(3);
   reyMalla.translateX(30);
   
   reyMalla1.rotateX(Math.PI/2);
-  reyMalla1.translateY(3);
+  reyMalla1.position.z(3);
   reyMalla1.translateZ(-70);
   reyMalla1.translateX(30);  
   	//REINAS
