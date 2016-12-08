@@ -281,7 +281,7 @@ function Caballoplan(x0, y0, xf, yf, side){
 	        if(xf!=x0){
 			piezaActual.position.x+=1;
 		}else if(xf==x0){
-			x0=parseInt(piezaActual.position.y);
+			y0=parseInt(piezaActual.position.y);
 			if(yf!=y0)
 			{
 				piezaActual.position.y+=1;	
