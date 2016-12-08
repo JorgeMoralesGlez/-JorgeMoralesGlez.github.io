@@ -555,7 +555,7 @@ function Reyplan(x0, y0, xf, yf, side){
 	  }else if(xf>x0 && yf<y0){
 	     if(div1==div4)
 	     {
-		     x0=parseInt(piezaActual.position.x);{
+		     x0=parseInt(piezaActual.position.x);
 				if(xf!=x0){
 					piezaActual.position.x+=1;
 					piezaActual.position.y-=1;
