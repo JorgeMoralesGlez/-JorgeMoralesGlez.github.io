@@ -2631,25 +2631,30 @@ function TexturaSetup(){
 
 //------------------------------------------------------------------------------------------------------MOVIMIENTO
 function teclado(){
-	window.onload=function(){document.onkeydown=desplazar};
-      function desplazar(objeto){
-      var tecla = objeto.which;
-          switch (tecla){
-              case 37 : 
-                  select.translateZ(10);
-                  break;
-              case 38 : 
-                  select.translateX(-10);
-                  break;
-              case 39 :  
-                  select.translateZ(-10);
-                  break;
-              case 40 : 
-                  select.translateX(10);
-                  break;
-	      case 13 :
-		  cuyo=cuyo+1;
-		}
+      if(reyMalla.position.z==5000 || reyMalla1.position.z==5000)){
+	      alert("Se acabo el juego")
+      }
+      else{   
+	      window.onload=function(){document.onkeydown=desplazar};
+	      function desplazar(objeto){
+	      var tecla = objeto.which;
+		  switch (tecla){
+		      case 37 : 
+			  select.translateZ(10);
+			  break;
+		      case 38 : 
+			  select.translateX(-10);
+			  break;
+		      case 39 :  
+			  select.translateZ(-10);
+			  break;
+		      case 40 : 
+			  select.translateX(10);
+			  break;
+		      case 13 :
+			  cuyo=cuyo+1;
+			}
+	      }
       }
 }
 
