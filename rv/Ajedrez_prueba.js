@@ -1241,7 +1241,7 @@ function Peonplan(x0, y0, xf, yf, side){
   var div2 = (y0-yf)/10;
   var div3 = (xf-x0)/10;
   var div4 = (yf-y0)/10;
-  if(piezaActual.side!=piezaPosterior.side && piezaPosterior.side!=2)
+  if(piezaActual.side!=piezaPosterior.side && piezaPosterior.side!=2 && (Math.abs(div1)>1 || Math.abs(div2)>1 || Math.abs(div3)>1 || Math.abs(div4)>1))
   {
 	piezaPosterior.position.z=5000; 
 	if(xf>x0 && yf>y0){
