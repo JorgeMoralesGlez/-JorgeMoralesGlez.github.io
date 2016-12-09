@@ -1,25 +1,45 @@
-//Iluminación
-var iluminacion= new THREE.PointLight(0xFFFFFF);
-iluminacion.position.y= 40;
-iluminacion.position.x= 40;
-iluminacion.position.z= 50;
+//------------------------------------------------------------------------------------------------AGENTES - ENVIRONMENT
+function Agent(x=0,y=0){
+  THREE.Object3D.call(this);
+  this.position.x = x;
+  this.position.y = y;
+}
 
-//Seleccionador
-var base1selec = new THREE.CylinderGeometry(2,2,6,6,6,false);
-var base2selec = new THREE.CylinderGeometry(4,0,4,4,4,false);
-base2selec.translate(0,-4,0);
-var base1selec = new THREE.Mesh(base1selec);
-var base2selec= new THREE.Mesh(base2selec);
-var seleccionadorForma = new THREE.Geometry();
-seleccionadorForma.merge(base1selec.geometry, base1selec.matrix);
-seleccionadorForma.merge(base2selec.geometry, base2selec.matrix);
-var material= new THREE.MeshBasicMaterial({color: 0xB40100});
-var seleccionadorMalla = new THREE.Mesh(seleccionadorForma, material);
-seleccionadorMalla.rotateX(Math.PI/2);
-seleccionadorMalla.translateY(30);
-var posicionador= new THREE.MeshBasicMaterial({color: 0x0096D6});
+Agent.prototype = new THREE.Object3D();
 
-var camara,escena,renderizador, valor, posicionadorMalla, auxx, auxy;
+Agent.prototype.sense = function(environment){};
+Agent.prototype.plan = function(environment) {};
+Agent.prototype.act = function(environment) {};
+
+function Environment(){
+  THREE.Scene.call(this);
+}
+
+Environment.prototype = new THREE.Scene();
+
+Environment.prototype.sense = function(){
+  for(var i=0; i<this.children.length;i++){
+    if(this.children[i].sense !== undefined)
+      this.children[i].sense(this);
+  }
+};
+
+Environment.prototype.plan = function(){
+  for(var i=0; i < this.children.length; i++){
+    if(this.children[i].plan !== undefined )
+      this.children[i].plan(this);
+  }
+};
+
+Environment.prototype.act = function(){
+  for(var i=0; i < this.children.length; i++){
+    if(this.children[i].act !== undefined )
+      this.children[i].act(this);
+  }
+};
+
+
+//------------------------------------------------------------------------------------------------------VARIABLES GLOBALES
 var torreMalla, torreMalla1, torreMalla2, torreMalla3;
 var alfilMalla, alfilMalla1, alfilMalla2, alfilMalla3;
 var reyMalla, reyMalla1;
@@ -31,22 +51,14 @@ var vacio1, vacio2, vacio3, vacio4, vacio5, vacio6, vacio7, vacio8, vacio9, vaci
 var vacio12, vacio13, vacio14, vacio15, vacio16, vacio17, vacio18, vacio19, vacio11, vacio20;
 var vacio21, vacio22, vacio23, vacio24, vacio25, vacio26, vacio27, vacio28, vacio29, vacio30;
 var vacio31, vacio32, vacio33, vacio34, vacio35, vacio36;
+var valor, xselect, yselect;
+var auxx;
+var auxy;
 
-function setup(){
-  //Texturas
-  var textura1 = new THREE.TextureLoader().load('marnol_blanco.jpg');
-  var textura2 = new THREE.TextureLoader().load('marnol_cafe.jpg');
-  var textura3 = new THREE.TextureLoader().load('marnol_negro.jpg');
-  var textura4 = new THREE.TextureLoader().load('ceramica_blanca.jpg');
-  var textura5 = new THREE.TextureLoader().load('ceramica_negra.jpg');
-  var marmolblanco = new THREE.MeshLambertMaterial({map:textura1});
-  var marmolcafe = new THREE.MeshLambertMaterial({map:textura2});
-  var marmolnegro = new THREE.MeshLambertMaterial({map:textura3});
-  var ceramicablanca = new THREE.MeshLambertMaterial({map:textura4});
-  var ceramicanegra = new THREE.MeshLambertMaterial({map:textura5});
 
-  
-  //Torres
+//--------------------------------------------------------------------------------------------------------TORRE
+function Torre(textura){ 
+  Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
   var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
   var base3Forma = new THREE.CylinderGeometry(3,4,2,20,2,false);
@@ -95,7 +107,6 @@ function setup(){
   pico3.translate(0,12,0);
   pico4.translate(0,12,0);
   
-
   var base1Malla = new THREE.Mesh(base1Forma);
   var base2Malla= new THREE.Mesh(base2Forma);
   var base3Malla= new THREE.Mesh(base3Forma);
@@ -118,29 +129,614 @@ function setup(){
   torreForma.merge(pico2Malla.geometry, pico2Malla.matrix);
   torreForma.merge(pico3Malla.geometry, pico3Malla.matrix);
   torreForma.merge(pico4Malla.geometry, pico4Malla.matrix);
-  //var material= new THREE.MeshNormalMaterial();
-  torreMalla = new THREE.Mesh(torreForma, ceramicablanca);
-  torreMalla1 = new THREE.Mesh(torreForma, ceramicanegra);
-  torreMalla2 = new THREE.Mesh(torreForma, ceramicanegra);
-  torreMalla3 = new THREE.Mesh(torreForma, ceramicablanca);
-  
-  torreMalla.rotateX(Math.PI/2);
-  torreMalla.translateY(3);
+  this.add(new THREE.Mesh(torreForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.castShadow=true;
+  this.receiveShadow=true;  
+  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
+  this.pieizq= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.pieder= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.add(this.pieizq,this.pieder);
 
-  torreMalla1.rotateX(Math.PI/2);
-  torreMalla1.translateY(3);
-  torreMalla1.translateZ(-70);
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+	    this.pieizq.position.x=4;
+	    this.pieder.position.x=-4;
+	    this.pieizq.position.z=-2;
+	    this.pieder.position.z=-2;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+	    this.pieizq.position.x=-4;
+	    this.pieder.position.x=4;
+	    this.pieizq.position.z=2;
+	    this.pieder.position.z=2;
+    }
+}
+Torre.prototype=new Agent();
 
-  torreMalla2.rotateX(Math.PI/2);
-  torreMalla2.translateY(3);
-  torreMalla2.translateZ(-70);
-  torreMalla2.translateX(70);
-  
-  torreMalla3.rotateX(Math.PI/2);
-  torreMalla3.translateY(3);
-  torreMalla3.translateX(70);
-  
-  //Rey
+var i, j, k, l;
+function Torreplan(x0, y0, xf, yf, side){
+  x0s = x0;
+  y0s = y0;
+  xfs = xf;
+  yfs = yf;
+  x0 = parseInt(x0);
+  y0 = parseInt(y0);
+  xf = parseInt(xf);
+  yf = parseInt(yf);
+  side = parseInt(side);
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000;  
+	if(x0==xf && y0<=yf){
+	y0=parseInt(piezaActual.position.y);
+	if(yf!=y0){	
+		piezaActual.position.y+=1;
+		piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  		piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+	}else if(yf==y0){
+		valor[xfs][yfs]= piezaActual;
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno  ");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+		}
+	}else if(x0==xf && y0>=yf){
+	y0=parseInt(piezaActual.position.y);
+	if(yf!=y0){
+		piezaActual.position.y-=1;
+		piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  		piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+	}else if(yf==y0){
+		valor[xfs][yfs]= piezaActual;
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno  ");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+	}else if(x0<=xf && y0==yf){
+	x0=parseInt(piezaActual.position.x);
+	if(xf!=x0){
+		piezaActual.position.x+=1;
+		piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  		piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+	}else if(xf==x0){
+		valor[xfs][yfs]= piezaActual;
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno  ");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+	}else if(x0>=xf && y0==yf){
+	x0=parseInt(piezaActual.position.x);
+	if(xf!=x0){
+		piezaActual.position.x-=1;
+		piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  		piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+	}else if(xf==x0){
+		valor[xfs][yfs]= piezaActual;
+		valor[x0s][y0s]= piezaPosterior;
+		alert("Terminó tu turno  ");
+		resetSelect();
+		animar=0;
+		cuyo=1;
+	}
+	}else{
+	resetSelect();	  
+	animar=0;
+	cuyo=1;	
+	alert("nosepuede");
+	flag=flag+1;
+	}
+  }
+  else{
+	resetSelect();
+	animar=0;
+	cuyo=1;  
+	flag=flag+1;
+	alert("No se puede");
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------CABALLO
+function Caballo(textura){ 
+  Agent.call(this);
+  var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
+  var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
+  var base3Forma = new THREE.CylinderGeometry(3,4,2,20,2,false);
+  var troncoForma = new THREE.CylinderGeometry(2,2,6,20,6,false);
+  var cubierta1Forma = new THREE.CylinderGeometry(4,3,2,20,2,false);
+  var cubierta2Forma = new THREE.CylinderGeometry(3,3,4,20,3,false);
+  var cabezaForma = new THREE.CylinderGeometry(.25,3,10,20,2,false);
+
+  base2Forma.translate(0,1,0);
+  base3Forma.translate(0,2,0);
+  troncoForma.translate(2,4,0);
+  troncoForma.rotateZ(Math.PI/8);
+  cubierta1Forma.translate(0,8,0);
+  cubierta2Forma.translate(0,10,0);
+  cabezaForma.rotateZ(-Math.PI/2);
+  cabezaForma.translate(5,12,0);
+
+  var base1Malla = new THREE.Mesh(base1Forma);
+  var base2Malla= new THREE.Mesh(base2Forma);
+  var base3Malla= new THREE.Mesh(base3Forma);
+  var toncoMalla= new THREE.Mesh(troncoForma);
+  var cubierta1Malla= new THREE.Mesh(cubierta1Forma);
+  var cubierta2Malla= new THREE.Mesh(cubierta2Forma);
+  var cabezaMalla= new THREE.Mesh(cabezaForma);
+
+  var caballoForma = new THREE.Geometry();
+  caballoForma.merge(base1Malla.geometry, base1Malla.matrix);
+  caballoForma.merge(base2Malla.geometry, base2Malla.matrix);
+  caballoForma.merge(base3Malla.geometry, base3Malla.matrix);
+  caballoForma.merge(toncoMalla.geometry, toncoMalla.matrix);
+  caballoForma.merge(cubierta1Malla.geometry, cubierta1Malla.matrix);
+  caballoForma.merge(cubierta2Malla.geometry, cubierta2Malla.matrix);
+  caballoForma.merge(cabezaMalla.geometry, cabezaMalla.matrix);
+  this.add(new THREE.Mesh(caballoForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.castShadow=true;
+  this.receiveShadow=true;  
+  this.sensor = new THREE.Raycaster(this.position, new THREE.Vector3(1,0,0));
+  this.pieizq= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.pieder= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.add(this.pieizq,this.pieder);
+
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+	    this.pieizq.position.z=4;
+	    this.pieder.position.z=-4;
+	    this.pieizq.position.x=2;
+	    this.pieder.position.x=2;
+	    this.pieizq.rotateY(Math.PI/2);
+	    this.pieder.rotateY(Math.PI/2);
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+	    this.pieizq.position.z=-4;
+	    this.pieder.position.z=4;
+	    this.pieizq.position.x=2;
+	    this.pieder.position.x=2;
+	    this.pieizq.rotateY(Math.PI/2);
+	    this.pieder.rotateY(Math.PI/2);
+    }
+}
+Caballo.prototype=new Agent();
+
+function Caballoplan(x0, y0, xf, yf, side){
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	  if(div4==2 && div3==1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==2 && div3==-1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-2 && div3==1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-2 && div3==-1)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==1 && div3==2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==1 && div3==-2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-1 && div3==2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else if(div4==-1 && div3==-2)
+	  {
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x-=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				y0=parseInt(piezaActual.position.y);
+				if(yf!=y0)
+				{
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;
+				}
+			} 
+	  }
+	  else
+	  {
+		resetSelect();
+		animar=0;
+		cuyo=1;
+		flag=flag+1;
+		alert("No se puede");
+	  }
+  }
+  else{
+	resetSelect();
+	animar=0;
+	cuyo=1;  
+	flag=flag+1;
+	alert("No se puede");  
+  }
+}
+
+//--------------------------------------------------------------------------------------------------------ALFIL
+function Alfil(textura){
+  Agent.call(this);
+  var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
+  var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
+  var troncoForma = new THREE.CylinderGeometry(1.5,3,12,12,12,false);
+  var detalle1Forma = new THREE.CylinderGeometry(3.5,3.5,.5,20,.5,false);
+  var detalle2Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
+  var detalle3Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
+  var cabeza1Forma = new THREE.SphereGeometry(2);
+  var cabeza2Forma = new THREE.SphereGeometry(.5);
+
+  base1Forma.translate(0,1,0);
+  base2Forma.translate(0,2,0);
+  troncoForma.translate(0,8,0);
+  cabeza1Forma.translate(0,15,0);
+  cabeza2Forma.translate(0,17,0);
+  detalle1Forma.translate(0,11,0);
+  detalle2Forma.translate(0,10.7,0);
+  detalle3Forma.translate(0,11.5,0);
+
+  var base1Malla = new THREE.Mesh(base1Forma);
+  var base2Malla= new THREE.Mesh(base2Forma);
+  var troncoMalla= new THREE.Mesh(troncoForma);
+  var cabeza1Malla= new THREE.Mesh(cabeza1Forma);
+  var cabeza2Malla= new THREE.Mesh(cabeza2Forma);
+  var detalle1Malla= new THREE.Mesh(detalle1Forma);
+  var detalle2Malla= new THREE.Mesh(detalle2Forma);
+  var detalle3Malla= new THREE.Mesh(detalle3Forma);
+
+  var alfilForma = new THREE.Geometry();
+  alfilForma.merge(base1Malla.geometry, base1Malla.matrix);
+  alfilForma.merge(base2Malla.geometry, base2Malla.matrix);
+  alfilForma.merge(troncoMalla.geometry, troncoMalla.matrix);
+  alfilForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
+  alfilForma.merge(cabeza2Malla.geometry, cabeza2Malla.matrix);
+  alfilForma.merge(detalle1Malla.geometry, detalle1Malla.matrix);
+  alfilForma.merge(detalle2Malla.geometry, detalle2Malla.matrix);
+  alfilForma.merge(detalle3Malla.geometry, detalle3Malla.matrix);
+  this.add(new THREE.Mesh(alfilForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.castShadow=true;
+  this.receiveShadow=true;  
+  this.pieizq= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.pieder= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.add(this.pieizq,this.pieder);
+
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+	    this.pieizq.position.x=4;
+	    this.pieder.position.x=-4;
+	    this.pieizq.position.z=-2;
+	    this.pieder.position.z=-2;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+	    this.pieizq.position.x=-4;
+	    this.pieder.position.x=4;
+	    this.pieizq.position.z=2;
+	    this.pieder.position.z=2;
+    }
+}
+Alfil.prototype=new Agent();
+
+function Alfilplan(x0, y0, xf, yf, side){
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	if(xf>x0 && yf>y0){
+	if(div3==div4)
+	{
+
+		x0=parseInt(piezaActual.position.x);
+		if(xf!=x0){
+			piezaActual.position.x+=1;
+			piezaActual.position.y+=1;
+			piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  			piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+		}else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+			valor[x0s][y0s]= piezaPosterior;
+			alert("Terminó tu turno  ");
+			resetSelect();
+			animar=0;
+			cuyo=1;
+		}
+	}else
+	{
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	     
+	     flag = flag + 1;
+	     alert("nosepuede");     
+	}
+	}else if(xf>x0 && yf<y0){
+	if(div1==div4)
+	{
+
+		x0=parseInt(piezaActual.position.x);
+		if(xf!=x0){
+			piezaActual.position.x+=1;
+			piezaActual.position.y-=1;
+			piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  			piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+		}else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+			valor[x0s][y0s]= piezaPosterior;
+			alert("Terminó tu turno  ");
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			}
+	}else
+	{
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	     
+	     flag = flag + 1;
+	     alert("nosepuede");     
+	}
+	}else if(xf<x0 && yf>y0){
+	if(div1==div4)
+	{
+		x0=parseInt(piezaActual.position.x);
+		if(xf!=x0){
+			piezaActual.position.x-=1;
+			piezaActual.position.y+=1;
+			piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  			piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+		}else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+			valor[x0s][y0s]= piezaPosterior;
+			alert("Terminó tu turno  ");
+			resetSelect();
+			animar=0;
+			cuyo=1;
+		}
+	}else
+	{
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;
+	     flag = flag + 1;
+	     alert("nosepuede");     
+	}
+	}else if(xf<x0 && yf<y0){
+	if(div3==div4)
+	{
+		x0=parseInt(piezaActual.position.x);
+		if(xf!=x0){
+			piezaActual.position.x-=1;
+			piezaActual.position.y-=1;
+			piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  			piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+		}else if(xf==x0){
+			valor[xfs][yfs]= piezaActual;
+			valor[x0s][y0s]= piezaPosterior;
+			alert("Terminó tu turno  ");
+			resetSelect();
+			animar=0;
+			cuyo=1;			
+		}
+	}else
+	{
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;
+	     flag = flag + 1;
+	     alert("nosepuede");     
+	}
+	}
+	else if(x0==xf || y0==yf){
+	  resetSelect();
+	  animar=0;
+	  cuyo=1;
+	  flag = flag + 1;
+	  alert("nosepuede");
+	}
+  }
+  else
+  {
+	  resetSelect();
+	  animar=0;
+	  cuyo=1;
+	  flag = flag + 1;
+	  alert("nosepuede");  
+  }		
+}
+
+//----------------------------------------------------------------------------------------------------------REY
+function Rey(textura){
+  Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
   var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
   var base3Forma = new THREE.CylinderGeometry(2,4,10,20,10,false);
@@ -200,20 +796,230 @@ function setup(){
   reyForma.merge(cabeza3Malla.geometry, cabeza3Malla.matrix);
   reyForma.merge(cabeza4Malla.geometry, cabeza4Malla.matrix);
   reyForma.merge(cabeza5Malla.geometry, cabeza5Malla.matrix);
-  //var material= new THREE.MeshNormalMaterial();
-  reyMalla = new THREE.Mesh(reyForma, ceramicablanca);
-  reyMalla1 = new THREE.Mesh(reyForma, ceramicanegra);
+  this.add(new THREE.Mesh(reyForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.castShadow=true;
+  this.receiveShadow=true;
+  this.pieizq= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.pieder= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.add(this.pieizq,this.pieder);
 
-  reyMalla.rotateX(Math.PI/2);
-  reyMalla.translateY(3);
-  reyMalla.translateX(30);
-  
-  reyMalla1.rotateX(Math.PI/2);
-  reyMalla1.translateY(3);
-  reyMalla1.translateZ(-70);
-  reyMalla1.translateX(30);  
-  
-  //Reina
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+	    this.pieizq.position.x=4;
+	    this.pieder.position.x=-4;
+	    this.pieizq.position.z=-2;
+	    this.pieder.position.z=-2;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+	    this.pieizq.position.x=-4;
+	    this.pieder.position.x=4;
+	    this.pieizq.position.z=2;
+	    this.pieder.position.z=2;
+    }
+}
+Rey.prototype=new Agent();
+
+function Reyplan(x0, y0, xf, yf, side){
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	  if(Math.abs(div1)>1 || Math.abs(div2)>1 || Math.abs(div3)>1 || Math.abs(div4)>1) {
+		  resetSelect();
+		  animar=0;
+		  cuyo=1;	  
+		  flag = flag + 1;
+		  alert("No se puede");
+	  }
+	  else {
+		  if(x0==xf && y0<=yf){
+		     y0=parseInt(piezaActual.position.y); 
+			if(yf!=y0){	
+			  piezaActual.position.y+=1;
+			  piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  			  piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+			}else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno  ");
+				resetSelect();
+				animar=0;
+				cuyo=1;			
+				}
+		  }
+		  else if(x0==xf && y0>=yf){
+			y0=parseInt(piezaActual.position.y);
+			     if(yf!=y0){
+				piezaActual.position.y-=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+			     }else if(yf==y0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno  ");
+				resetSelect();
+				animar=0;
+				cuyo=1;	
+				}
+		  }
+		  else if(x0<=xf && y0==yf){
+			x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;					
+					}
+		  }
+		  else if(x0>=xf && y0==yf){
+			x0=parseInt(piezaActual.position.x);
+			     if(xf!=x0){
+				piezaActual.position.x-=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			     }else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if(xf>x0 && yf>y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y+=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf>x0 && yf<y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y-=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf<x0 && yf>y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y+=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		  }else if(xf<x0 && yf<y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y-=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+		}
+	  }
+  }
+  else{
+	     resetSelect();
+	     animar=0;
+	     cuyo=1;	
+	     flag = flag + 1;
+	     alert("nosepuede");  
+  }
+}
+
+//--------------------------------------------------------------------------------------------------------------REINA
+function Reina(textura){
+  Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
   var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
   var base3Forma = new THREE.CylinderGeometry(2,4,10,20,10,false);
@@ -300,81 +1106,222 @@ function setup(){
   reinaForma.merge(cubierta1Malla.geometry, cubierta1Malla.matrix);
   reinaForma.merge(cubierta2Malla.geometry, cubierta2Malla.matrix);
   reinaForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
-  //var material= new THREE.MeshNormalMaterial();
-  reinaMalla = new THREE.Mesh(reinaForma, ceramicablanca);
-  reinaMalla1 = new THREE.Mesh(reinaForma, ceramicanegra);
+  this.add(new THREE.Mesh(reinaForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.castShadow=true;
+  this.receiveShadow=true;
+  this.pieizq= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.pieder= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.add(this.pieizq,this.pieder);
 
-  reinaMalla.rotateX(Math.PI/2);
-  reinaMalla.translateY(3);
-  reinaMalla.translateX(40);
-  
-  reinaMalla1.rotateX(Math.PI/2);
-  reinaMalla1.translateY(3);
-  reinaMalla1.translateX(40);
-  reinaMalla1.translateZ(-70);
-  
-  //Alfil
- var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
-  var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
-  var troncoForma = new THREE.CylinderGeometry(1.5,3,12,12,12,false);
-  var detalle1Forma = new THREE.CylinderGeometry(3.5,3.5,.5,20,.5,false);
-  var detalle2Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
-  var detalle3Forma = new THREE.CylinderGeometry(2.5,2.5,.3,20,.3,false);
-  var cabeza1Forma = new THREE.SphereGeometry(2);
-  var cabeza2Forma = new THREE.SphereGeometry(.5);
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+	    this.pieizq.position.x=4;
+	    this.pieder.position.x=-4;
+	    this.pieizq.position.z=-2;
+	    this.pieder.position.z=-2;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+	    this.pieizq.position.x=-4;
+	    this.pieder.position.x=4;
+	    this.pieizq.position.z=2;
+	    this.pieder.position.z=2;
+    }
+}
+Reina.prototype=new Agent();
 
-  base1Forma.translate(0,1,0);
-  base2Forma.translate(0,2,0);
-  troncoForma.translate(0,8,0);
-  cabeza1Forma.translate(0,15,0);
-  cabeza2Forma.translate(0,17,0);
-  detalle1Forma.translate(0,11,0);
-  detalle2Forma.translate(0,10.7,0);
-  detalle3Forma.translate(0,11.5,0);
+function Reinaplan(x0, y0, xf, yf, side){
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
+  if(piezaActual.side!=piezaPosterior.side)
+  {
+	piezaPosterior.position.z=5000; 
+	if(x0==xf && y0<=yf){
+	     y0=parseInt(piezaActual.position.y); 
+		if(yf!=y0){	
+		  piezaActual.position.y+=1;
+		  piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  		  piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+		}else if(yf==y0){
+			valor[xfs][yfs]= piezaActual;
+			valor[x0s][y0s]= piezaPosterior;
+			alert("Terminó tu turno  ");
+			resetSelect();
+			animar=0;
+			cuyo=1;			
+			}
+	}
+	else if(x0==xf && y0>=yf){
+		y0=parseInt(piezaActual.position.y);
+		     if(yf!=y0){
+			piezaActual.position.y-=1;
+			piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  			piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+		     }else if(yf==y0){
+			valor[xfs][yfs]= piezaActual;
+			valor[x0s][y0s]= piezaPosterior;
+			alert("Terminó tu turno  ");
+			resetSelect();
+			animar=0;
+			cuyo=1;	
+			}
+	}
+	else if(x0<=xf && y0==yf){
+		x0=parseInt(piezaActual.position.x);
+			if(xf!=x0){
+				piezaActual.position.x+=1;
+				piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  				piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+			}else if(xf==x0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno  ");
+				resetSelect();
+				animar=0;
+				cuyo=1;					
+				}
+	}
+	else if(x0>=xf && y0==yf){
+		x0=parseInt(piezaActual.position.x);
+		     if(xf!=x0){
+			piezaActual.position.x-=1;
+			piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.x));
+  			piezaActual.pieder.rotateX(Math.cos(piezaActual.position.x));
+		     }else if(xf==x0){
+				valor[xfs][yfs]= piezaActual;
+				valor[x0s][y0s]= piezaPosterior;
+				alert("Terminó tu turno  ");
+				resetSelect();
+				animar=0;
+				cuyo=1;	
+				}
+	}
+	else if(xf>x0 && yf>y0){
+	     if(div3==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	 }else if(xf>x0 && yf<y0){
+	     if(div1==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x+=1;
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf<x0 && yf>y0){
+	     if(div1==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x-=1;
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }else if(xf<x0 && yf<y0){
+	     if(div3==div4)
+	     {
+		     x0=parseInt(piezaActual.position.x);
+				if(xf!=x0){
+					piezaActual.position.x-=1;
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(xf==x0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+	     }else
+	     {
+		     resetSelect();
+		     animar=0;
+		     cuyo=1;	
+		     flag = flag + 1;
+		     alert("nosepuede");     
+	     }
+	  }
+  }
+  else
+  {
+     resetSelect();
+     animar=0;
+     cuyo=1;	
+     flag = flag + 1;
+     alert("nosepuede");  	  
+  }
+}
 
-  var base1Malla = new THREE.Mesh(base1Forma);
-  var base2Malla= new THREE.Mesh(base2Forma);
-  var troncoMalla= new THREE.Mesh(troncoForma);
-  var cabeza1Malla= new THREE.Mesh(cabeza1Forma);
-  var cabeza2Malla= new THREE.Mesh(cabeza2Forma);
-  var detalle1Malla= new THREE.Mesh(detalle1Forma);
-  var detalle2Malla= new THREE.Mesh(detalle2Forma);
-  var detalle3Malla= new THREE.Mesh(detalle3Forma);
-
-  var alfilForma = new THREE.Geometry();
-  alfilForma.merge(base1Malla.geometry, base1Malla.matrix);
-  alfilForma.merge(base2Malla.geometry, base2Malla.matrix);
-  alfilForma.merge(troncoMalla.geometry, troncoMalla.matrix);
-  alfilForma.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
-  alfilForma.merge(cabeza2Malla.geometry, cabeza2Malla.matrix);
-  alfilForma.merge(detalle1Malla.geometry, detalle1Malla.matrix);
-  alfilForma.merge(detalle2Malla.geometry, detalle2Malla.matrix);
-  alfilForma.merge(detalle3Malla.geometry, detalle3Malla.matrix);
-  //var material= new THREE.MeshNormalMaterial();
-  alfilMalla = new THREE.Mesh(alfilForma, ceramicablanca);
-  alfilMalla1 = new THREE.Mesh(alfilForma, ceramicanegra);
-  alfilMalla2 = new THREE.Mesh(alfilForma, ceramicablanca);
-  alfilMalla3 = new THREE.Mesh(alfilForma, ceramicanegra);
-  
-  alfilMalla.rotateX(Math.PI/2);
-  alfilMalla.translateY(3);
-  alfilMalla.translateX(20);
-  
-  alfilMalla1.rotateX(Math.PI/2);
-  alfilMalla1.translateY(3);
-  alfilMalla1.translateX(20);
-  alfilMalla1.translateZ(-70);
-  
-  alfilMalla2.rotateX(Math.PI/2);
-  alfilMalla2.translateY(3);
-  alfilMalla2.translateX(50);
-  
-  alfilMalla3.rotateX(Math.PI/2);
-  alfilMalla3.translateY(3);
-  alfilMalla3.translateX(50);
-  alfilMalla3.translateZ(-70);
-  
-  //Peon
+//-------------------------------------------------------------------------------------------------------PEON
+function Peon(textura){
+  Agent.call(this);
   var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
   var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
   var troncoForma = new THREE.CylinderGeometry(1.5,3,7,7,7,false);
@@ -394,22 +1341,1026 @@ function setup(){
   peonForma.merge(base2Malla.geometry, base2Malla.matrix);
   peonForma.merge(troncoMalla.geometry, troncoMalla.matrix);
   peonForma.merge(cabezaMalla.geometry, cabezaMalla.matrix);
-  peonMalla = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla1 = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla2 = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla3 = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla4 = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla5 = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla6 = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla7 = new THREE.Mesh(peonForma, ceramicablanca);
-  peonMalla8 = new THREE.Mesh(peonForma, ceramicanegra);
-  peonMalla9 = new THREE.Mesh(peonForma, ceramicanegra);
-  peonMalla10 = new THREE.Mesh(peonForma, ceramicanegra);
-  peonMalla11 = new THREE.Mesh(peonForma, ceramicanegra);
-  peonMalla12 = new THREE.Mesh(peonForma, ceramicanegra);
-  peonMalla13 = new THREE.Mesh(peonForma, ceramicanegra);
-  peonMalla14 = new THREE.Mesh(peonForma, ceramicanegra);
-  peonMalla15 = new THREE.Mesh(peonForma, ceramicanegra);
+  this.add(new THREE.Mesh(peonForma, new THREE.MeshLambertMaterial({map:textura})));
+  this.castShadow=true;
+  this.receiveShadow=true;  
+  this.pieizq= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.pieder= new THREE.Mesh(new THREE.BoxGeometry(2,2,6),new THREE.MeshBasicMaterial({color: 0x99CCFF}));
+  this.add(this.pieizq,this.pieder);
+
+  if(textura===TEXTURAS.ceramicablanca){
+	    this.side=1;
+	    this.pieizq.position.x=4;
+	    this.pieder.position.x=-4;
+	    this.pieizq.position.z=-2;
+	    this.pieder.position.z=-2;
+    }
+    else if(textura===TEXTURAS.ceramicanegra){
+	    this.side=0;
+	    this.pieizq.position.x=-4;
+	    this.pieder.position.x=4;
+	    this.pieizq.position.z=2;
+	    this.pieder.position.z=2;
+    }
+}
+Peon.prototype=new Agent();
+
+var p=0;
+var p1=0;
+var p2=0;
+var p3=0;
+var p4=0;
+var p5=0;
+var p6=0;
+var p7=0;
+var p8=0;
+var p9=0;
+var p10=0;
+var p11=0;
+var p12=0;
+var p13=0;
+var p14=0;
+var p15=0;
+function Peonplan(x0, y0, xf, yf, side){
+  var x0s = x0;
+  var y0s = y0;
+  var xfs = xf;
+  var yfs = yf;
+  var x0 = parseInt(x0);
+  var y0 = parseInt(y0);
+  var xf = parseInt(xf);
+  var yf = parseInt(yf);
+  var side = parseInt(side);
+  var div1 = (x0-xf)/10;
+  var div2 = (y0-yf)/10;
+  var div3 = (xf-x0)/10;
+  var div4 = (yf-y0)/10;
+  if(piezaActual.side!=piezaPosterior.side && piezaPosterior.side!=2)
+  {
+	piezaPosterior.position.z=5000; 
+	if(xf>x0 && yf>y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y+=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+	}else if(xf>x0 && yf<y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x+=1;
+						piezaActual.position.y-=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+	}else if(xf<x0 && yf>y0){
+		     if(div1==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y+=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+	}else if(xf<x0 && yf<y0){
+		     if(div3==div4)
+		     {
+			     x0=parseInt(piezaActual.position.x);
+					if(xf!=x0){
+						piezaActual.position.x-=1;
+						piezaActual.position.y-=1;
+						piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  						piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+					}else if(xf==x0){
+						valor[xfs][yfs]= piezaActual;
+						valor[x0s][y0s]= piezaPosterior;
+						alert("Terminó tu turno  ");
+						resetSelect();
+						animar=0;
+						cuyo=1;	
+						}
+		     }else
+		     {
+			     resetSelect();
+			     animar=0;
+			     cuyo=1;	
+			     flag = flag + 1;
+			     alert("nosepuede");     
+		     }
+	}
+  }
+  else if(piezaPosterior.side==2)
+  {
+	  if (Math.abs(div1)>2 || Math.abs(div2)>2 || Math.abs(div3)>2 || Math.abs(div4)>2 || x0!=xf){
+		  flag=flag+1;
+		  resetSelect();
+		  animar=0;
+		  cuyo=1;	
+		  alert("No se puede");
+	  }
+	  else{
+		  if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla) && div4==1){
+			p=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla) && div4==2 && p==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;	
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p1=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla1) && div4==1){
+			p1=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					} 
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla1) && div4==2 && p1==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;	
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p2=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla2) && div4==1){
+			p2=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla2) && div4==2 && p2==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;	  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p3=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla3) && div4==1){
+			p3=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla3) && div4==2 && p3==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p4=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla4) && div4==1){
+			p4=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla4) && div4==2 && p4==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p5=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla5) && div4==1){
+			p5=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla5) && div4==2 && p5==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p6=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla6) && div4==1){
+			p6=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla6) && div4==2 && p6==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p7=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla7) && div4==1){
+			p7=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y+=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla7) && div4==2 && p7==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p8=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla8) && div2==1){
+			p8=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla8) && div2==2 && p8==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p9=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla9) && div2==1){
+			p9=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla9) && div2==2 && p9==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p10=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla10) && div2==1){
+			p10=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla10) && div2==2 && p10==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p11=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla11) && div2==1){
+			p11=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla11) && div2==2 && p11==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;  
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p12=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla12) && div2==1){
+			p12=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					} 
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla12) && div2==2 && p12==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p13=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla13) && div2==1){
+			p13=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla13) && div2==2 && p13==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p14=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla14) && div2==1){
+			p14=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla14) && div2==2 && p14==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==0){
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					p15=1;
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}
+		  }
+		  else if((valor[x0s][y0s]==peonMalla15) && div2==1){
+			p15=1;
+			y0=parseInt(piezaActual.position.y);
+				if(yf!=y0){	
+					piezaActual.position.y-=1;
+					piezaActual.pieizq.rotateX(Math.sin(piezaActual.position.y));
+  					piezaActual.pieder.rotateX(Math.cos(piezaActual.position.y));
+				}else if(yf==y0){
+					valor[xfs][yfs]= piezaActual;
+					valor[x0s][y0s]= piezaPosterior;
+					alert("Terminó tu turno  ");
+					resetSelect();
+					animar=0;
+					cuyo=1;	
+					}	  
+		  }
+		  else if ((valor[x0s][y0s]==peonMalla15) && div2==2 && p15==1){
+			resetSelect();
+			animar=0;
+			cuyo=1;
+			alert("No se puede");
+			flag = flag + 1;
+		  }
+	  }
+  }
+  else{
+	resetSelect();
+	animar=0;
+	cuyo=1;
+	alert("No se puede");
+	flag = flag + 1;	  
+  }
+}
+	
+//-----------------------------------------------------------------------------------------------------------VACIO
+function Vacio(textura){
+  Agent.call(this);
+  var base1Forma = new THREE.CylinderGeometry(5,5,1,20,1,false);
+  var base2Forma = new THREE.CylinderGeometry(4,4,1,20,1,false);
+  var troncoForma = new THREE.CylinderGeometry(1.5,3,7,7,7,false);
+  var cabezaForma = new THREE.SphereGeometry(2);
+
+  base2Forma.translate(0,1,0);
+  troncoForma.translate(0,5,0);
+  cabezaForma.translate(0,9.5,0);
+
+  var base1Malla = new THREE.Mesh(base1Forma);
+  var base2Malla= new THREE.Mesh(base2Forma);
+  var troncoMalla= new THREE.Mesh(troncoForma);
+  var cabezaMalla= new THREE.Mesh(cabezaForma);
+
+  var peonForma = new THREE.Geometry();
+  peonForma.merge(base1Malla.geometry, base1Malla.matrix);
+  peonForma.merge(base2Malla.geometry, base2Malla.matrix);
+  peonForma.merge(troncoMalla.geometry, troncoMalla.matrix);
+  peonForma.merge(cabezaMalla.geometry, cabezaMalla.matrix);
+  this.add(new THREE.Mesh(peonForma, new THREE.MeshLambertMaterial({map:textura, transparent: true, opacity: 0})));
+  this.castShadow=true;
+  this.receiveShadow=true;  
+  this.side=2;
+}
+Vacio.prototype=new Agent();
+
+
+//-----------------------------------------------------------------------------------------------------------TABLERO
+function Tablero (texturaBlanco, texturaNegro, texturaMadera){
+  var cubo= new Array();
+  var a=2;
+  for(var k=0; k<64; k++){
+      for(var i=0; i<8; i++){
+        for(var j=0; j<8; j++){
+          if(a==2){
+            cubo[k] = new THREE.Mesh( new THREE.BoxGeometry(10, 10, 4), new THREE.MeshLambertMaterial({map: texturaBlanco}) );
+            a=1;
+          }else{
+            cubo[k] = new THREE.Mesh( new THREE.BoxGeometry(10, 10, 4), new THREE.MeshLambertMaterial({map: texturaNegro}) );
+            a=2;
+          }
+         cubo[k].position.x=j*10;
+         cubo[k].position.y=i*10;
+         escena.add(cubo[k]);
+         cubo[k].receiveShadow=true;
+       }
+       if(a==2){
+            a=1;
+          }else{
+            a=2;
+          }
+      }
+  }
+  var base = new THREE.Mesh( new THREE.BoxGeometry(90, 90, 2), new THREE.MeshLambertMaterial({map: texturaMadera}) );
+  base.position.x=35;
+  base.position.y=35;
+  base.position.z=-2;
+  base.receiveShadow=true;
+  escena.add(base);
+}
+
+
+//-------------------------------------------------------------------------------------------------------SELECCIONADOR
+function Seleccionador(){
+  Agent.call(this);
+  var base1selec = new THREE.CylinderGeometry(2,2,6,6,6,false);
+  var base2selec = new THREE.CylinderGeometry(4,0,4,4,4,false);
+  base2selec.translate(0,-4,0);
+  var base1selec = new THREE.Mesh(base1selec);
+  var base2selec= new THREE.Mesh(base2selec);
+  var seleccionadorForma = new THREE.Geometry();
+  seleccionadorForma.merge(base1selec.geometry, base1selec.matrix);
+  seleccionadorForma.merge(base2selec.geometry, base2selec.matrix);
+  var material= new THREE.MeshBasicMaterial({color: 0xB40100});
+  var seleccionador = new THREE.Mesh(seleccionadorForma, material);
+  this.add(seleccionador);
+}
+Seleccionador.prototype=new Agent();
+
+
+//---------------------------------------------------------------------------------------------------------SETUP
+function setup(){
+	//CAMARA
+  var campoVision = 45;
+  var relacionAspecto = window.innerWidth / window.innerHeight;
+  var planoCercano = 1;
+  var planoLejano = 1000;
+  camara = new THREE.PerspectiveCamera(campoVision, relacionAspecto, planoCercano, planoLejano);
+  camara.position.z=150;
+  camara.position.x=100;
+  camara.position.y=40;
+  camara.lookAt(new THREE.Vector3(40,40,0));
+  camara.rotateZ(Math.PI/2);
+  setupDone=true;
+	//ILUMINACION
+  var iluminacion= new THREE.PointLight(0xFFFFFF);
+  iluminacion.position.y= 40;
+  iluminacion.position.x= 40;
+  iluminacion.position.z= 50;
+  	//TORRES
+  torreMalla = new Torre(TEXTURAS.ceramicablanca);
+  torreMalla1 = new Torre(TEXTURAS.ceramicanegra);
+  torreMalla2 = new Torre(TEXTURAS.ceramicanegra);
+  torreMalla3 = new Torre(TEXTURAS.ceramicablanca);
+  
+  torreMalla.rotateX(Math.PI/2);
+  torreMalla.translateY(3);
+
+  torreMalla1.rotateX(Math.PI/2);
+  torreMalla1.translateY(3);
+  torreMalla1.translateZ(-70);
+
+  torreMalla2.rotateX(Math.PI/2);
+  torreMalla2.translateY(3);
+  torreMalla2.translateZ(-70);
+  torreMalla2.translateX(70);
+  
+  torreMalla3.rotateX(Math.PI/2);
+  torreMalla3.translateY(3);
+  torreMalla3.translateX(70);
+
+	//CABALLOS
+  caballoMalla = new Caballo(TEXTURAS.ceramicablanca);
+  caballoMalla1 = new Caballo(TEXTURAS.ceramicanegra);
+  caballoMalla2 = new Caballo(TEXTURAS.ceramicanegra);
+  caballoMalla3 = new Caballo(TEXTURAS.ceramicablanca);
+
+  caballoMalla.rotateX(Math.PI/2);
+  caballoMalla.translateY(3);
+  caballoMalla.translateX(10);
+  caballoMalla.rotation.y=Math.PI/2;
+
+  caballoMalla1.rotateX(Math.PI/2);
+  caballoMalla1.translateY(3);
+  caballoMalla1.translateZ(-70);
+  caballoMalla1.translateX(10);
+  caballoMalla1.rotation.y=-Math.PI/2;
+
+  caballoMalla2.rotateX(Math.PI/2);
+  caballoMalla2.translateY(3);
+  caballoMalla2.translateZ(-70);
+  caballoMalla2.translateX(60);
+  caballoMalla2.rotation.y=-Math.PI/2;
+
+  caballoMalla3.rotateX(Math.PI/2);
+  caballoMalla3.translateY(3);
+  caballoMalla3.translateX(60);
+  caballoMalla3.rotation.y=Math.PI/2;
+	
+  	//REYES
+  reyMalla = new Rey(TEXTURAS.ceramicablanca);
+  reyMalla1 = new Rey(TEXTURAS.ceramicanegra);
+
+  reyMalla.rotateX(Math.PI/2);
+  reyMalla.position.z=3;
+  reyMalla.translateX(30);
+  
+  reyMalla1.rotateX(Math.PI/2);
+  reyMalla1.position.z=3;
+  reyMalla1.translateZ(-70);
+  reyMalla1.translateX(30);  
+  	//REINAS
+  reinaMalla = new Reina(TEXTURAS.ceramicablanca);
+  reinaMalla1 = new Reina(TEXTURAS.ceramicanegra);
+
+  reinaMalla.rotateX(Math.PI/2);
+  reinaMalla.translateY(3);
+  reinaMalla.translateX(40);
+  
+  reinaMalla1.rotateX(Math.PI/2);
+  reinaMalla1.translateY(3);
+  reinaMalla1.translateX(40);
+  reinaMalla1.translateZ(-70);
+	//ALFIL
+  alfilMalla = new Alfil(TEXTURAS.ceramicablanca);
+  alfilMalla1 = new Alfil(TEXTURAS.ceramicanegra);
+  alfilMalla2 = new Alfil(TEXTURAS.ceramicablanca);
+  alfilMalla3 = new Alfil(TEXTURAS.ceramicanegra);
+  
+  alfilMalla.rotateX(Math.PI/2);
+  alfilMalla.translateY(2);
+  alfilMalla.translateX(20);
+  
+  alfilMalla1.rotateX(Math.PI/2);
+  alfilMalla1.translateY(2);
+  alfilMalla1.translateX(20);
+  alfilMalla1.translateZ(-70);
+  
+  alfilMalla2.rotateX(Math.PI/2);
+  alfilMalla2.translateY(2);
+  alfilMalla2.translateX(50);
+  
+  alfilMalla3.rotateX(Math.PI/2);
+  alfilMalla3.translateY(2);
+  alfilMalla3.translateX(50);
+  alfilMalla3.translateZ(-70);
+  	//PEON
+  peonMalla = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla1 = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla2 = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla3 = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla4 = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla5 = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla6 = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla7 = new Peon(TEXTURAS.ceramicablanca);
+  peonMalla8 = new Peon(TEXTURAS.ceramicanegra);
+  peonMalla9 = new Peon(TEXTURAS.ceramicanegra);
+  peonMalla10 = new Peon(TEXTURAS.ceramicanegra);
+  peonMalla11 = new Peon(TEXTURAS.ceramicanegra);
+  peonMalla12 = new Peon(TEXTURAS.ceramicanegra);
+  peonMalla13 = new Peon(TEXTURAS.ceramicanegra);
+  peonMalla14 = new Peon(TEXTURAS.ceramicanegra);
+  peonMalla15 = new Peon(TEXTURAS.ceramicanegra);
   
   peonMalla.rotateX(Math.PI/2);
   peonMalla.translateY(3);
@@ -488,49 +2439,45 @@ function setup(){
   peonMalla15.translateY(3);
   peonMalla15.translateZ(-60);
   peonMalla15.translateX(70);
-  
-  //Vacios
-  var materialt= new THREE.MeshLambertMaterial({color: 0xFFFFFF, transparent: true});
-  materialt.opacity = 0;
-  
-  vacio1 = new THREE.Mesh(peonForma, materialt);
-  vacio2 = new THREE.Mesh(peonForma, materialt);
-  vacio3 = new THREE.Mesh(peonForma, materialt); 
-  vacio4 = new THREE.Mesh(peonForma, materialt);
-  vacio5 = new THREE.Mesh(peonForma, materialt);
-  vacio6 = new THREE.Mesh(peonForma, materialt);
-  vacio7 = new THREE.Mesh(peonForma, materialt);
-  vacio8 = new THREE.Mesh(peonForma, materialt);
-  vacio9 = new THREE.Mesh(peonForma, materialt);
-  vacio10 = new THREE.Mesh(peonForma, materialt);
-  vacio11 = new THREE.Mesh(peonForma, materialt);
-  vacio12 = new THREE.Mesh(peonForma, materialt);
-  vacio13 = new THREE.Mesh(peonForma, materialt);
-  vacio14 = new THREE.Mesh(peonForma, materialt);
-  vacio15 = new THREE.Mesh(peonForma, materialt);
-  vacio16 = new THREE.Mesh(peonForma, materialt);
-  vacio17 = new THREE.Mesh(peonForma, materialt);
-  vacio18 = new THREE.Mesh(peonForma, materialt);
-  vacio19 = new THREE.Mesh(peonForma, materialt);
-  vacio20 = new THREE.Mesh(peonForma, materialt);
-  vacio21 = new THREE.Mesh(peonForma, materialt);
-  vacio22 = new THREE.Mesh(peonForma, materialt);
-  vacio23 = new THREE.Mesh(peonForma, materialt);
-  vacio24 = new THREE.Mesh(peonForma, materialt);
-  vacio25 = new THREE.Mesh(peonForma, materialt);
-  vacio26 = new THREE.Mesh(peonForma, materialt);
-  vacio27 = new THREE.Mesh(peonForma, materialt);
-  vacio28 = new THREE.Mesh(peonForma, materialt);
-  vacio29 = new THREE.Mesh(peonForma, materialt);
-  vacio30 = new THREE.Mesh(peonForma, materialt);
-  vacio31 = new THREE.Mesh(peonForma, materialt);
-  vacio32 = new THREE.Mesh(peonForma, materialt);
-  vacio33 = new THREE.Mesh(peonForma, materialt);
-  vacio34 = new THREE.Mesh(peonForma, materialt);
-  vacio35 = new THREE.Mesh(peonForma, materialt);
-  vacio36 = new THREE.Mesh(peonForma, materialt);
-  vacio37 = new THREE.Mesh(peonForma, materialt);
-  vacio38 = new THREE.Mesh(peonForma, materialt);
+  	//VACIO
+  vacio1 = new Vacio(TEXTURAS.madera);
+  vacio2 = new Vacio(TEXTURAS.madera);
+  vacio3 = new Vacio(TEXTURAS.madera); 
+  vacio4 = new Vacio(TEXTURAS.madera);
+  vacio5 = new Vacio(TEXTURAS.madera);
+  vacio6 = new Vacio(TEXTURAS.madera);
+  vacio7 = new Vacio(TEXTURAS.madera);
+  vacio8 = new Vacio(TEXTURAS.madera);
+  vacio9 = new Vacio(TEXTURAS.madera);
+  vacio10 = new Vacio(TEXTURAS.madera);
+  vacio11 = new Vacio(TEXTURAS.madera);
+  vacio12 = new Vacio(TEXTURAS.madera);
+  vacio13 = new Vacio(TEXTURAS.madera);
+  vacio14 = new Vacio(TEXTURAS.madera);
+  vacio15 = new Vacio(TEXTURAS.madera);
+  vacio16 = new Vacio(TEXTURAS.madera);
+  vacio17 = new Vacio(TEXTURAS.madera);
+  vacio18 = new Vacio(TEXTURAS.madera);
+  vacio19 = new Vacio(TEXTURAS.madera);
+  vacio20 = new Vacio(TEXTURAS.madera);
+  vacio21 = new Vacio(TEXTURAS.madera);
+  vacio22 = new Vacio(TEXTURAS.madera);
+  vacio23 = new Vacio(TEXTURAS.madera);
+  vacio24 = new Vacio(TEXTURAS.madera);
+  vacio25 = new Vacio(TEXTURAS.madera);
+  vacio26 = new Vacio(TEXTURAS.madera);
+  vacio27 = new Vacio(TEXTURAS.madera);
+  vacio28 = new Vacio(TEXTURAS.madera);
+  vacio29 = new Vacio(TEXTURAS.madera);
+  vacio30 = new Vacio(TEXTURAS.madera);
+  vacio31 = new Vacio(TEXTURAS.madera);
+  vacio32 = new Vacio(TEXTURAS.madera);
+  vacio33 = new Vacio(TEXTURAS.madera);
+  vacio34 = new Vacio(TEXTURAS.madera);
+  vacio35 = new Vacio(TEXTURAS.madera);
+  vacio36 = new Vacio(TEXTURAS.madera);
+  vacio37 = new Vacio(TEXTURAS.madera);
+  vacio38 = new Vacio(TEXTURAS.madera);
   
   vacio1.translateY(3);
   vacio1.translateZ(-20);
@@ -675,50 +2622,16 @@ function setup(){
   vacio36.translateY(3);
   vacio36.translateZ(0);
   vacio36.translateX(60);
-  
-  //Tablero
-  var campoVision = 45;
-  var relacionAspecto = window.innerWidth / window.innerHeight;
-  var planoCercano = 1;
-  var planoLejano = 1000;
-  camara = new THREE.PerspectiveCamera(campoVision, relacionAspecto, planoCercano, planoLejano);
-  camara.position.z=50;
-  camara.position.x=160;
-  camara.position.y=40;
-  //camara.rotateY(1.365);
-  //camara.rotateX(Math.PI/4);
-  camara.lookAt(new THREE.Vector3(40,40,0));
-  camara.rotateZ(Math.PI/2);
-  
-  
-  escena = new THREE.Scene();
-  var cubo= new Array();
-  var a=2;
-  for(var k=0; k<64; k++){
-    for(var i=0; i<8; i++){
-      for(var j=0; j<8; j++){
-        if(a==2){
-          cubo[k] = new THREE.Mesh( new THREE.BoxGeometry(10, 10, 4), marmolblanco );
-          a=1;
-        }else{
-          cubo[k] = new THREE.Mesh( new THREE.BoxGeometry(10, 10, 4), marmolnegro );
-          a=2;
-        }
-       cubo[k].position.x=j*10;
-       cubo[k].position.y=i*10;
-       escena.add(cubo[k]);
-       cubo[k].receiveShadow=true;
-     }
-     if(a==2){
-          a=1;
-        }else{
-          a=2;
-        }
-    }
-  }
-  
-  valor = new Array(80)
-  valor[0] = new Array(80);
+  	//SELECTOR
+  select = new Seleccionador();
+  select.rotateX(Math.PI/2);
+  select.translateY(30);
+  select.position.x=0;
+  select.position.y=0;	
+	
+  	//VALOR (CADA POSICION TABLERO)
+  valor = new Array(8)
+  valor[0] = new Array(8);
   valor[0][0] = torreMalla;
   valor[0][10] = peonMalla;
   valor[0][20] = vacio1;
@@ -729,14 +2642,14 @@ function setup(){
   valor[0][70] = torreMalla1;
 
   valor[10] = new Array(8);
-  valor[10][0] = vacio33;
+  valor[10][0] = caballoMalla;
   valor[10][10] = peonMalla1;
   valor[10][20] = vacio2;
   valor[10][30] = vacio10;
   valor[10][40] = vacio18;
   valor[10][50] = vacio26;
   valor[10][60] = peonMalla9;
-  valor[10][70] = vacio34;
+  valor[10][70] = caballoMalla1;
 
   valor[20] = new Array(8);
   valor[20][0] = alfilMalla;
@@ -748,7 +2661,7 @@ function setup(){
   valor[20][60] = peonMalla10;
   valor[20][70] = alfilMalla1;
 
-  valor[30] = new Array(80);
+  valor[30] = new Array(8);
   valor[30][0] = reyMalla;
   valor[30][10] = peonMalla3;
   valor[30][20] = vacio4;
@@ -758,7 +2671,7 @@ function setup(){
   valor[30][60] = peonMalla11;
   valor[30][70] = reyMalla1;
 
-  valor[40] = new Array(80);
+  valor[40] = new Array(8);
   valor[40][0] = reinaMalla;
   valor[40][10] = peonMalla4;
   valor[40][20] = vacio5;
@@ -768,7 +2681,7 @@ function setup(){
   valor[40][60] = peonMalla12;
   valor[40][70] = reinaMalla1;
 
-  valor[50] = new Array(80);
+  valor[50] = new Array(8);
   valor[50][0] = alfilMalla2;
   valor[50][10] = peonMalla5;
   valor[50][20] = vacio6;
@@ -778,15 +2691,15 @@ function setup(){
   valor[50][60] = peonMalla13;
   valor[50][70] = alfilMalla3;
 
-  valor[60] = new Array(80);
-  valor[60][0] = vacio35;
+  valor[60] = new Array(8);
+  valor[60][0] = caballoMalla3;
   valor[60][10] = peonMalla6;
   valor[60][20] = vacio7;
   valor[60][30] = vacio15;
   valor[60][40] = vacio23;
   valor[60][50] = vacio31;
   valor[60][60] = peonMalla14;
-  valor[60][70] = vacio36;
+  valor[60][70] = caballoMalla2;
 
   valor[70] = new Array(8);
   valor[70][0] = torreMalla3;
@@ -797,18 +2710,15 @@ function setup(){
   valor[70][50] = vacio32;
   valor[70][60] = peonMalla15;
   valor[70][70] = torreMalla2;  
-  
-  
-  var base = new THREE.Mesh( new THREE.BoxGeometry(90, 90, 2), marmolcafe );
-  base.position.x=35;
-  base.position.y=35;
-  base.position.z=-2;
-  escena.add(seleccionadorMalla);
-  escena.add(base);
+  	//ESCENA
   escena.add(torreMalla);
   escena.add(torreMalla1);
   escena.add(torreMalla2);
   escena.add(torreMalla3);
+  escena.add(caballoMalla);
+  escena.add(caballoMalla1);
+  escena.add(caballoMalla2);
+  escena.add(caballoMalla3);
   escena.add(reyMalla);
   escena.add(reyMalla1);
   escena.add(reinaMalla);
@@ -870,10 +2780,9 @@ function setup(){
   escena.add(vacio35);
   escena.add(vacio36);
   escena.add(iluminacion);
-  renderizador = new THREE.WebGLRenderer();
-  renderizador.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderizador.domElement);
-  renderizador.shadowMapEnabled=true;
+  escena.add(select);
+  Tablero(TEXTURAS.marmolnegro, TEXTURAS.marmolblanco, TEXTURAS.madera);
+	//SOMBRAS
   iluminacion.castShadow=true;
   torreMalla.castShadow=true;
   torreMalla1.castShadow=true;
@@ -903,649 +2812,137 @@ function setup(){
   peonMalla13.castShadow=true;
   peonMalla14.castShadow=true;
   peonMalla15.castShadow=true;
-  base.receiveShadow=true;
+  renderizador.setSize(window.innerWidth-100, window.innerHeight-100);
+  document.body.appendChild(renderizador.domElement);
+  renderizador.shadowMapEnabled=true;
 }
 
-
+//-----------------------------------------------------------------------------------------------------------------LOOP
+var setupDone=false;
 function loop(){
+  requestAnimationFrame(loop);
+  if(TEXTURAS.madera!==undefined && TEXTURAS.ceramicablanca!==undefined && TEXTURAS.ceramicanegra!==undefined && TEXTURAS.marmolblanco!==undefined && TEXTURAS.marmolnegro!==undefined && !setupDone){
+      setup();
+  }
   if(cuyo==2){
-      auxx=parseInt(posicionadorMalla.position.x);
-      auxy=parseInt(posicionadorMalla.position.y);
-      cuyo=cuyo+1;
-      requestAnimationFrame(loop);
-      renderizador.render(escena,camara);
+      guardarPosicion();
   }
   else if(cuyo==4){
-    alert(auxx)
-    if(auxx==0 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][0].position.y
-      valor[0][0].position.x=seleccionadorMalla.position.x;
-      valor[0][0].position.y=seleccionadorMalla.position.y;
-      var a = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a1 = valor[0][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a1;
-      valor[0][0]= a;
-    }else if(auxx==10 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][0].position.y
-      valor[10][0].position.x=seleccionadorMalla.position.x;
-      valor[10][0].position.y=seleccionadorMalla.position.y;      
-      var b = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b1 = valor[10][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b1;
-      valor[10][0]= b;
-    }else if(auxx==20 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][0].position.y
-      valor[20][0].position.x=seleccionadorMalla.position.x;
-      valor[20][0].position.y=seleccionadorMalla.position.y;      
-      var c = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c1 = valor[20][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c1;
-      valor[20][0]= c; 
-    }else if(auxx==30 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][0].position.y
-      valor[30][0].position.x=seleccionadorMalla.position.x;
-      valor[30][0].position.y=seleccionadorMalla.position.y;      
-      var d = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d1 = valor[30][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d1;
-      valor[30][0]= d;
-    }else if(auxx==40 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][0].position.y
-      valor[40][0].position.x=seleccionadorMalla.position.x;
-      valor[40][0].position.y=seleccionadorMalla.position.y;      
-      var e = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e1 = valor[40][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e1;
-      valor[40][0]= e;
-    }else if(auxx==50 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][0].position.y
-      valor[50][0].position.x=seleccionadorMalla.position.x;
-      valor[50][0].position.y=seleccionadorMalla.position.y;      
-      var f = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f1 = valor[50][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f1;
-      valor[50][0]= f;
-    }else if(auxx==60 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][0].position.y
-      valor[60][0].position.x=seleccionadorMalla.position.x;
-      valor[60][0].position.y=seleccionadorMalla.position.y;      
-      var g = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g1 = valor[60][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g1;
-      valor[60][0]= g;
-    }else if(auxx==70 && auxy==0){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][0].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][0].position.y
-      valor[70][0].position.x=seleccionadorMalla.position.x;
-      valor[70][0].position.y=seleccionadorMalla.position.y;      
-      var h = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h1 = valor[70][0];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h1;
-      valor[70][0]= h;
-      
-    }else if(auxx==0 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][10].position.y
-      valor[0][10].position.x=seleccionadorMalla.position.x;
-      valor[0][10].position.y=seleccionadorMalla.position.y;
-      var a2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a3 = valor[0][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a3;
-      valor[0][10]= a2;
-    }else if(auxx==10 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][10].position.y
-      valor[10][10].position.x=seleccionadorMalla.position.x;
-      valor[10][10].position.y=seleccionadorMalla.position.y;      
-      var b2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b3 = valor[10][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b3;
-      valor[10][10]= b2;
-    }else if(auxx==20 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][10].position.y
-      valor[20][10].position.x=seleccionadorMalla.position.x;
-      valor[20][10].position.y=seleccionadorMalla.position.y;      
-      var c2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c3 = valor[20][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c3;
-      valor[20][10]= c2; 
-    }else if(auxx==30 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][10].position.y
-      valor[30][10].position.x=seleccionadorMalla.position.x;
-      valor[30][10].position.y=seleccionadorMalla.position.y;      
-      var d2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d3 = valor[30][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d3;
-      valor[30][10]= d2;
-    }else if(auxx==40 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][10].position.y
-      valor[40][10].position.x=seleccionadorMalla.position.x;
-      valor[40][10].position.y=seleccionadorMalla.position.y;      
-      var e2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e3 = valor[40][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e3;
-      valor[40][10]= e2;
-    }else if(auxx==50 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][10].position.y
-      valor[50][10].position.x=seleccionadorMalla.position.x;
-      valor[50][10].position.y=seleccionadorMalla.position.y;      
-      var f2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f3 = valor[50][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f3;
-      valor[50][10]= f2;
-    }else if(auxx==60 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][10].position.y
-      valor[60][10].position.x=seleccionadorMalla.position.x;
-      valor[60][10].position.y=seleccionadorMalla.position.y;      
-      var g2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g3 = valor[60][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g3;
-      valor[60][10]= g2;
-    }else if(auxx==70 && auxy==10){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][10].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][10].position.y
-      valor[70][10].position.x=seleccionadorMalla.position.x;
-      valor[70][10].position.y=seleccionadorMalla.position.y;      
-      var h2 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h3 = valor[70][10];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h3;
-      valor[70][10]= h2;
-      
-    }else if(auxx==0 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][20].position.y
-      valor[0][20].position.x=seleccionadorMalla.position.x;
-      valor[0][20].position.y=seleccionadorMalla.position.y;
-      var a4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a5 = valor[0][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a5;
-      valor[0][20]= a4;
-    }else if(auxx==10 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][20].position.y
-      valor[10][20].position.x=seleccionadorMalla.position.x;
-      valor[10][20].position.y=seleccionadorMalla.position.y;      
-      var b4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b5 = valor[10][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b5;
-      valor[10][20]= b4;
-    }else if(auxx==20 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][20].position.y
-      valor[20][20].position.x=seleccionadorMalla.position.x;
-      valor[20][20].position.y=seleccionadorMalla.position.y;      
-      var c4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c5 = valor[20][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c5;
-      valor[20][20]= c4; 
-    }else if(auxx==30 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][20].position.y
-      valor[30][20].position.x=seleccionadorMalla.position.x;
-      valor[30][20].position.y=seleccionadorMalla.position.y;      
-      var d4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d5 = valor[30][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d5;
-      valor[30][20]= d4;
-    }else if(auxx==40 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][20].position.y
-      valor[40][20].position.x=seleccionadorMalla.position.x;
-      valor[40][20].position.y=seleccionadorMalla.position.y;      
-      var e4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e5 = valor[40][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e5;
-      valor[40][20]= e4;
-    }else if(auxx==50 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][20].position.y
-      valor[50][20].position.x=seleccionadorMalla.position.x;
-      valor[50][20].position.y=seleccionadorMalla.position.y;      
-      var f4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f5 = valor[50][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f5;
-      valor[50][20]= f4;
-    }else if(auxx==60 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][20].position.y
-      valor[60][20].position.x=seleccionadorMalla.position.x;
-      valor[60][20].position.y=seleccionadorMalla.position.y;      
-      var g4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g5 = valor[60][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g5;
-      valor[60][20]= g4;
-    }else if(auxx==70 && auxy==20){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][20].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][20].position.y
-      valor[70][20].position.x=seleccionadorMalla.position.x;
-      valor[70][20].position.y=seleccionadorMalla.position.y;      
-      var h4 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h5 = valor[70][20];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h5;
-      valor[70][20]= h4;
-    
-     }else if(auxx==0 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][30].position.y
-      valor[0][30].position.x=seleccionadorMalla.position.x;
-      valor[0][30].position.y=seleccionadorMalla.position.y;
-      var a6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a7 = valor[0][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a7;
-      valor[0][30]= a6;
-    }else if(auxx==10 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][30].position.y
-      valor[10][30].position.x=seleccionadorMalla.position.x;
-      valor[10][30].position.y=seleccionadorMalla.position.y;      
-      var b6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b7 = valor[10][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b7;
-      valor[10][30]= b6;
-    }else if(auxx==20 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][30].position.y
-      valor[20][30].position.x=seleccionadorMalla.position.x;
-      valor[20][30].position.y=seleccionadorMalla.position.y;      
-      var c6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c7 = valor[20][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c7;
-      valor[20][30]= c6; 
-    }else if(auxx==30 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][30].position.y
-      valor[30][30].position.x=seleccionadorMalla.position.x;
-      valor[30][30].position.y=seleccionadorMalla.position.y;      
-      var d6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d7 = valor[30][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d7;
-      valor[30][30]= d6;
-    }else if(auxx==40 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][30].position.y
-      valor[40][30].position.x=seleccionadorMalla.position.x;
-      valor[40][30].position.y=seleccionadorMalla.position.y;      
-      var e6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e7 = valor[40][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e7;
-      valor[40][30]= e6;
-    }else if(auxx==50 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][30].position.y
-      valor[50][30].position.x=seleccionadorMalla.position.x;
-      valor[50][30].position.y=seleccionadorMalla.position.y;      
-      var f6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f7 = valor[50][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f7;
-      valor[50][30]= f6;
-    }else if(auxx==60 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][30].position.y
-      valor[60][30].position.x=seleccionadorMalla.position.x;
-      valor[60][30].position.y=seleccionadorMalla.position.y;      
-      var g6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g7 = valor[60][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g7;
-      valor[60][30]= g6;
-    }else if(auxx==70 && auxy==30){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][30].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][30].position.y
-      valor[70][30].position.x=seleccionadorMalla.position.x;
-      valor[70][30].position.y=seleccionadorMalla.position.y;      
-      var h6 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h7 = valor[70][30];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h7;
-      valor[70][30]= h6;
-    
-    }else if(auxx==0 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][40].position.y
-      valor[0][40].position.x=seleccionadorMalla.position.x;
-      valor[0][40].position.y=seleccionadorMalla.position.y;
-      var a8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a9 = valor[0][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a8;
-      valor[0][40]= a9;
-    }else if(auxx==10 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][40].position.y
-      valor[10][40].position.x=seleccionadorMalla.position.x;
-      valor[10][40].position.y=seleccionadorMalla.position.y;      
-      var b8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b9 = valor[10][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b9;
-      valor[10][40]= b8;
-    }else if(auxx==20 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][40].position.y
-      valor[20][40].position.x=seleccionadorMalla.position.x;
-      valor[20][40].position.y=seleccionadorMalla.position.y;      
-      var c8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c9 = valor[20][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c9;
-      valor[20][40]= c8; 
-    }else if(auxx==30 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][40].position.y
-      valor[30][40].position.x=seleccionadorMalla.position.x;
-      valor[30][40].position.y=seleccionadorMalla.position.y;      
-      var d8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d9 = valor[30][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d9;
-      valor[30][40]= d8;
-    }else if(auxx==40 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][40].position.y
-      valor[40][40].position.x=seleccionadorMalla.position.x;
-      valor[40][40].position.y=seleccionadorMalla.position.y;      
-      var e8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e9 = valor[40][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e9;
-      valor[40][40]= e8;
-    }else if(auxx==50 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][40].position.y
-      valor[50][40].position.x=seleccionadorMalla.position.x;
-      valor[50][40].position.y=seleccionadorMalla.position.y;      
-      var f8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f9 = valor[50][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f9;
-      valor[50][40]= f8;
-    }else if(auxx==60 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][40].position.y
-      valor[60][40].position.x=seleccionadorMalla.position.x;
-      valor[60][40].position.y=seleccionadorMalla.position.y;      
-      var g8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g9 = valor[60][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g9;
-      valor[60][40]= g8;
-    }else if(auxx==70 && auxy==40){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][40].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][40].position.y
-      valor[70][40].position.x=seleccionadorMalla.position.x;
-      valor[70][40].position.y=seleccionadorMalla.position.y;      
-      var h8 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h9 = valor[70][40];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h9;
-      valor[70][40]= h8;
-    
-    }else if(auxx==0 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][50].position.y
-      valor[0][50].position.x=seleccionadorMalla.position.x;
-      valor[0][50].position.y=seleccionadorMalla.position.y;
-      var a10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a11 = valor[0][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a11;
-      valor[0][50]= a10;
-    }else if(auxx==10 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][50].position.y
-      valor[10][50].position.x=seleccionadorMalla.position.x;
-      valor[10][50].position.y=seleccionadorMalla.position.y;      
-      var b10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b11 = valor[10][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b11;
-      valor[10][50]= b10;
-    }else if(auxx==20 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][50].position.y
-      valor[20][50].position.x=seleccionadorMalla.position.x;
-      valor[20][50].position.y=seleccionadorMalla.position.y;      
-      var c10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c11 = valor[20][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c11;
-      valor[20][50]= c10; 
-    }else if(auxx==30 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][50].position.y
-      valor[30][50].position.x=seleccionadorMalla.position.x;
-      valor[30][50].position.y=seleccionadorMalla.position.y;      
-      var d10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d11 = valor[30][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d11;
-      valor[30][50]= d10;
-    }else if(auxx==40 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][50].position.y
-      valor[40][50].position.x=seleccionadorMalla.position.x;
-      valor[40][50].position.y=seleccionadorMalla.position.y;      
-      var e10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e11 = valor[40][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e11;
-      valor[40][50]= e10;
-    }else if(auxx==50 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][50].position.y
-      valor[50][50].position.x=seleccionadorMalla.position.x;
-      valor[50][50].position.y=seleccionadorMalla.position.y;      
-      var f10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f11 = valor[50][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f11;
-      valor[50][50]= f10;
-    }else if(auxx==60 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][50].position.y
-      valor[60][50].position.x=seleccionadorMalla.position.x;
-      valor[60][50].position.y=seleccionadorMalla.position.y;      
-      var g10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g11 = valor[60][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g11;
-      valor[60][50]= g10;
-    }else if(auxx==70 && auxy==50){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][50].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][50].position.y
-      valor[70][50].position.x=seleccionadorMalla.position.x;
-      valor[70][50].position.y=seleccionadorMalla.position.y;      
-      var h10 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h11 = valor[70][50];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h11;
-      valor[70][50]= h10;
-    
-    }else if(auxx==0 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][60].position.y
-      valor[0][60].position.x=seleccionadorMalla.position.x;
-      valor[0][60].position.y=seleccionadorMalla.position.y;
-      var a12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a13 = valor[0][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a13;
-      valor[0][60]= a12;
-    }else if(auxx==10 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][60].position.y
-      valor[10][60].position.x=seleccionadorMalla.position.x;
-      valor[10][60].position.y=seleccionadorMalla.position.y;      
-      var b12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b13 = valor[10][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b13;
-      valor[10][60]= b12;
-    }else if(auxx==20 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][60].position.y
-      valor[20][60].position.x=seleccionadorMalla.position.x;
-      valor[20][60].position.y=seleccionadorMalla.position.y;      
-      var c12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c13 = valor[20][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c13;
-      valor[20][60]= c12; 
-    }else if(auxx==30 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][60].position.y
-      valor[30][60].position.x=seleccionadorMalla.position.x;
-      valor[30][60].position.y=seleccionadorMalla.position.y;      
-      var d12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d13 = valor[30][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d13;
-      valor[30][60]= d12;
-    }else if(auxx==40 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][60].position.y
-      valor[40][60].position.x=seleccionadorMalla.position.x;
-      valor[40][60].position.y=seleccionadorMalla.position.y;      
-      var e12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e13 = valor[40][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e13;
-      valor[40][60]= e12;
-    }else if(auxx==50 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][60].position.y
-      valor[50][60].position.x=seleccionadorMalla.position.x;
-      valor[50][60].position.y=seleccionadorMalla.position.y;      
-      var f12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f13 = valor[50][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f13;
-      valor[50][60]= f12;
-    }else if(auxx==60 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][60].position.y
-      valor[60][60].position.x=seleccionadorMalla.position.x;
-      valor[60][60].position.y=seleccionadorMalla.position.y;      
-      var g12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g13 = valor[60][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g13;
-      valor[60][60]= g12;
-    }else if(auxx==70 && auxy==60){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][60].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][60].position.y
-      valor[70][60].position.x=seleccionadorMalla.position.x;
-      valor[70][60].position.y=seleccionadorMalla.position.y;      
-      var h12 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h13 = valor[70][60];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h13;
-      valor[70][60]= h12;
-    
-    }else if(auxx==0 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[0][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[0][70].position.y
-      valor[0][70].position.x=seleccionadorMalla.position.x;
-      valor[0][70].position.y=seleccionadorMalla.position.y;
-      var a14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var a15 = valor[0][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= a15;
-      valor[0][70]= a14;
-    }else if(auxx==10 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[10][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[10][70].position.y
-      valor[10][70].position.x=seleccionadorMalla.position.x;
-      valor[10][70].position.y=seleccionadorMalla.position.y;      
-      var b14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var b15 = valor[10][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= b15;
-      valor[10][70]= b14;
-    }else if(auxx==20 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[20][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[20][70].position.y
-      valor[20][70].position.x=seleccionadorMalla.position.x;
-      valor[20][70].position.y=seleccionadorMalla.position.y;      
-      var c14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var c15 = valor[20][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= c15;
-      valor[20][70]= c14; 
-    }else if(auxx==30 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[30][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[30][70].position.y
-      valor[30][70].position.x=seleccionadorMalla.position.x;
-      valor[30][70].position.y=seleccionadorMalla.position.y;      
-      var d14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var d15 = valor[30][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= d15;
-      valor[30][70]= d14;
-    }else if(auxx==40 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[40][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[40][70].position.y
-      valor[40][70].position.x=seleccionadorMalla.position.x;
-      valor[40][70].position.y=seleccionadorMalla.position.y;      
-      var e14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var e15 = valor[40][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= e15;
-      valor[40][70]= e14;
-    }else if(auxx==50 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[50][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[50][70].position.y
-      valor[50][70].position.x=seleccionadorMalla.position.x;
-      valor[50][70].position.y=seleccionadorMalla.position.y;      
-      var f14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var f15 = valor[50][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= f15;
-      valor[50][70]= f14;
-    }else if(auxx==60 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[60][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[60][70].position.y
-      valor[60][70].position.x=seleccionadorMalla.position.x;
-      valor[60][70].position.y=seleccionadorMalla.position.y;      
-      var g14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var g15 = valor[60][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= g15;
-      valor[60][70]= g14;
-    }else if(auxx==70 && auxy==70){
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.x=valor[70][70].position.x
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y].position.y=valor[70][70].position.y
-      valor[70][70].position.x=seleccionadorMalla.position.x;
-      valor[70][70].position.y=seleccionadorMalla.position.y;      
-      var h14 = valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y];
-      var h15 = valor[70][70];
-      valor[seleccionadorMalla.position.x][seleccionadorMalla.position.y]= h15;
-      valor[70][70]= h14;
-    }
-
-    seleccionadorMalla.position.x=0;
-    seleccionadorMalla.position.y=0;
-    seleccionadorMalla.position.z=30;
-    posicionadorMalla.position.x=0;
-    posicionadorMalla.position.y=0;
-    posicionadorMalla.position.z=1000;
-    cuyo=1;
-    requestAnimationFrame(loop);
-    renderizador.render(escena,camara);
-  }else{
-    window.onload=function(){document.onkeydown=desplazar};
-      function desplazar(objeto){
-      var tecla = objeto.which;
-          switch (tecla){
-              case 37 : 
-                  seleccionadorMalla.translateZ(10);
-                  break;
-              case 38 : 
-                  seleccionadorMalla.translateX(-10);
-                  break;
-              case 39 :  
-                  seleccionadorMalla.translateZ(-10);
-                  break;
-              case 40 : 
-                  seleccionadorMalla.translateX(10);
-                  break;
-              case 13 :
-                  escena.remove(posicionadorMalla);
-                  posicionadorMalla = new THREE.Mesh(seleccionadorForma, posicionador);
-                  posicionadorMalla.rotateX(Math.PI/2);
-                  posicionadorMalla.position.x=seleccionadorMalla.position.x;
-                  posicionadorMalla.position.y=seleccionadorMalla.position.y;
-                  posicionadorMalla.position.z=seleccionadorMalla.position.z;
-                  escena.add(posicionadorMalla);
-                  cuyo=cuyo+1;
-                  break;
-          default :alert("Se ha equivocado, debe pulsar las flechas del teclado");
-          }
-      }
-    requestAnimationFrame(loop);
-    renderizador.render(escena,camara);
+    animar=1;
+    planGeneral();
   }
+  else{
+    teclado();
+     animar=0;
+  }
+    escena.sense();
+    escena.plan();
+    escena.act();
+    renderizador.render(escena, camara);
 }
 
+//---------------------------------------------------------------------------------------------------LOADER DE TEXTURAS
+var cargador = new THREE.TextureLoader();
+function TexturaSetup(){
+    cargador.load("ceramica_negra.jpg",
+                  function(textura){ TEXTURAS.ceramicanegra = textura;});
+    cargador.load("ceramica_blanca.jpg",
+                  function(textura){ TEXTURAS.ceramicablanca = textura;});
+    cargador.load("marnol_blanco.jpg",
+                  function(textura){ TEXTURAS.marmolblanco = textura;});
+    cargador.load("marnol_negro.jpg",
+                  function(textura){ TEXTURAS.marmolnegro = textura;});
+    cargador.load("marnol_cafe.jpg",
+                  function(textura){ TEXTURAS.madera = textura;});
+}
 
-setup();
+//------------------------------------------------------------------------------------------------------MOVIMIENTO
+function teclado(){  
+      window.onload=function(){document.onkeydown=desplazar};
+      function desplazar(objeto){
+      var tecla = objeto.which;
+	  switch (tecla){
+	      case 37 : 
+		  select.translateZ(10);
+		  break;
+	      case 38 : 
+		  select.translateX(-10);
+		  break;
+	      case 39 :  
+		  select.translateZ(-10);
+		  break;
+	      case 40 : 
+		  select.translateX(10);
+		  break;
+	      case 13 :
+		  cuyo=cuyo+1;
+		}
+      }
+}
+
+var flag = 1;
+function guardarPosicion(){
+    auxx=select.position.x;
+    auxy=select.position.y;
+    if(valor[auxx][auxy].side==1 && flag%2!=0){
+	cuyo=cuyo+1;
+	flag=flag+1;
+    }else if(valor[auxx][auxy].side==0 && flag%2==0){
+	    cuyo=cuyo+1;
+	    flag=flag+1;
+	     }
+	else{
+	alert("no es tu turno");
+	cuyo=1;
+	}
+}
+
+var nombre=new THREE.Object3D;
+var piezaActual, piezaPosterior;
+var animar=0;
+function planGeneral(){
+	nombre = valor[auxx][auxy];
+	piezaActual = nombre;
+	piezaPosterior = valor[select.position.x][select.position.y];
+	if(reyMalla.position.z==5000 || reyMalla1.position.z==5000)
+	{
+	  alert("Se acabo el juego");	
+	}
+	else if(nombre instanceof Torre && animar != 0){
+	  cuyo=4;
+	  Torreplan(auxx, auxy, select.position.x, select.position.y, nombre.side);
+	}else if(nombre instanceof Caballo && animar!=0){
+	  cuyo=4;
+	  Caballoplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Alfil && animar!=0){
+	  cuyo=4;
+	  Alfilplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Rey && animar!=0){
+	  cuyo=4;
+	  Reyplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Reina && animar!=0){
+	  cuyo=4;
+	  Reinaplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Peon && animar!=0){
+	  cuyo=4;
+	  Peonplan(auxx, auxy, select.position.x, select.position.y, nombre.side);	
+	}else if(nombre instanceof Vacio && animar!=0){
+		alert("vacio");
+	}
+}
+
+function resetSelect(){
+	select.position.x=0;
+        select.position.y=0;
+        select.position.z=30;	
+}
+
+var raycaster = new THREE.Raycaster();
+var TEXTURAS= new THREE.Object3D();
+var escena = new Environment();
+var camara = new THREE.PerspectiveCamera();
+var renderizador = new THREE.WebGLRenderer();
+
+//-------------------------------------------------------------------------------------------------------------PROGRAMA
+TexturaSetup();
 loop();
