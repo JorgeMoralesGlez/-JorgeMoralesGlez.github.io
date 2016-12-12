@@ -2303,23 +2303,23 @@ function setup(){
 
   reyMalla.rotateX(Math.PI/2);
   reyMalla.position.z=3;
-  reyMalla.translateX(40);
+  reyMalla.translateX(30);
   
   reyMalla1.rotateX(Math.PI/2);
   reyMalla1.position.z=3;
   reyMalla1.translateZ(-70);
-  reyMalla1.translateX(40);  
+  reyMalla1.translateX(30);  
   	//REINAS
   reinaMalla = new Reina(TEXTURAS.ceramicablanca);
   reinaMalla1 = new Reina(TEXTURAS.ceramicanegra);
 
   reinaMalla.rotateX(Math.PI/2);
   reinaMalla.translateY(3);
-  reinaMalla.translateX(30);
+  reinaMalla.translateX(40);
   
   reinaMalla1.rotateX(Math.PI/2);
   reinaMalla1.translateY(3);
-  reinaMalla1.translateX(30);
+  reinaMalla1.translateX(40);
   reinaMalla1.translateZ(-70);
 	//ALFIL
   alfilMalla = new Alfil(TEXTURAS.ceramicablanca);
